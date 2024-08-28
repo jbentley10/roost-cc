@@ -7,7 +7,7 @@ import Content from "./content";
 
 // Set metadata
 export const metadata = {
-  title: "Home | Example app",
+  title: "Home | The Roost - Cathedral City, CA",
   description: "This app uses NextJS and Contentful.",
 };
 
@@ -27,7 +27,6 @@ export default async function Home() {
           spanishBlocks={spanish}
         />
       )}
-      ;
     </main>
   );
 }

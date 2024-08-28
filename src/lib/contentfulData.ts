@@ -73,7 +73,7 @@ export async function fetchMetadataBySlug(slug: string) {
 export async function fetchBlocksBySlug(slug: string, locale: string) {
   console.log(`Fetching blocks from ${slug}...`);
   const pages = await client.getEntries({
-    include: 2,
+    include: 1,
     "fields.slug": slug,
     content_type: "page",
     locale: locale,
