@@ -25,7 +25,6 @@ export default function RootLayout({
     <html lang='en'>
       <style jsx global>{`
         h1,
-        h2,
         h3,
         h4,
         button,
@@ -34,6 +33,7 @@ export default function RootLayout({
           font-family: ${bevan.style.fontFamily};
         }
 
+        h2,
         button > a {
           font-family: ${grandHotel.style.fontFamily};
         }
