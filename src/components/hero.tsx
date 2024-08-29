@@ -17,28 +17,23 @@ export const Hero: React.FC<HeroProps> = ({
   buttonText,
 }) => {
   return (
-    <section className='h-dvh md:h-auto mt-0 sm:pt-10 md:pt-11 lg:pt-14 xl:pt-16 atf-container bg-primary relative w-full flex'>
-      <div className='hidden md:inline w-0 md:w-1/2'>
-        <Image
-          src='/hero-image.webp'
-          width={1201}
-          height={1321}
-          alt='A monotone red image of a man addressing a crowd'
-          loading='eager'
-        />
-      </div>
-      <div className='w-full md:w-1/2 relative z-10 text-left'>
-        <div className='mb-16 max-w-md'>
-          <h1 className='pb-7 text-white font-bold tracking-tight'>
-            {heading}
-          </h1>
-          <p className='text-lg text-white'>{subheading}</p>
+    <section className="h-dvh md:h-auto mt-0 relative w-full flex bg-[url('/hero.webp?height=600&width=800')] bg-cover bg-center">
+      <div className='bg-transparentOverlay atf-container w-full h-full sm:pt-10 md:pt-11 lg:pt-14 xl:pt-16 '>
+        <div className='w-full md:w-1/2 relative z-10 text-left'>
+          <div className='mb-16 max-w-md'>
+            <h1 className='pb-7 text-white font-bold tracking-wider'>
+              {heading}
+            </h1>
+            {subheading && <p className='text-lg text-white'>{subheading}</p>}
+          </div>
+          {buttonText && buttonLink && (
+            <Button size={`lg`} className='mr-6'>
+              <Link href={buttonLink} prefetch={false}>
+                {buttonText}
+              </Link>
+            </Button>
+          )}
         </div>
-        <Button size={`lg`} className='mr-6'>
-          <Link href={buttonLink} prefetch={false}>
-            {buttonText}
-          </Link>
-        </Button>
       </div>
     </section>
   );

@@ -7,16 +7,12 @@
 // All it does is look at each content block,
 // and assign it the appropriate React component(s)
 
-// Import depdencies
-import { useState, useContext, useEffect } from "react";
-
 // Import components
 import { Hero } from "../components/hero";
 import { DividerText } from "../components/divider-text";
 import { CallToAction } from "../components/call-to-action";
 import { Heading } from "../components/heading";
 import { ImageTextBlock } from "../components/image-text-block";
-import { LocaleContext } from "./locale-provider";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
@@ -24,6 +20,7 @@ const blockByType = (block: any) => {
 
   switch (contentType) {
     case "heroBlock":
+      console.log(block.fields);
       return (
         <Hero
           heading={block.fields.heading}
@@ -63,26 +60,13 @@ const blockByType = (block: any) => {
 
 interface ContentProps {
   englishBlocks: [];
-  spanishBlocks: [];
 }
 
 // Component recieves a single array of block objects
-export default function Content({
-  englishBlocks,
-  spanishBlocks,
-}: ContentProps) {
-  const isEnglish = useContext(LocaleContext);
-  const [translatedBlocks, setTranslatedBlocks] = useState(englishBlocks);
-
-  useEffect(() => {
-    isEnglish?.isEnglish === true
-      ? setTranslatedBlocks(englishBlocks)
-      : setTranslatedBlocks(spanishBlocks);
-  }, [isEnglish?.isEnglish, englishBlocks, spanishBlocks]);
-
+export default function Content({ englishBlocks }: ContentProps) {
   return (
-    translatedBlocks &&
-    translatedBlocks.map((block: any) => {
+    englishBlocks &&
+    englishBlocks.map((block: any) => {
       return blockByType(block);
     })
   );

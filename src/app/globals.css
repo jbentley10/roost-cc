@@ -4,18 +4,18 @@
 
 @layer base {
   :root {
-    --background: 168 39% 33%;
+    --background: 167 39% 93%;
     --foreground: 197 100% 23%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
-    --nav: 6 6% 11%;
+    --nav: 167 39% 93%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 168 39% 33%;
+    --primary: 197 100% 23%;
     --primary-foreground: 197 100% 23%;
 
     --secondary: 210 40% 96.1%;
@@ -74,5 +74,103 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.component-container {
+  padding: 0 88px;
+}
+
+.component-spacer {
+  margin: 124px 0;
+}
+
+h2 {
+  font-weight: 800;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+h4 {
+  font-weight: 300;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+/* XS */
+@media (max-width: 639px) {
+  h1 {
+    line-height: 1.25;
+    font-size: 4.5rem;
+  }
+
+  h2 {
+    line-height: 1.25;
+    font-size: 4rem;
+  }
+
+  .component-container,
+  .atf-container {
+    padding: 0 12px;
+  }
+}
+
+/* SM */
+@media (min-width: 640px) {
+  h1 {
+    line-height: 1.25;
+    font-size: 4.5rem;
+  }
+
+  h2 {
+    line-height: 1.25;
+    font-size: 4rem;
+  }
+}
+
+/* MD */
+@media (min-width: 768px) {
+  h2 {
+    line-height: 1.375;
+    font-size: 2.5rem;
+  }
+
+  .component-container,
+  .atf-container {
+    padding: 0 24px;
+  }
+}
+
+/* LG */
+@media (min-width: 1024px) {
+  h1 {
+    line-height: 1.25;
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  /* Creates padding for "Above the fold (ATF)" content and regular components */
+  .component-container,
+  .atf-container {
+    padding: 0 88px;
+  }
+}
+
+/* XL */
+@media (min-width: 1536px) {
+  h1 {
+    line-height: 1.375;
+    font-size: 4.5rem;
+  }
+
+  h2 {
+    font-size: 4rem;
   }
 }
