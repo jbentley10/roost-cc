@@ -20,7 +20,6 @@ const blockByType = (block: any) => {
 
   switch (contentType) {
     case "heroBlock":
-      console.log(block.fields);
       return (
         <Hero
           heading={block.fields.heading}
