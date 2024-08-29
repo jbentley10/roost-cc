@@ -7,20 +7,20 @@ let linkList = [
     url: "/about",
   },
   {
-    name: "What We Do",
-    url: "/what-we-do",
+    name: "Events",
+    url: "/events",
   },
   {
-    name: "Get Involved",
-    url: "/get-involved",
+    name: "Food and Drink",
+    url: "/food-and-drink",
   },
   {
-    name: "Donate",
-    url: "/donate",
+    name: "Foundation",
+    url: "/foundation",
   },
   {
-    name: "Resources",
-    url: "/resources",
+    name: "Gallery",
+    url: "/gallery",
   },
 ];
 
@@ -42,10 +42,10 @@ export const Links: React.FC<LinksProps> = ({ orientation, size }) => {
         <Link
           key={index}
           className={`
-            hover:opacity-50 mr-2 sm:mr-4 lg:mr-5 xl:mr-6 text-white 
+            hover:opacity-50 mr-2 sm:mr-4 lg:mr-5 xl:mr-6 text-foreground 
             ${
               size == "small"
-                ? "font-light text-xs lg:text-sm xl:text-base"
+                ? "font-light text-base"
                 : "font-regular text-base sm:text-base md:text-xl lg:text-2xl xl:text-2xl antonio pb-8"
             }
           `}

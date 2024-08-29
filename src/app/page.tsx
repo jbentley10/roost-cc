@@ -13,20 +13,13 @@ export const metadata = {
 
 export default async function Home() {
   const blocksEnglish = await fetchBlocksBySlug("home", "en-US");
-  const blocksSpanish = await fetchBlocksBySlug("home", "es");
 
   // Wait for the promises to resolve
-  const [english, spanish] = await Promise.all([blocksEnglish, blocksSpanish]);
+  const [english] = await Promise.all([blocksEnglish]);
 
   return (
     <main className='flex flex-col items-center justify-between lg:p-24 xs:p-4'>
-      {english && spanish && (
-        <Content
-          key={Math.random()}
-          englishBlocks={english}
-          spanishBlocks={spanish}
-        />
-      )}
+      {english && <Content key={Math.random()} englishBlocks={english} />}
     </main>
   );
 }

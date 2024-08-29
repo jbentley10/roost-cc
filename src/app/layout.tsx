@@ -1,12 +1,19 @@
 "use client";
 
-import { Antonio, Inter } from "next/font/google";
+import { Bevan, Grand_Hotel, Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "../components/navigation";
 import { Footer } from "../components/footer";
 
 // Declare fonts
-const antonio = Antonio({ subsets: ["latin"] });
+const bevan = Bevan({
+  subsets: ["latin"],
+  weight: ["400"],
+});
+const grandHotel = Grand_Hotel({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -24,11 +31,11 @@ export default function RootLayout({
         button,
         span,
         .antonio {
-          font-family: ${antonio.style.fontFamily};
+          font-family: ${bevan.style.fontFamily};
         }
 
         button > a {
-          font-family: ${antonio.style.fontFamily};
+          font-family: ${grandHotel.style.fontFamily};
         }
 
         p,
