@@ -16,7 +16,7 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const blocksEnglish = await fetchBlocksBySlug("home", "en-US");
+  const blocksEnglish = await fetchBlocksBySlug("home");
 
   // Wait for the promises to resolve
   const [english] = await Promise.all([blocksEnglish]);
@@ -24,7 +24,6 @@ export default async function Home() {
   return (
     <main className='flex flex-col items-center justify-between'>
       {english && <Content key={Math.random()} englishBlocks={english} />}
-      <ImageCards />
       <LogoRow />
       <SplitContentForm />
     </main>

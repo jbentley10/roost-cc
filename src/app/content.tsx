@@ -13,6 +13,7 @@ import { DividerText } from "../components/divider-text";
 import { CallToAction } from "../components/call-to-action";
 import { Heading } from "../components/heading";
 import { ImageTextBlock } from "../components/image-text-block";
+import { ImageCards, ImageCardType } from "../components/image-cards";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
@@ -54,6 +55,16 @@ const blockByType = (block: any) => {
           imageOnLeft={block.fields.imageOnLeft}
         />
       );
+
+    case "imageCards":
+      if (block.fields) {
+        const imageCards = block.fields.imageCards;
+        const imageCardFields: ImageCardType[] = imageCards.map(
+          (imageCard: ImageCardType) => imageCard.fields
+        );
+
+        return <ImageCards cards={imageCardFields} />;
+      }
   }
 };
 
