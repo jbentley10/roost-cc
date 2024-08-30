@@ -14,6 +14,7 @@ import { CallToAction } from "../components/call-to-action";
 import { Heading } from "../components/heading";
 import { ImageTextBlock } from "../components/image-text-block";
 import { ImageCards, ImageCardType } from "../components/image-cards";
+import LogoRow, { LogoType } from "../components/logo-row";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
@@ -53,6 +54,8 @@ const blockByType = (block: any) => {
           image={block.fields.image.fields}
           subtext={block.fields.descriptionRich}
           imageOnLeft={block.fields.imageOnLeft}
+          buttonText={block.fields.buttonText}
+          buttonLink={block.fields.buttonLink}
         />
       );
 
@@ -64,6 +67,16 @@ const blockByType = (block: any) => {
         );
 
         return <ImageCards cards={imageCardFields} />;
+      }
+
+    case "logoRow":
+      if (block.fields) {
+        const logos = block.fields.logos;
+        const logosFields: LogoType[] = logos.map(
+          (logo: { fields: {} }) => logo.fields
+        );
+
+        return <LogoRow heading={block.fields.heading} logos={logosFields} />;
       }
   }
 };

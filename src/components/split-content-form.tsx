@@ -37,7 +37,7 @@ export default function SplitContentForm() {
                   type='email'
                 />
               </div>
-              <Button className='w-full' type='submit'>
+              <Button size={`lg`} className='w-full' type='submit'>
                 Sign up for newsletter
               </Button>
             </form>

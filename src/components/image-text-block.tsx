@@ -1,6 +1,8 @@
 import { renderDocument } from "../lib/renderDocument";
 import Image from "next/image";
 import React from "react";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 export interface ImageTextBlockProps {
   image: {
@@ -14,6 +16,8 @@ export interface ImageTextBlockProps {
   heading: string;
   subtext: {};
   imageOnLeft: boolean;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
 export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
@@ -21,6 +25,8 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
   heading,
   subtext,
   imageOnLeft,
+  buttonText,
+  buttonLink,
 }) => {
   return (
     <section
@@ -40,8 +46,13 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
         }`}
       />
       <div className={"md:w-1/2"}>
-        <h2 className={"pb-12"}>{heading}</h2>
-        <div>{renderDocument(subtext)}</div>
+        <h2 className={"pb-6 leading-tight"}>{heading}</h2>
+        <div className={"pb-12"}>{renderDocument(subtext)}</div>
+        {buttonText && buttonLink && (
+          <Link href={buttonLink}>
+            <Button size={"lg"}>{buttonText}</Button>
+          </Link>
+        )}
       </div>
     </section>
   );
