@@ -60,7 +60,7 @@ const blockByType = (block: any) => {
       if (block.fields) {
         const imageCards = block.fields.imageCards;
         const imageCardFields: ImageCardType[] = imageCards.map(
-          (imageCard: ImageCardType) => imageCard.fields
+          (imageCard: { fields: {} }) => imageCard.fields
         );
 
         return <ImageCards cards={imageCardFields} />;
