@@ -70,12 +70,11 @@ export async function fetchMetadataBySlug(slug: string) {
   }
 }
 
-export async function fetchBlocksBySlug(slug: string, locale: string) {
+export async function fetchBlocksBySlug(slug: string) {
   const pages = await client.getEntries({
-    include: 1,
     "fields.slug": slug,
+    include: 2,
     content_type: "page",
-    locale: locale,
   });
 
   if (!pages || pages.total <= 0) {
