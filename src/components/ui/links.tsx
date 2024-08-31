@@ -42,11 +42,11 @@ export const Links: React.FC<LinksProps> = ({ orientation, size }) => {
         <Link
           key={index}
           className={`
-            hover:opacity-50 mr-2 sm:mr-4 lg:mr-5 xl:mr-6 text-foreground 
+            hover:opacity-50 mr-2 sm:mr-4 lg:mr-5 xl:mr-6 
             ${
               size == "small"
-                ? "font-light text-base"
-                : "font-regular text-base sm:text-base md:text-xl lg:text-2xl xl:text-2xl antonio pb-8"
+                ? "font-light text-primary text-base"
+                : "font-regular text-white text-base sm:text-base md:text-xl lg:text-2xl xl:text-2xl antonio pb-8"
             }
           `}
           href={link.url}
