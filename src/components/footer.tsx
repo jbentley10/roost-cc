@@ -47,10 +47,14 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <p className={"bg-primary text-white text-center pt-12 pb-10"}>
+      <p
+        className={
+          "grand-hotel text-xl bg-primary text-white text-center pt-12 pb-10"
+        }
+      >
         Copyright 2024{" "}
         <Link
-          className={"font-bold"}
+          className={"font-bold grand-hotel"}
           href='https://palmspringswebdesign.net'
           target='_blank'
         >

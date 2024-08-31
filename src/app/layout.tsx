@@ -36,7 +36,8 @@ export default function RootLayout({
 
         h5,
         button > a,
-        button {
+        button,
+        .grand-hotel {
           font-family: ${grandHotel.style.fontFamily};
         }
 
