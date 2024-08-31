@@ -24,7 +24,6 @@ export default async function Home() {
   return (
     <main className='flex flex-col items-center justify-between'>
       {english && <Content key={Math.random()} englishBlocks={english} />}
-      <LogoRow />
       <SplitContentForm />
     </main>
   );
