@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Links } from "./ui/links";
+import { Links } from "@/components/ui/links";
 import Link from "next/link";
 
 export const Navigation = () => {

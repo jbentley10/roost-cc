@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Links } from "./ui/links";
+import { Links } from "@/components/ui/links";
 
 export const Footer = () => {
   return (

@@ -1,14 +1,14 @@
 import React, { useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/src/components/ui/dialog";
-import { Badge } from "@/src/components/ui/badge";
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
 
 // Mock event data
 const events = [
