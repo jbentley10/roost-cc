@@ -46,7 +46,7 @@ export const Links: React.FC<LinksProps> = ({ orientation, size }) => {
             ${
               size == "small"
                 ? "font-light text-primary text-base"
-                : "font-regular text-white text-base sm:text-base md:text-xl lg:text-2xl xl:text-2xl antonio pb-8"
+                : "font-regular text-white text-base sm:text-base md:text-xl lg:text-2xl xl:text-2xl bevan pb-8"
             }
           `}
           href={link.url}

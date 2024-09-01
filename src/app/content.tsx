@@ -18,65 +18,59 @@ import LogoRow, { LogoType } from "../components/logo-row";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
-  const contentType = block.sys.contentType.sys.id;
+  const contentType = block.__typename;
 
   switch (contentType) {
-    case "heroBlock":
+    case "HeroBlock":
       return (
         <Hero
-          heading={block.fields.heading}
-          subheading={block.fields.subheading}
-          buttonLink={block.fields.buttonLink}
-          buttonText={block.fields.buttonText}
+          heading={block.heading}
+          subheading={block.subheading}
+          buttonLink={block.buttonLink}
+          buttonText={block.buttonText}
         />
       );
 
-    case "dividerTextBlock":
-      return <DividerText text={block.fields.text} />;
+    case "DividerTextBlock":
+      return <DividerText text={block.text} />;
 
-    case "callToActionBlock":
+    case "CallToActionBlock":
       return (
         <CallToAction
-          heading={block.fields.heading}
-          subheading={block.fields.subheading}
-          buttonText={block.fields.buttonText}
-          buttonLink={block.fields.buttonLink}
+          heading={block.heading}
+          subheading={block.subheading}
+          buttonText={block.buttonText}
+          buttonLink={block.buttonLink}
         />
       );
 
-    case "heading":
-      return <Heading heading={block.fields.headingText} />;
+    case "Heading":
+      return <Heading heading={block.headingText} />;
 
-    case "imageAndTextBlock":
+    case "ImageAndTextBlock":
       return (
         <ImageTextBlock
-          heading={block.fields.heading}
-          image={block.fields.image.fields}
-          subtext={block.fields.descriptionRich}
-          imageOnLeft={block.fields.imageOnLeft}
-          buttonText={block.fields.buttonText}
-          buttonLink={block.fields.buttonLink}
+          heading={block.heading}
+          image={block.image}
+          subtext={block.descriptionRich}
+          imageOnLeft={block.imageOnLeft}
+          buttonText={block.buttonText}
+          buttonLink={block.buttonLink}
         />
       );
 
-    case "imageCards":
-      if (block.fields) {
-        const imageCards = block.fields.imageCards;
-        const imageCardFields: ImageCardType[] = imageCards.map(
-          (imageCard: { fields: {} }) => imageCard.fields
-        );
+    case "ImageCards":
+      console.log(block);
+      return <ImageCards cards={block.imageCardsCollection.items} />;
 
-        return <ImageCards cards={imageCardFields} />;
-      }
-
-    case "logoRow":
+    case "LogoRow":
       if (block.fields) {
-        const logos = block.fields.logos;
+        const logos = block.logos;
         const logosFields: LogoType[] = logos.map(
           (logo: { fields: {} }) => logo.fields
         );
 
-        return <LogoRow heading={block.fields.heading} logos={logosFields} />;
+        return <LogoRow heading={block.heading} logos={logosFields} />;
       }
   }
 };

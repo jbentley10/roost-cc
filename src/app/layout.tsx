@@ -30,7 +30,7 @@ export default function RootLayout({
         h4,
         button,
         span,
-        .antonio {
+        .bevan {
           font-family: ${bevan.style.fontFamily};
         }
 

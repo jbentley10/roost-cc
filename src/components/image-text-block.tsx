@@ -8,13 +8,12 @@ export interface ImageTextBlockProps {
   image: {
     title: string;
     description: string;
-    file: {
-      url: string;
-      details: { image: { width: number; height: number } };
-    };
+    url: string;
+    width: number;
+    height: number;
   };
   heading: string;
-  subtext: {};
+  subtext: { json: {} };
   imageOnLeft: boolean;
   buttonText?: string;
   buttonLink?: string;
@@ -37,9 +36,9 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
       } items-center text-primary`}
     >
       <Image
-        src={`https:${image.file.url}`}
-        width={image.file.details.image.width}
-        height={image.file.details.image.height}
+        src={image.url}
+        width={image.width}
+        height={image.height}
         alt={image.description}
         className={`${
           imageOnLeft === true ? "md:mr-24 md:w-1/2" : "md:ml-24 md:w-1/2"
@@ -47,7 +46,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
       />
       <div className={"md:w-1/2"}>
         <h2 className={"pb-6 leading-tight"}>{heading}</h2>
-        <div className={"pb-12"}>{renderDocument(subtext)}</div>
+        <div className={"pb-12"}>{renderDocument(subtext.json)}</div>
         {buttonText && buttonLink && (
           <Link href={buttonLink}>
             <Button size={"lg"}>{buttonText}</Button>
