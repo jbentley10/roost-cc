@@ -60,7 +60,6 @@ const blockByType = (block: any) => {
       );
 
     case "ImageCards":
-      console.log(block);
       return <ImageCards cards={block.imageCardsCollection.items} />;
 
     case "LogoRow":

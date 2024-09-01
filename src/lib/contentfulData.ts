@@ -99,8 +99,6 @@ export async function fetchPages() {
 }
 
 export async function fetchMetadataBySlug(slug: string) {
-  console.log(`Fetching metadata for slug ${slug}...`);
-
   const query = `
     query($slug: String!) {
       pageCollection(where: { slug: $slug }, limit: 1) {
