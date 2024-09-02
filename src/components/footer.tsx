@@ -5,20 +5,19 @@ import { Links } from "@/components/ui/links";
 
 export const Footer = () => {
   return (
-    <footer
-      className={"footer component-container bg-white text-primary-foreground"}
-    >
-      <div className={"flex flex-col sm:flex-row"}>
-        <div className={"bg-white pl-16 sm:pl-0 sm:w-1/2 pt-14 pb-10"}>
+    <footer className={"footer text-primary-foreground"}>
+      <div className={"flex flex-col sm:flex-row bg-white"}>
+        <div className={"bg-white sm:pl-0 sm:w-1/2 pt-14 pb-10"}>
           <Image
+            className={"pl-16"}
             src='/logo.webp'
-            width='200'
-            height='195'
+            width='350'
+            height='295'
             alt='The logo for The Roost of Cathedral City'
           />
         </div>
         {/* Wave */}
-        <div className='relative h-full w-12 overflow-hidden'>
+        <div className='relative h-full md:w-16 lg:w-24 overflow-hidden'>
           <svg
             viewBox='0 0 120 1200'
             preserveAspectRatio='none'

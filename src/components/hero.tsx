@@ -17,7 +17,7 @@ export const Hero: React.FC<HeroProps> = ({
   buttonText,
 }) => {
   return (
-    <section className="h-dvh md:h-auto mt-0 relative w-full flex bg-[url('/hero.webp?height=600&width=800')] bg-cover bg-center">
+    <section className="h-dvh md:h-auto mt-0 relative w-full flex bg-[url('/hero.webp')] bg-cover bg-center">
       <div className='bg-transparentOverlay atf-container w-full h-full sm:pt-10 md:pt-11 lg:pt-14 xl:pt-16 '>
         <div className='w-full md:w-1/2 relative z-10 text-left'>
           <div className='mb-16 max-w-md'>

@@ -32,6 +32,7 @@ export default function RootLayout({
         span,
         .bevan {
           font-family: ${bevan.style.fontFamily};
+          font-weight: 500;
         }
 
         h5,

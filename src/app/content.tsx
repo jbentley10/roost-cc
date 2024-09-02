@@ -25,7 +25,7 @@ const blockByType = (block: any) => {
       return (
         <Hero
           heading={block.heading}
-          subheading={block.subheading}
+          subheading={block.subHeading}
           buttonLink={block.buttonLink}
           buttonText={block.buttonText}
         />
