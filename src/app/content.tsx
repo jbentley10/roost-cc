@@ -16,6 +16,8 @@ import { ImageTextBlock } from "../components/image-text-block";
 import { ImageCards, ImageCardType } from "../components/image-cards";
 import LogoRow, { LogoType } from "../components/logo-row";
 import EventsContainer from "@/components/events-container";
+import TestimonialsSlider from "@/components/testimonials-slider";
+import ImageGrid from "@/components/image-grid";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
@@ -70,6 +72,14 @@ const blockByType = (block: any) => {
 
     case "EventsContainer":
       return <EventsContainer events={block.eventsCollection.items} />;
+
+    case "TestimonialsSlider":
+      return (
+        <TestimonialsSlider testimonials={block.testimonialsCollection.items} />
+      );
+
+    case "ImageGrid3X3":
+      return <ImageGrid images={block.imagesCollection.items} />;
   }
 };
 

@@ -140,19 +140,16 @@ export async function fetchBlocksBySlug(slug: string) {
               __typename
               ...CallToActionBlockFields
               ...DividerTextBlockFields
-              ...DonationTiersBlockFields
               ...EventsContainerFields
               ...ExampleBlockFields
               ...HeadingFields
               ...HeroBlockFields
               ...ImageAndTextBlockFields
               ...ImageCardsFields
-              ...ImageGridFields
               ...ImageSlidesBlockFields
               ...LogoRowFields
-              ...OurHistoryBlockFields
-              ...QuickStatisticsBlockFields
-              ...ResourcesBlockFields
+              ...TestimonialsSliderFields
+              ...ImageGrid3x3Fields
             }
           }
         }
@@ -170,19 +167,6 @@ export async function fetchBlocksBySlug(slug: string) {
     fragment DividerTextBlockFields on DividerTextBlock {
       _id
       text
-    }
-
-    fragment DonationTiersBlockFields on DonationTiersBlock {
-      _id
-      heading
-      tier1Heading
-      tier1Subheading
-      tier2Heading
-      tier2Subheading
-      tier3Heading
-      tier3Subheading
-      ctaText
-      ctaLink
     }
 
     fragment ExampleBlockFields on ExampleBlock {
@@ -258,12 +242,6 @@ export async function fetchBlocksBySlug(slug: string) {
       }
     }
 
-    fragment ImageGridFields on ImageGrid {
-      _id
-      imageGridName
-      textCallout
-    }
-
     fragment ImageSlidesBlockFields on ImageSlidesBlock {
       _id
     }
@@ -281,23 +259,28 @@ export async function fetchBlocksBySlug(slug: string) {
       }
     }
 
-    fragment OurHistoryBlockFields on OurHistoryBlock {
+    fragment TestimonialsSliderFields on TestimonialsSlider {
       _id
-      heading
-      subheading
-      year1
-      text1
+      testimonialsCollection (limit:10) {
+        items {
+          _id
+          quote
+          author
+        }
+      }
     }
 
-    fragment QuickStatisticsBlockFields on QuickStatisticsBlock {
+    fragment ImageGrid3x3Fields on ImageGrid3X3 {
       _id
-      heading
-    }
-
-    fragment ResourcesBlockFields on ResourcesBlock {
-      _id
-      heading
-      subheading
+      imagesCollection (limit:9) {
+        items {
+          _id
+          image {
+            description
+            url
+          }
+        }
+      }
     }
   `;
 
