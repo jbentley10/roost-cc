@@ -166,9 +166,7 @@ function EventsContainer(props: { events: EventType[] }) {
             </div>
           ) : (
             <div className={"w-full"}>
-              {filteredEvents.map((event: EventType, index: number) => (
-                <Calendar key={index} events={filteredEvents} />
-              ))}
+              <Calendar events={filteredEvents} />
             </div>
           )}
         </div>
