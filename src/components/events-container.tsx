@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CalendarIcon, ClockIcon } from "lucide-react";
-import Image from "next/image";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { CalendarIcon, ListIcon, ClockIcon } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import Calendar from "./calendar";
 
-interface EventType {
+type ViewType = "list" | "calendar";
+
+export interface EventType {
+  contentfulMetadata: {
+    tags: [{ name: string }];
+  };
+  _id: string;
   name: string;
   description: string;
   link: string;
   dateAndTime: string;
   image: {
     url: string;
-    width: number;
-    height: number;
     description: string;
   };
 }
@@ -40,22 +55,26 @@ function EventCard(props: { event: EventType }) {
   const { event } = props;
 
   return (
-    <Card className='overflow-hidden'>
+    <Card className='overflow-hidden py-8 px-14 mb-10 rounded bg-card text-card-foreground'>
       <CardContent className='p-0'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
           <div className='h-full'>
             <Image
               src={event.image.url}
               alt={event.image.description}
-              width={event.image.width}
-              height={event.image.height}
+              width={400}
+              height={200}
               className='object-cover w-full h-full'
             />
           </div>
           <div className='p-6 flex flex-col justify-between'>
             <div>
-              <h2 className='text-2xl font-bold mb-2'>{event.name}</h2>
-              <p className='text-muted-foreground mb-4'>{event.description}</p>
+              <div id={"name-and-description"} className={"mb-8"}>
+                <h2 className='text-2xl font-bold mb-2'>{event.name}</h2>
+                <p className='text-muted-foreground mb-4'>
+                  {event.description}
+                </p>
+              </div>
               <div className='flex items-center mb-2'>
                 <CalendarIcon className='mr-2 h-4 w-4' />
                 <span>{formatDate(event.dateAndTime)}</span>
@@ -66,7 +85,9 @@ function EventCard(props: { event: EventType }) {
               </div>
             </div>
             <Button asChild>
-              <a href={event.link}>Buy Tickets</a>
+              <Link target='_blank' href={event.link}>
+                Buy Tickets
+              </Link>
             </Button>
           </div>
         </div>
@@ -77,11 +98,66 @@ function EventCard(props: { event: EventType }) {
 
 function EventsContainer(props: { events: EventType[] }) {
   const { events } = props;
+  const [selectedTag, setSelectedTag] = useState<string>("all");
+  const [view, setView] = useState<ViewType>("list");
+
+  const handleViewChange = (value: ViewType) => {
+    setView(value);
+  };
+
+  const filteredEvents =
+    selectedTag === "all"
+      ? events
+      : events.filter((event) =>
+          event.contentfulMetadata.tags[0].name.includes(selectedTag)
+        );
+
   return (
-    <div id='events-container'>
-      {events.map((event: EventType, index: number) => (
-        <EventCard key={index} event={event} />
-      ))}
+    <div
+      id='events-container'
+      className={"component-container component-spacer"}
+    >
+      {/* Event Select */}
+      <div className='mb-6 flex flex-row justify-end'>
+        <h5>Filter by</h5>
+        <Select onValueChange={setSelectedTag} defaultValue='all'>
+          <SelectTrigger className='w-[180px]'>
+            <SelectValue placeholder='Select event type' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value='all'>All Events</SelectItem>
+            <SelectItem value='music'>Music</SelectItem>
+            <SelectItem value='bingo'>Bingo</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* View Type */}
+      <div className='mb-6 flex flex-row justify-end'>
+        <RadioGroup onValueChange={handleViewChange} defaultValue='comfortable'>
+          <div className='flex items-center space-x-2'>
+            <RadioGroupItem value='list' id='r1' />
+            <ListIcon />
+            <Label htmlFor='r1'>List View</Label>
+          </div>
+          <div className='flex items-center space-x-2'>
+            <RadioGroupItem value='calendar' id='r2' />
+            <CalendarIcon />
+            <Label htmlFor='r2'>Calendar View</Label>
+          </div>
+        </RadioGroup>
+      </div>
+
+      {/* Heading */}
+      <h2 className={"text-center capitalize pb-8"}>{selectedTag} Events</h2>
+
+      {view === "list" ? (
+        filteredEvents.map((event: EventType, index: number) => (
+          <EventCard key={index} event={event} />
+        ))
+      ) : (
+        <Calendar events={events} />
+      )}
     </div>
   );
 }

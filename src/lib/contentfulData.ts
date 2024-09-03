@@ -196,14 +196,17 @@ export async function fetchBlocksBySlug(slug: string) {
       eventsCollection (limit: 5) {
         items {
           _id
+          contentfulMetadata {
+            tags {
+              name
+            }
+          }
           name
           description
           link
           dateAndTime
           image {
             url
-            width
-            height
           }
         }
       }

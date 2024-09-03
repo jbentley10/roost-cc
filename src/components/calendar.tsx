@@ -10,43 +10,11 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 
-// Mock event data
-const events = [
-  {
-    id: 1,
-    title: "Team Meeting",
-    description: "Weekly team sync",
-    date: new Date(2024, 7, 5, 10, 0),
-    link: "https://example.com/meeting",
-  },
-  {
-    id: 2,
-    title: "Conference",
-    description: "Annual tech conference",
-    date: new Date(2024, 7, 15, 9, 0),
-    link: "https://example.com/conference",
-  },
-  {
-    id: 3,
-    title: "Workshop",
-    description: "React workshop",
-    date: new Date(2024, 7, 22, 14, 0),
-    link: "https://example.com/workshop",
-  },
-  {
-    id: 4,
-    title: "Product Launch",
-    description: "New product release event",
-    date: new Date(2024, 7, 29, 11, 0),
-    link: "https://example.com/product-launch",
-  },
-];
-
-interface Event {
-  id: number;
-  title: string;
+export interface EventType {
+  _id: string;
+  name: string;
   description: string;
-  date: Date;
+  dateAndTime: string;
   link: string;
 }
 
@@ -90,22 +58,24 @@ const MonthSelector: React.FC<{
   );
 };
 
-const EventModal: React.FC<{ event: Event | null; onClose: () => void }> = ({
-  event,
-  onClose,
-}) => {
+const EventModal: React.FC<{
+  event: EventType | null;
+  onClose: () => void;
+}> = ({ event, onClose }) => {
   if (!event) return null;
+
+  const eventDate: Date = new Date(event.dateAndTime);
 
   return (
     <Dialog open={!!event} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{event.title}</DialogTitle>
+          <DialogTitle>{event.name}</DialogTitle>
           <DialogDescription>
             <p>{event.description}</p>
             <p className='mt-2'>
               Time:{" "}
-              {event.date.toLocaleTimeString([], {
+              {eventDate.toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
               })}
@@ -125,9 +95,13 @@ const EventModal: React.FC<{ event: Event | null; onClose: () => void }> = ({
   );
 };
 
-export default function Calendar() {
+interface CalendarProps {
+  events?: EventType[];
+}
+
+export default function Calendar({ events = [] }: CalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 7, 1)); // Set initial date to August 2024
-  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
 
   const handleMonthChange = useCallback((date: Date) => {
     setCurrentDate(date);
@@ -147,12 +121,14 @@ export default function Calendar() {
   const { daysInMonth, startingDay } = getDaysInMonth(currentDate);
 
   const getEventsForDate = (date: Date) => {
-    return events.filter(
-      (event) =>
-        event.date.getDate() === date.getDate() &&
-        event.date.getMonth() === date.getMonth() &&
-        event.date.getFullYear() === date.getFullYear()
-    );
+    return events.filter((event) => {
+      const eventDate = new Date(event.dateAndTime);
+      return (
+        eventDate.getDate() === date.getDate() &&
+        eventDate.getMonth() === date.getMonth() &&
+        eventDate.getFullYear() === date.getFullYear()
+      );
+    });
   };
 
   return (
@@ -185,16 +161,16 @@ export default function Calendar() {
               <div className='font-semibold mb-1'>{index + 1}</div>
               {dayEvents.map((event) => (
                 <Badge
-                  key={event.id}
+                  key={event._id}
                   variant='secondary'
                   className='mb-1 cursor-pointer'
                   onClick={() => setSelectedEvent(event)}
                 >
-                  {event.date.toLocaleTimeString([], {
+                  {new Date(event.dateAndTime).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}{" "}
-                  - {event.title}
+                  - {event.name}
                 </Badge>
               ))}
             </div>
