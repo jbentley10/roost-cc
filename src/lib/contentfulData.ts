@@ -271,6 +271,14 @@ export async function fetchBlocksBySlug(slug: string) {
     fragment LogoRowFields on LogoRow {
       _id
       heading
+      logosCollection (limit:8) {
+        items {
+          name
+          image {
+            url
+          }
+        }
+      }
     }
 
     fragment OurHistoryBlockFields on OurHistoryBlock {

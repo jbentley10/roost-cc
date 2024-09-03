@@ -3,19 +3,12 @@ import Image from "next/image";
 export interface LogoType {
   name: string;
   image: {
-    fields: {
-      title: string;
-      description: string;
-      file: {
-        url: string;
-        details: { image: { width: number; height: number } };
-      };
-    };
+    url: string;
   };
 }
 
 export default function LogoRow(props: { heading: string; logos: LogoType[] }) {
-  const logos = props.logos || [];
+  const { logos } = props;
 
   return (
     <section className='w-full py-12 md:py-24 lg:py-32'>
@@ -27,8 +20,8 @@ export default function LogoRow(props: { heading: string; logos: LogoType[] }) {
           {logos.map((logo: LogoType, i: number) => (
             <div key={i} className='flex justify-center'>
               <Image
-                src={`https:${logo.image.fields.file.url}`}
-                alt={`${logo.image.fields.description}`}
+                src={`${logo.image.url}`}
+                alt={`The logo of ${logo.name}`}
                 width={180}
                 height={80}
                 className='max-w-[120px] md:max-w-[180px] h-auto'

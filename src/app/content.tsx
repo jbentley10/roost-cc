@@ -64,14 +64,9 @@ const blockByType = (block: any) => {
       return <ImageCards cards={block.imageCardsCollection.items} />;
 
     case "LogoRow":
-      if (block.fields) {
-        const logos = block.logos;
-        const logosFields: LogoType[] = logos.map(
-          (logo: { fields: {} }) => logo.fields
-        );
-
-        return <LogoRow heading={block.heading} logos={logosFields} />;
-      }
+      return (
+        <LogoRow heading={block.heading} logos={block.logosCollection.items} />
+      );
 
     case "EventsContainer":
       return <EventsContainer events={block.eventsCollection.items} />;
