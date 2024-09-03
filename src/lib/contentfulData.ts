@@ -141,6 +141,7 @@ export async function fetchBlocksBySlug(slug: string) {
               ...CallToActionBlockFields
               ...DividerTextBlockFields
               ...DonationTiersBlockFields
+              ...EventsContainerFields
               ...ExampleBlockFields
               ...HeadingFields
               ...HeroBlockFields
@@ -187,6 +188,25 @@ export async function fetchBlocksBySlug(slug: string) {
     fragment ExampleBlockFields on ExampleBlock {
       _id
       example
+    }
+
+    fragment EventsContainerFields on EventsContainer {
+      _id
+      heading
+      eventsCollection (limit: 5) {
+        items {
+          _id
+          name
+          description
+          link
+          dateAndTime
+          image {
+            url
+            width
+            height
+          }
+        }
+      }
     }
 
     fragment HeadingFields on Heading {

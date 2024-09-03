@@ -15,6 +15,7 @@ import { Heading } from "../components/heading";
 import { ImageTextBlock } from "../components/image-text-block";
 import { ImageCards, ImageCardType } from "../components/image-cards";
 import LogoRow, { LogoType } from "../components/logo-row";
+import EventsContainer from "@/components/events-container";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
@@ -71,6 +72,9 @@ const blockByType = (block: any) => {
 
         return <LogoRow heading={block.heading} logos={logosFields} />;
       }
+
+    case "EventsContainer":
+      return <EventsContainer events={block.eventsCollection.items} />;
   }
 };
 
