@@ -113,52 +113,67 @@ function EventsContainer(props: { events: EventType[] }) {
         );
 
   return (
-    <div
-      id='events-container'
-      className={"component-container component-spacer"}
-    >
-      {/* Event Select */}
-      <div className='mb-6 flex flex-row justify-end'>
-        <h5>Filter by</h5>
-        <Select onValueChange={setSelectedTag} defaultValue='all'>
-          <SelectTrigger className='w-[180px]'>
-            <SelectValue placeholder='Select event type' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value='all'>All Events</SelectItem>
-            <SelectItem value='music'>Music</SelectItem>
-            <SelectItem value='bingo'>Bingo</SelectItem>
-          </SelectContent>
-        </Select>
+    <>
+      <div
+        id={"controls"}
+        className={"w-full flex flex-col component-container mt-48"}
+      >
+        {/* Event Select */}
+        <div className='mb-6 flex flex-row justify-end'>
+          <h5>Filter by</h5>
+          <Select onValueChange={setSelectedTag} defaultValue='all'>
+            <SelectTrigger className='w-[180px]'>
+              <SelectValue placeholder='Select event type' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value='all'>All Events</SelectItem>
+              <SelectItem value='music'>Music</SelectItem>
+              <SelectItem value='bingo'>Bingo</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* View Type */}
+        <div className='mb-6 flex flex-row justify-end'>
+          <RadioGroup
+            onValueChange={handleViewChange}
+            defaultValue='comfortable'
+          >
+            <div className='flex items-center space-x-2'>
+              <RadioGroupItem value='list' id='r1' />
+              <ListIcon />
+              <Label htmlFor='r1'>List View</Label>
+            </div>
+            <div className='flex items-center space-x-2'>
+              <RadioGroupItem value='calendar' id='r2' />
+              <CalendarIcon />
+              <Label htmlFor='r2'>Calendar View</Label>
+            </div>
+          </RadioGroup>
+        </div>
       </div>
 
-      {/* View Type */}
-      <div className='mb-6 flex flex-row justify-end'>
-        <RadioGroup onValueChange={handleViewChange} defaultValue='comfortable'>
-          <div className='flex items-center space-x-2'>
-            <RadioGroupItem value='list' id='r1' />
-            <ListIcon />
-            <Label htmlFor='r1'>List View</Label>
-          </div>
-          <div className='flex items-center space-x-2'>
-            <RadioGroupItem value='calendar' id='r2' />
-            <CalendarIcon />
-            <Label htmlFor='r2'>Calendar View</Label>
-          </div>
-        </RadioGroup>
+      <div id='events-container' className={"component-container"}>
+        {/* Heading */}
+        <h2 className={"text-center capitalize pb-8"}>{selectedTag} Events</h2>
+
+        <div className={""}>
+          {view === "list" ? (
+            <div className={"w-full"}>
+              {filteredEvents.map((event: EventType, index: number) => (
+                <EventCard key={index} event={event} />
+              ))}
+            </div>
+          ) : (
+            <div className={"w-full"}>
+              {filteredEvents.map((event: EventType, index: number) => (
+                <Calendar key={index} events={filteredEvents} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-
-      {/* Heading */}
-      <h2 className={"text-center capitalize pb-8"}>{selectedTag} Events</h2>
-
-      {view === "list" ? (
-        filteredEvents.map((event: EventType, index: number) => (
-          <EventCard key={index} event={event} />
-        ))
-      ) : (
-        <Calendar events={events} />
-      )}
-    </div>
+    </>
   );
 }
 

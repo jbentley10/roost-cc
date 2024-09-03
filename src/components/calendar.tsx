@@ -100,7 +100,7 @@ interface CalendarProps {
 }
 
 export default function Calendar({ events = [] }: CalendarProps) {
-  const [currentDate, setCurrentDate] = useState(new Date(2024, 7, 1)); // Set initial date to August 2024
+  const [currentDate, setCurrentDate] = useState(new Date()); // Set initial date to August 2024
   const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
 
   const handleMonthChange = useCallback((date: Date) => {
@@ -132,7 +132,7 @@ export default function Calendar({ events = [] }: CalendarProps) {
   };
 
   return (
-    <div className='max-w-4xl mx-auto p-4'>
+    <div>
       <MonthSelector
         currentDate={currentDate}
         onMonthChange={handleMonthChange}
