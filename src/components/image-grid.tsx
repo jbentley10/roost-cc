@@ -22,6 +22,7 @@ function ImageGrid(props: {
               width={300}
               height={300}
               key={index}
+              className={"mr-4 mb-4"}
             />
           )
         )}
