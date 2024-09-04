@@ -29,21 +29,28 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
 }) => {
   return (
     <section
-      className={`component-container component-spacer flex ${
-        imageOnLeft === true
-          ? "flex-col md:flex-row"
-          : "flex-col-reverse md:flex-row-reverse"
-      } items-center text-primary`}
+      className={`
+        component-container component-spacer flex ${
+          imageOnLeft === true
+            ? "flex-col md:flex-row"
+            : "flex-col-reverse md:flex-row-reverse"
+        } 
+        items-center text-primary
+        ${!image && "justify-center"}
+      `}
     >
-      <Image
-        src={image.url}
-        width={image.width}
-        height={image.height}
-        alt={image.description}
-        className={`${
-          imageOnLeft === true ? "md:mr-24 md:w-1/2" : "md:ml-24 md:w-1/2"
-        }`}
-      />
+      {image && (
+        <Image
+          src={image.url}
+          width={image.width}
+          height={image.height}
+          alt={image.description}
+          className={`${
+            imageOnLeft === true ? "md:mr-24 md:w-1/2" : "md:ml-24 md:w-1/2"
+          }`}
+        />
+      )}
+
       <div className={"md:w-1/2"}>
         <h2 className={"pb-6 leading-tight"}>{heading}</h2>
         <div className={"pb-12"}>{renderDocument(subtext.json)}</div>
