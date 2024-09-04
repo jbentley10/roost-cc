@@ -150,6 +150,7 @@ export async function fetchBlocksBySlug(slug: string) {
               ...LogoRowFields
               ...TestimonialsSliderFields
               ...ImageGrid3x3Fields
+              ...GalleryGridFields
             }
           }
         }
@@ -275,6 +276,24 @@ export async function fetchBlocksBySlug(slug: string) {
       imagesCollection (limit:9) {
         items {
           _id
+          image {
+            description
+            url
+          }
+        }
+      }
+    }
+
+    fragment GalleryGridFields on GalleryGrid {
+      _id
+      imagesCollection (limit:9) {
+        items {
+          _id
+          contentfulMetadata {
+            tags {
+              name
+            }
+          }
           image {
             description
             url

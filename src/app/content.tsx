@@ -18,6 +18,7 @@ import LogoRow, { LogoType } from "../components/logo-row";
 import EventsContainer from "@/components/events-container";
 import TestimonialsSlider from "@/components/testimonials-slider";
 import ImageGrid from "@/components/image-grid";
+import GalleryGrid from "@/components/gallery-grid";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
@@ -80,6 +81,9 @@ const blockByType = (block: any) => {
 
     case "ImageGrid3X3":
       return <ImageGrid images={block.imagesCollection.items} />;
+
+    case "GalleryGrid":
+      return <GalleryGrid images={block.imagesCollection.items} />;
   }
 };
 
