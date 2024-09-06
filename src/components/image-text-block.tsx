@@ -52,11 +52,13 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
       )}
 
       <div className={"md:w-1/2"}>
-        <h2 className={"pb-6 leading-tight"}>{heading}</h2>
-        <div className={"pb-12"}>{renderDocument(subtext.json)}</div>
+        <h2 className={"pb-4"}>{heading}</h2>
+        <div className={"pb-5 md:pb-12"}>{renderDocument(subtext.json)}</div>
         {buttonText && buttonLink && (
           <Link href={buttonLink}>
-            <Button size={"lg"}>{buttonText}</Button>
+            <Button className={"mb-8 md:mb-0"} size={"lg"}>
+              {buttonText}
+            </Button>
           </Link>
         )}
       </div>

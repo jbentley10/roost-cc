@@ -35,18 +35,18 @@ export const Links: React.FC<LinksProps> = ({ orientation, size }) => {
       className={
         orientation == "horizontal"
           ? "flex flex-row"
-          : "flex flex-row sm:flex-col"
+          : "flex flex-row flex-wrap md:flex-nowrap sm:flex-col"
       }
     >
       {linkList.map((link, index) => (
         <Link
           key={index}
           className={`
-            hover:opacity-50 mr-2 sm:mr-4 lg:mr-5 xl:mr-6 
+            hover:opacity-50 mr-4 sm:mr-4 lg:mr-5 xl:mr-6 
             ${
               size == "small"
-                ? "font-light text-primary text-base"
-                : "font-regular text-white text-base sm:text-base md:text-xl lg:text-2xl xl:text-2xl bevan pb-8"
+                ? "font-light text-primary text-sm md:text-base"
+                : "font-regular text-white text-sm sm:text-base md:text-xl lg:text-2xl xl:text-2xl bevan pb-2 sm:pb-8"
             }
           `}
           href={link.url}

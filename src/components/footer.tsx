@@ -7,9 +7,9 @@ export const Footer = () => {
   return (
     <footer className={"footer text-primary-foreground"}>
       <div className={"flex flex-col sm:flex-row bg-white"}>
-        <div className={"bg-white sm:pl-0 sm:w-1/2 pt-14 pb-10"}>
+        <div className={"bg-white sm:pl-0 w-full sm:w-1/2 pt-14 pb-10"}>
           <Image
-            className={"pl-16"}
+            className={"pl-8 md:pl-16 sm:pr-16 md:pr-0"}
             src='/logo.webp'
             width='350'
             height='295'
@@ -17,7 +17,7 @@ export const Footer = () => {
           />
         </div>
         {/* Wave */}
-        <div className='relative h-full md:w-16 lg:w-24 overflow-hidden'>
+        <div className='relative h-0 md:h-full md:w-16 lg:w-10 overflow-hidden'>
           <svg
             viewBox='0 0 120 1200'
             preserveAspectRatio='none'
@@ -26,15 +26,15 @@ export const Footer = () => {
             <path
               d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z'
               className='fill-primary'
-              transform='rotate(90) translate(0, -120)'
+              transform='rotate(90) translate(0, -125)'
             ></path>
           </svg>
         </div>
-        <div className={`sm:w-1/2 pl-8 pt-14 bg-primary text-white`}>
+        <div className={`sm:w-1/2 pt-8 p-4 md:pl-10 bg-primary text-white`}>
           <div className={"flex flex-col sm:flex-row"}>
             <div
               className={
-                "links sm:border-r-2 border-white pl-16 sm:pl-0 sm:pr-4 md:pr-4"
+                "links sm:border-r-2 border-white pl-0 sm:pr-4 md:pr-4 mb-8 sm:mb-0"
               }
             >
               <Links orientation='vertical' size={"large"} />

@@ -13,9 +13,7 @@ export default function LogoRow(props: { heading: string; logos: LogoType[] }) {
   return (
     <section className='w-full py-12 md:py-24 lg:py-32'>
       <div className='container px-4 md:px-6'>
-        <h2 className='text-3xl font-bold text-center mb-12'>
-          {props.heading}
-        </h2>
+        <h2 className='text-3xl text-center mb-12'>{props.heading}</h2>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center justify-center'>
           {logos.map((logo: LogoType, i: number) => (
             <div key={i} className='flex justify-center'>

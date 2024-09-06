@@ -9,10 +9,10 @@ export default function SplitContentForm() {
         <div className='grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2'>
           <div className='flex flex-col justify-center space-y-4'>
             <div className='space-y-2'>
-              <h2 className='text-3xl font-bold tracking-tighter sm:text-5xl'>
+              <h2 className='text-3xl tracking-tighter sm:text-5xl'>
                 Stay up to date
               </h2>
-              <p className='max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400'>
+              <p>
                 Join our newsletter to receive the latest updates and exclusive
                 offers. We dont send spam, and you can unsubscribe at any time.
               </p>
@@ -21,7 +21,9 @@ export default function SplitContentForm() {
           <div className='flex flex-col gap-4 min-[400px]:flex-row lg:flex-col lg:justify-center'>
             <form className='w-full max-w-sm space-y-4'>
               <div className='space-y-2'>
-                <Label htmlFor='first-name'>First name</Label>
+                <Label className={"grand-hotel text-lg"} htmlFor='first-name'>
+                  First name
+                </Label>
                 <Input
                   id='first-name'
                   placeholder='Enter your first name'
@@ -29,7 +31,9 @@ export default function SplitContentForm() {
                 />
               </div>
               <div className='space-y-2'>
-                <Label htmlFor='email'>Email address</Label>
+                <Label className={"grand-hotel text-lg"} htmlFor='email'>
+                  Email address
+                </Label>
                 <Input
                   id='email'
                   placeholder='Enter your email'

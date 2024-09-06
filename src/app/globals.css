@@ -86,10 +86,8 @@
   margin: 124px 0;
 }
 
-h2 {
-  font-weight: 800;
-}
-
+h1,
+h2,
 h3 {
   font-weight: 500;
 }
@@ -110,17 +108,24 @@ ul {
 @media (max-width: 639px) {
   h1 {
     line-height: 1.25;
-    font-size: 4.5rem;
+    font-size: 2.75rem;
   }
 
   h2 {
-    line-height: 1.25;
-    font-size: 4rem;
+    line-height: 1;
+    font-size: 2.5rem;
   }
 
-  .component-container,
+  .component-container {
+    padding: 0 24px;
+  }
+
+  .component-spacer {
+    margin: 40px 0;
+  }
+
   .atf-container {
-    padding: 0 12px;
+    padding-left: 12px;
   }
 }
 
@@ -132,8 +137,13 @@ ul {
   }
 
   h2 {
-    line-height: 1.25;
+    line-height: 1;
     font-size: 4rem;
+  }
+
+  .component-container,
+  .atf-container {
+    padding-left: 24px;
   }
 }
 
@@ -146,7 +156,7 @@ ul {
 
   .component-container,
   .atf-container {
-    padding: 0 24px;
+    padding-left: 24px;
   }
 }
 
