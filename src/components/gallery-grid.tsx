@@ -121,14 +121,6 @@ function GalleryGrid(props: { images: ImageType[] }) {
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
         <DialogContent className='max-w-3xl w-full h-[80vh] flex items-center justify-center'>
-          <Button
-            variant='ghost'
-            size='icon'
-            className='absolute right-4 top-4'
-            onClick={closeModal}
-          >
-            <X className='h-4 w-4' />
-          </Button>
           <div className='relative w-full h-full'>
             <Image
               alt={filteredImages[currentImageIndex]?.image.description || ""}
@@ -137,7 +129,7 @@ function GalleryGrid(props: { images: ImageType[] }) {
               objectFit='contain'
             />
             <Button
-              variant='ghost'
+              variant='default'
               size='icon'
               className='absolute left-4 top-1/2 transform -translate-y-1/2'
               onClick={goToPreviousImage}
@@ -145,7 +137,7 @@ function GalleryGrid(props: { images: ImageType[] }) {
               <ChevronLeft className='h-6 w-6' />
             </Button>
             <Button
-              variant='ghost'
+              variant='default'
               size='icon'
               className='absolute right-4 top-1/2 transform -translate-y-1/2'
               onClick={goToNextImage}
