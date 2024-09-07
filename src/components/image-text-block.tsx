@@ -17,6 +17,7 @@ export interface ImageTextBlockProps {
   imageOnLeft: boolean;
   buttonText?: string;
   buttonLink?: string;
+  newWindow: boolean;
 }
 
 export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
@@ -26,6 +27,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
   imageOnLeft,
   buttonText,
   buttonLink,
+  newWindow,
 }) => {
   return (
     <section
@@ -55,7 +57,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
         <h2 className={"pb-4"}>{heading}</h2>
         <div className={"pb-5 md:pb-12"}>{renderDocument(subtext.json)}</div>
         {buttonText && buttonLink && (
-          <Link href={buttonLink}>
+          <Link target={newWindow ? "_blank" : ""} href={buttonLink}>
             <Button className={"mb-8 md:mb-0"} size={"lg"}>
               {buttonText}
             </Button>

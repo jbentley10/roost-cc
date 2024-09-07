@@ -69,7 +69,9 @@ function GalleryGrid(props: { images: ImageType[] }) {
     <>
       <div
         id={"controls"}
-        className={"w-full flex flex-col component-container mt-48"}
+        className={
+          "w-full flex flex-col component-container mt-8 mb-8 lg:mt-24"
+        }
       >
         {/* Event Select */}
         <div className='mb-6 flex flex-row justify-end'>

@@ -216,6 +216,7 @@ export async function fetchBlocksBySlug(slug: string) {
       imageOnLeft
       buttonText
       buttonLink
+      newWindow
       descriptionRich {
         json
       }
@@ -286,15 +287,20 @@ export async function fetchBlocksBySlug(slug: string) {
 
     fragment GalleryGridFields on GalleryGrid {
       _id
-      imagesCollection(limit: 9) {
-      items {
-        _id
-        image {
-          description
-          url
+      imagesCollection (limit:9) {
+        items {
+          _id
+          contentfulMetadata {
+            tags {
+              name
+            }
+          }
+          image {
+            description
+            url
+          }
         }
       }
-}
     }`;
 
   const variables = { slug };

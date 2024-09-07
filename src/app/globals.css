@@ -96,7 +96,8 @@ h4 {
   font-weight: 300;
 }
 
-h5 {
+h5,
+label {
   font-size: 24px;
 }
 

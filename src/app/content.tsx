@@ -60,6 +60,7 @@ const blockByType = (block: any) => {
           imageOnLeft={block.imageOnLeft}
           buttonText={block.buttonText}
           buttonLink={block.buttonLink}
+          newWindow={block.newWindow}
         />
       );
 

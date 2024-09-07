@@ -25,11 +25,11 @@ function TestimonialsSlider(props: { testimonials: TestimonialType[] }) {
   return (
     <div
       className={
-        "testimonial-slider component-spacer component-container text-center items-center flex flex-col"
+        "testimonial-slider component-spacer component-container text-center items-center"
       }
     >
       <h2 className={"pb-8"}>Testimonials</h2>
-      <div className='flex flex-row items-center w-full h-56'>
+      <div className='flex flex-row items-center justify-center w-full h-56'>
         <div className='testimonial'>
           <div className={"w-96"}>
             <h5 className='quote'>
@@ -39,7 +39,7 @@ function TestimonialsSlider(props: { testimonials: TestimonialType[] }) {
           </div>
         </div>
       </div>
-      <div id='controls'>
+      <div id='controls' className={"flex flex-row"}>
         <Button size={"lg"} onClick={handlePrev} className='chevron left mr-24'>
           &#10094;Previous
         </Button>

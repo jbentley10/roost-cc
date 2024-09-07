@@ -116,10 +116,12 @@ function EventsContainer(props: { events: EventType[] }) {
     <>
       <div
         id={"controls"}
-        className={"w-full flex flex-col component-container mt-48"}
+        className={
+          "w-full flex flex-col component-container mt-8 mb-8 lg:mt-24"
+        }
       >
         {/* Event Select */}
-        <div className='mb-6 flex flex-row justify-end'>
+        <div className='mb-6 flex flex-row justify-start md:justify-end'>
           <h5>Filter by</h5>
           <Select onValueChange={setSelectedTag} defaultValue='all'>
             <SelectTrigger className='w-[180px]'>
@@ -134,20 +136,21 @@ function EventsContainer(props: { events: EventType[] }) {
         </div>
 
         {/* View Type */}
-        <div className='mb-6 flex flex-row justify-end'>
-          <RadioGroup
-            onValueChange={handleViewChange}
-            defaultValue='comfortable'
-          >
+        <div className='mb-6 flex flex-row justify-start md:justify-end'>
+          <RadioGroup onValueChange={handleViewChange} defaultValue='list'>
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='list' id='r1' />
               <ListIcon />
-              <Label htmlFor='r1'>List View</Label>
+              <Label className={"grand-hotel"} htmlFor='r1'>
+                List View
+              </Label>
             </div>
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='calendar' id='r2' />
               <CalendarIcon />
-              <Label htmlFor='r2'>Calendar View</Label>
+              <Label className={"grand-hotel"} htmlFor='r2'>
+                Calendar View
+              </Label>
             </div>
           </RadioGroup>
         </div>

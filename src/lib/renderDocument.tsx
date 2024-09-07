@@ -17,6 +17,9 @@ export const renderDocument = (document: any) => {
           height={node.data?.target?.fields?.file?.details?.image?.height}
         />
       ),
+      [BLOCKS.HEADING_4]: (node: any, children: React.ReactNode) => (
+        <h4 className={"pb-6"}>{children}</h4>
+      ),
       [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => (
         <>
           <p>{children}</p>
