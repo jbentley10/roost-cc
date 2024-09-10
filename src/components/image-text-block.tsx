@@ -14,6 +14,7 @@ export interface ImageTextBlockProps {
   };
   heading: string;
   subtext: { json: {} };
+  sectionID: string;
   imageOnLeft: boolean;
   buttonText?: string;
   buttonLink?: string;
@@ -24,6 +25,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
   image,
   heading,
   subtext,
+  sectionID,
   imageOnLeft,
   buttonText,
   buttonLink,
@@ -31,6 +33,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
 }) => {
   return (
     <section
+      id={sectionID}
       className={`
         component-container component-spacer flex ${
           imageOnLeft === true

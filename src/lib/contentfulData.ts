@@ -220,6 +220,7 @@ export async function fetchBlocksBySlug(slug: string) {
       descriptionRich {
         json
       }
+      sectionId
       image {
         title
         description

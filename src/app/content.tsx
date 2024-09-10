@@ -57,6 +57,7 @@ const blockByType = (block: any) => {
           heading={block.heading}
           image={block.image}
           subtext={block.descriptionRich}
+          sectionID={block.sectionId}
           imageOnLeft={block.imageOnLeft}
           buttonText={block.buttonText}
           buttonLink={block.buttonLink}
