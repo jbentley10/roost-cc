@@ -105,6 +105,21 @@ ul {
   list-style-type: disc;
 }
 
+.ctct-form-defaults {
+  background-color: transparent !important;
+}
+
+.ctct-form-defaults label,
+.ctct-form-header,
+.ctct-form-text {
+  color: hsl(var(--primary)) !important;
+}
+
+.ctct-form-element {
+  border: 2px solid hsl(var(--accent-stroke)) !important;
+  border-radius: 10px !important;
+}
+
 /* XS */
 @media (max-width: 639px) {
   h1 {

@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+"use client";
 
 export default function SplitContentForm() {
   return (
@@ -19,32 +17,10 @@ export default function SplitContentForm() {
             </div>
           </div>
           <div className='flex flex-col gap-4 min-[400px]:flex-row lg:flex-col lg:justify-center'>
-            <form className='w-full max-w-sm space-y-4'>
-              <div className='space-y-2'>
-                <Label className={"grand-hotel text-lg"} htmlFor='first-name'>
-                  First name
-                </Label>
-                <Input
-                  id='first-name'
-                  placeholder='Enter your first name'
-                  required
-                />
-              </div>
-              <div className='space-y-2'>
-                <Label className={"grand-hotel text-lg"} htmlFor='email'>
-                  Email address
-                </Label>
-                <Input
-                  id='email'
-                  placeholder='Enter your email'
-                  required
-                  type='email'
-                />
-              </div>
-              <Button size={`lg`} className='w-full' type='submit'>
-                Sign up for newsletter
-              </Button>
-            </form>
+            <div
+              className='ctct-inline-form'
+              data-form-id='7ab5322d-c61a-4957-aa9f-d468fc471713'
+            ></div>
           </div>
         </div>
       </div>

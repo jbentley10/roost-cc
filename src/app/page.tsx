@@ -2,7 +2,6 @@
  * @file page.tsx
  */
 // Import components and utils
-import Link from "next/link";
 import { fetchBlocksBySlug } from "@/lib/contentfulData";
 import Content from "@/app/content";
 import SplitContentForm from "@/components/split-content-form";

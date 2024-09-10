@@ -4,6 +4,7 @@ import { Bevan, Grand_Hotel, Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "../components/navigation";
 import { Footer } from "../components/footer";
+import Script from "next/script";
 
 // Declare fonts
 const bevan = Bevan({
@@ -38,8 +39,13 @@ export default function RootLayout({
         h5,
         button > a,
         button,
+        label,
         .grand-hotel {
           font-family: ${grandHotel.style.fontFamily};
+        }
+
+        label {
+          color: "hsl(var(--primary))";
         }
 
         p,
@@ -54,6 +60,15 @@ export default function RootLayout({
         <Navigation />
         {children}
         <Footer />
+        <Script
+          id='signupScript'
+          src='//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js'
+          strategy='lazyOnload'
+        />
+        <Script id='cc-var'>
+          {" "}
+          var _ctct_m = &quot;80340fa0b2980f0bbdae8929a468d1b6&quot;;{" "}
+        </Script>
       </body>
     </html>
   );
