@@ -20,7 +20,13 @@ export function ImageCards(props: { cards: ImageCardType[] }) {
                 backgroundPosition: "center",
               }}
             >
-              <div className='absolute bottom-10 right-8 text-white font-bold text-2xl bevan'>
+              <div
+                className={`absolute bottom-10 text-white font-bold text-2xl bevan ${
+                  index % 2 == 0
+                    ? `left-12` // Even numbered cards
+                    : `right-10`
+                }`}
+              >
                 {card.text}
               </div>
             </div>
