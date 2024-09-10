@@ -43,14 +43,16 @@ export const Footer = () => {
             <div className={"information sm:pl-4 grand-hotel"}>
               <ul className={"list-none"}>
                 <li>
-                  <address>
+                  <address className={"not-italic"}>
                     The Roost Lounge <br />
                     68718 E Palm Canyon Drive #203 <br />
                     Cathedral City, CA 92234
                   </address>
                 </li>
                 <li className={"pt-4"}>
-                  <a href={"tel:+17605078495"}>760-507-8495</a>
+                  <a className={"grand-hotel"} href={"tel:+17605078495"}>
+                    760-507-8495
+                  </a>
                 </li>
               </ul>
             </div>
