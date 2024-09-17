@@ -111,6 +111,9 @@ function EventsContainer(props: { events: EventType[] }) {
     setView(value);
   };
 
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0); // Set to the start of the current day
+
   const filteredEvents =
     selectedTag === "all"
       ? events
@@ -118,10 +121,12 @@ function EventsContainer(props: { events: EventType[] }) {
           event.contentfulMetadata.tags[0].name.includes(selectedTag)
         );
 
-  const sortedEvents = [...filteredEvents].sort(
-    (a, b) =>
-      new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
-  );
+  const sortedEvents = [...filteredEvents]
+    .filter((event) => new Date(event.dateAndTime) >= currentDate)
+    .sort(
+      (a, b) =>
+        new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
+    );
 
   return (
     <>
