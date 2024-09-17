@@ -88,6 +88,25 @@
 
 h1,
 h2,
+h3,
+h4,
+button,
+span,
+h5,
+button > a,
+button,
+label,
+label {
+  color: "hsl(var(--primary))";
+}
+
+p,
+a {
+  font-family: var(--font-inter);
+}
+
+h1,
+h2,
 h3 {
   font-weight: 500;
 }
@@ -113,11 +132,13 @@ ul {
 .ctct-form-header,
 .ctct-form-text {
   color: hsl(var(--primary)) !important;
+  font-family: var(--font-hand);
 }
 
 .ctct-form-element {
   border: 2px solid hsl(var(--accent-stroke)) !important;
   border-radius: 10px !important;
+  font-family: var(--font-hand);
 }
 
 /* XS */

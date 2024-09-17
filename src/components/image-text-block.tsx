@@ -57,7 +57,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
       )}
 
       <div className={"md:w-1/2"}>
-        <h2 className={"pb-4"}>{heading}</h2>
+        <h2 className={"pb-4 font-display"}>{heading}</h2>
         <div className={"pb-5 md:pb-12"}>{renderDocument(subtext.json)}</div>
         {buttonText && buttonLink && (
           <Link target={newWindow ? "_blank" : ""} href={buttonLink}>

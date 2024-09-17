@@ -7,7 +7,7 @@ export default function SplitContentForm() {
         <div className='grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2'>
           <div className='flex flex-col justify-center space-y-4'>
             <div className='space-y-2'>
-              <h2 className='text-3xl tracking-tighter sm:text-5xl'>
+              <h2 className='text-3xl tracking-tighter sm:text-5xl font-display'>
                 Stay up to date
               </h2>
               <p>

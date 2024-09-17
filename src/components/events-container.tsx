@@ -72,7 +72,9 @@ function EventCard(props: { event: EventType }) {
           <div className='p-6 flex flex-col justify-between'>
             <div>
               <div id={"name-and-description"} className={"mb-8"}>
-                <h2 className='text-2xl font-bold mb-2'>{event.name}</h2>
+                <h2 className='text-2xl font-bold mb-2 font-display'>
+                  {event.name}
+                </h2>
                 <div className='text-muted-foreground mb-4'>
                   {renderDocument(event.description?.json)}
                 </div>
@@ -138,7 +140,7 @@ function EventsContainer(props: { events: EventType[] }) {
       >
         {/* Event Select */}
         <div className='mb-6 flex flex-row justify-start md:justify-end'>
-          <h5>Filter by</h5>
+          <h5 className={"font-hand"}>Filter by</h5>
           <Select onValueChange={setSelectedTag} defaultValue='all'>
             <SelectTrigger className='w-[180px]'>
               <SelectValue placeholder='Select event type' />
@@ -164,14 +166,14 @@ function EventsContainer(props: { events: EventType[] }) {
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='list' id='r1' />
               <ListIcon />
-              <Label className={"grand-hotel"} htmlFor='r1'>
+              <Label className={"font-hand"} htmlFor='r1'>
                 List View
               </Label>
             </div>
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='calendar' id='r2' />
               <CalendarIcon />
-              <Label className={"grand-hotel"} htmlFor='r2'>
+              <Label className={"font-hand"} htmlFor='r2'>
                 Calendar View
               </Label>
             </div>
@@ -181,7 +183,9 @@ function EventsContainer(props: { events: EventType[] }) {
 
       <div id='events-container' className={"component-container"}>
         {/* Heading */}
-        <h2 className={"text-center capitalize pb-8"}>{selectedTag} Events</h2>
+        <h2 className={"text-center capitalize pb-8 font-display"}>
+          {selectedTag} Events
+        </h2>
 
         <div className={""}>
           {view === "list" ? (

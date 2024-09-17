@@ -9,7 +9,7 @@ function ImageGrid(props: {
   const { images } = props;
   return (
     <div className={"component-container component-spacer"}>
-      <h2>Gallery</h2>
+      <h2 className={"font-display"}>Gallery</h2>
       <div className={"grid grid-cols-1 md:grid-cols-3 md:grid-rows-3"}>
         {images.map(
           (

@@ -28,14 +28,16 @@ function TestimonialsSlider(props: { testimonials: TestimonialType[] }) {
         "testimonial-slider component-spacer component-container text-center items-center"
       }
     >
-      <h2 className={"pb-8"}>Testimonials</h2>
+      <h2 className={"pb-8 font-display"}>Testimonials</h2>
       <div className='flex flex-row items-center justify-center w-full h-56'>
         <div className='testimonial'>
           <div className={"w-96"}>
-            <h5 className='quote'>
+            <h5 className='quote font-hand'>
               &quot;{testimonials[currentIndex].quote}&quot;
             </h5>
-            <h5 className='name'>- {testimonials[currentIndex].author}</h5>
+            <h5 className='name font-hand'>
+              - {testimonials[currentIndex].author}
+            </h5>
           </div>
         </div>
       </div>

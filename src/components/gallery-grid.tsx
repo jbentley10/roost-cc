@@ -75,7 +75,7 @@ function GalleryGrid(props: { images: ImageType[] }) {
       >
         {/* Event Select */}
         <div className='mb-6 flex flex-row justify-end'>
-          <h5>Filter by</h5>
+          <h5 className={"font-hand"}>Filter by</h5>
           <Select onValueChange={setSelectedTag} defaultValue='all'>
             <SelectTrigger className='w-[180px]'>
               <SelectValue placeholder='Select event type' />
@@ -94,7 +94,9 @@ function GalleryGrid(props: { images: ImageType[] }) {
         className={"component-container component-spacer"}
       >
         {/* Heading */}
-        <h2 className={"text-center capitalize pb-8"}>{selectedTag}</h2>
+        <h2 className={"text-center capitalize pb-8 font-display"}>
+          {selectedTag}
+        </h2>
 
         <div
           className={

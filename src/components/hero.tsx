@@ -20,7 +20,9 @@ export const Hero: React.FC<HeroProps> = ({
       <div className='bg-transparentOverlay atf-container w-full h-full pt-11 md:pt-11 lg:pt-14 xl:pt-16 '>
         <div className='w-full md:w-1/2 relative z-10 text-left'>
           <div className='mb-16 max-w-md'>
-            <h1 className='pb-7 text-white tracking-normal'>{heading}</h1>
+            <h1 className='pb-7 text-white tracking-normal font-display'>
+              {heading}
+            </h1>
             {subheading && (
               <p className='text-2xl font-bold text-white'>{subheading}</p>
             )}

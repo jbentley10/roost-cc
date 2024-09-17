@@ -40,7 +40,7 @@ export const Footer = () => {
               <Links orientation='vertical' size={"large"} />
             </div>
 
-            <div className={"information sm:pl-4 grand-hotel"}>
+            <div className={"information sm:pl-4 font-hand"}>
               <ul className={"list-none"}>
                 <li>
                   <address className={"not-italic"}>
@@ -50,7 +50,7 @@ export const Footer = () => {
                   </address>
                 </li>
                 <li className={"pt-4"}>
-                  <a className={"grand-hotel"} href={"tel:+17605078495"}>
+                  <a className={"font-hand"} href={"tel:+17605078495"}>
                     760-507-8495
                   </a>
                 </li>
@@ -61,12 +61,12 @@ export const Footer = () => {
       </div>
       <p
         className={
-          "grand-hotel text-xl bg-primary text-white text-center pt-12 pb-10"
+          "font-hand text-xl bg-primary text-white text-center pt-12 pb-10"
         }
       >
         Copyright 2024{" "}
         <Link
-          className={"font-bold grand-hotel"}
+          className={"font-bold font-hand"}
           href='https://palmspringswebdesign.net'
           target='_blank'
         >

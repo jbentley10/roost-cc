@@ -10,12 +10,14 @@ import Script from "next/script";
 const bevan = Bevan({
   subsets: ["latin"],
   weight: ["400"],
+  variable: "--font-bevan",
 });
 const grandHotel = Grand_Hotel({
   subsets: ["latin"],
   weight: ["400"],
+  variable: "--font-grand-hotel",
 });
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export default function RootLayout({
   children,
@@ -23,36 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <style jsx global>{`
-        h1,
-        h2,
-        h3,
-        h4,
-        button,
-        span,
-        .bevan {
-          font-family: ${bevan.style.fontFamily};
-          font-weight: 500;
-        }
-
-        h5,
-        button > a,
-        button,
-        label,
-        .grand-hotel {
-          font-family: ${grandHotel.style.fontFamily};
-        }
-
-        label {
-          color: "hsl(var(--primary))";
-        }
-
-        p,
-        a {
-          font-family: ${inter.style.fontFamily};
-        }
-      `}</style>
+    <html
+      lang='en'
+      className={`${grandHotel.variable} ${bevan.variable} ${inter.variable}`}
+    >
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>

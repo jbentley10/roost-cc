@@ -21,7 +21,7 @@ export function ImageCards(props: { cards: ImageCardType[] }) {
               }}
             >
               <div
-                className={`absolute bottom-10 text-white font-bold text-2xl bevan ${
+                className={`absolute bottom-10 text-white font-bold text-2xl font-display ${
                   index % 2 == 0
                     ? `left-12 lg:left-20` // Even numbered cards
                     : `right-12 lg:left-12`
