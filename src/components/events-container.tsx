@@ -15,6 +15,7 @@ import { CalendarIcon, ListIcon, ClockIcon } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import Calendar from "./calendar";
+import { renderDocument } from "@/lib/renderDocument";
 
 type ViewType = "list" | "calendar";
 
@@ -24,10 +25,10 @@ export interface EventType {
   };
   _id: string;
   name: string;
-  description: string;
-  link: string;
+  description: { json: {} };
+  link?: string;
   dateAndTime: string;
-  image: {
+  image?: {
     url: string;
     description: string;
   };
@@ -58,22 +59,23 @@ function EventCard(props: { event: EventType }) {
     <Card className='overflow-hidden py-8 px-14 mb-10 rounded bg-card text-card-foreground'>
       <CardContent className='p-0'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
-          <div className='h-full'>
-            <Image
-              src={event.image.url}
-              alt={event.image.description}
-              width={400}
-              height={200}
-              className='object-cover w-full h-full'
-            />
+          <div className='h-100 w-100'>
+            {event.image && (
+              <Image
+                src={event.image?.url}
+                alt={event.image?.description}
+                width={400}
+                height={200}
+              />
+            )}
           </div>
           <div className='p-6 flex flex-col justify-between'>
             <div>
               <div id={"name-and-description"} className={"mb-8"}>
                 <h2 className='text-2xl font-bold mb-2'>{event.name}</h2>
-                <p className='text-muted-foreground mb-4'>
-                  {event.description}
-                </p>
+                <div className='text-muted-foreground mb-4'>
+                  {renderDocument(event.description?.json)}
+                </div>
               </div>
               <div className='flex items-center mb-2'>
                 <CalendarIcon className='mr-2 h-4 w-4' />
@@ -84,11 +86,15 @@ function EventCard(props: { event: EventType }) {
                 <span>{formatTime(event.dateAndTime)}</span>
               </div>
             </div>
-            <Button asChild>
-              <Link target='_blank' href={event.link}>
-                Buy Tickets
-              </Link>
-            </Button>
+            {event.link ? (
+              <Button asChild>
+                <Link target='_blank' href={event.link}>
+                  Buy Tickets
+                </Link>
+              </Button>
+            ) : (
+              <h4>Free Event</h4>
+            )}
           </div>
         </div>
       </CardContent>
@@ -112,6 +118,11 @@ function EventsContainer(props: { events: EventType[] }) {
           event.contentfulMetadata.tags[0].name.includes(selectedTag)
         );
 
+  const sortedEvents = [...filteredEvents].sort(
+    (a, b) =>
+      new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
+  );
+
   return (
     <>
       <div
@@ -129,8 +140,15 @@ function EventsContainer(props: { events: EventType[] }) {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value='all'>All Events</SelectItem>
-              <SelectItem value='music'>Music</SelectItem>
               <SelectItem value='bingo'>Bingo</SelectItem>
+              <SelectItem value='drag-show'>Drag Show</SelectItem>
+              <SelectItem value='fundraiser'>Fundraiser</SelectItem>
+              <SelectItem value='karaoke'>Karaoke</SelectItem>
+              <SelectItem value='live-entertainment'>
+                Live Entertainment
+              </SelectItem>
+              <SelectItem value='special-event'>Special Event</SelectItem>
+              <SelectItem value='videos'>Videos</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -163,13 +181,13 @@ function EventsContainer(props: { events: EventType[] }) {
         <div className={""}>
           {view === "list" ? (
             <div className={"w-full"}>
-              {filteredEvents.map((event: EventType, index: number) => (
+              {sortedEvents.map((event: EventType, index: number) => (
                 <EventCard key={index} event={event} />
               ))}
             </div>
           ) : (
             <div className={"w-full"}>
-              <Calendar events={filteredEvents} />
+              <Calendar events={sortedEvents} />
             </div>
           )}
         </div>

@@ -178,7 +178,7 @@ export async function fetchBlocksBySlug(slug: string) {
     fragment EventsContainerFields on EventsContainer {
       _id
       heading
-      eventsCollection (limit: 5) {
+      eventsCollection (limit:10) {
         items {
           _id
           contentfulMetadata {
@@ -187,11 +187,14 @@ export async function fetchBlocksBySlug(slug: string) {
             }
           }
           name
-          description
+          description {
+            json
+          }
           link
           dateAndTime
           image {
             url
+            description
           }
         }
       }

@@ -9,13 +9,14 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { renderDocument } from "@/lib/renderDocument";
 
 export interface EventType {
   _id: string;
   name: string;
-  description: string;
+  description: { json: {} };
   dateAndTime: string;
-  link: string;
+  link?: string;
 }
 
 const MonthSelector: React.FC<{
@@ -72,7 +73,7 @@ const EventModal: React.FC<{
         <DialogHeader>
           <DialogTitle>{event.name}</DialogTitle>
           <DialogDescription>
-            <p>{event.description}</p>
+            <div>{renderDocument(event.description.json)}</div>
             <p className='mt-2'>
               Time:{" "}
               {eventDate.toLocaleTimeString([], {
