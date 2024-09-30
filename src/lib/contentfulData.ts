@@ -3,6 +3,7 @@ const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 const environment = process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT;
 const graphqlUrl = `https://graphql.contentful.com/content/v1/spaces/${space}/environments/${environment}?access_token=${accessToken}`;
 import { notFound } from "next/navigation";
+import { title } from "process";
 
 async function fetchGraphQL(
   query: string,
@@ -55,6 +56,47 @@ export async function fetchPage(id: string, locale: string) {
   if (data.page) return data.page;
 
   console.log(`Error getting page.`);
+}
+
+export async function fetchEvents() {
+  const query = `
+  query {
+    eventCollection (limit: 50) {
+      items {
+        sys {
+          id
+        }
+        name
+        link
+        dateAndTime
+        image {
+          url
+          description
+        }
+        facebookShareLink
+        learnMoreLink
+      }
+    }
+  }`;
+  const data = await fetchGraphQL(query);
+
+  if (!data || data.eventCollection.items.length === 0) {
+    console.log("Error finding events");
+    return [];
+  }
+
+  const events = data.eventCollection.items.map((entry: any) => ({
+    name: entry.name,
+    description: entry.description,
+    link: entry.link,
+    dateAndTime: entry.dateAndTime,
+    image: entry.image,
+    facebookShareLink: entry.facebookShareLink,
+    learnMoreLink: entry.learnMoreLink,
+    id: entry.sys.id,
+  }));
+
+  return events;
 }
 
 export async function fetchPages() {
@@ -178,7 +220,7 @@ export async function fetchBlocksBySlug(slug: string) {
     fragment EventsContainerFields on EventsContainer {
       _id
       heading
-      eventsCollection (limit:10) {
+      eventsCollection (limit:30) {
         items {
           _id
           contentfulMetadata {
@@ -196,6 +238,7 @@ export async function fetchBlocksBySlug(slug: string) {
             url
             description
           }
+          facebookShareLink
         }
       }
     }

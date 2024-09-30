@@ -56,7 +56,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
         />
       )}
 
-      <div className={"md:w-1/2"}>
+      <div className={`${image ? "md:w-1/2" : "md:w-full"}`}>
         <h2 className={"pb-4 font-display"}>{heading}</h2>
         <div className={"pb-5 md:pb-12"}>{renderDocument(subtext.json)}</div>
         {buttonText && buttonLink && (

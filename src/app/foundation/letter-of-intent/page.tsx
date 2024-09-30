@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 export default async function LetterOfIntent() {
-  const blocksEnglish = await fetchBlocksBySlug("letter-of-intent");
+  const blocksEnglish = await fetchBlocksBySlug("foundation/letter-of-intent");
 
   // Wait for the promises to resolve
   const [english] = await Promise.all([blocksEnglish]);

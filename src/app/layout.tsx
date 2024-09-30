@@ -1,10 +1,9 @@
-"use client";
-
 import { Bevan, Grand_Hotel, Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "../components/navigation";
 import { Footer } from "../components/footer";
-import Script from "next/script";
+import EventBanner, { Event } from "@/components/event-banner";
+import { fetchEvents } from "@/lib/contentfulData";
 
 // Declare fonts
 const bevan = Bevan({
@@ -19,11 +18,13 @@ const grandHotel = Grand_Hotel({
 });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const events = await fetchEvents();
+
   return (
     <html
       lang='en'
@@ -33,18 +34,10 @@ export default function RootLayout({
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
       <body>
+        <EventBanner events={events} />
         <Navigation />
         {children}
         <Footer />
-        <Script
-          id='signupScript'
-          src='//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js'
-          strategy='lazyOnload'
-        />
-        <Script id='cc-var'>
-          {" "}
-          var _ctct_m = &quot;80340fa0b2980f0bbdae8929a468d1b6&quot;;{" "}
-        </Script>
       </body>
     </html>
   );

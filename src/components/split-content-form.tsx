@@ -1,4 +1,4 @@
-"use client";
+import Script from "next/script";
 
 export default function SplitContentForm() {
   return (
@@ -24,6 +24,15 @@ export default function SplitContentForm() {
           </div>
         </div>
       </div>
+      <Script
+        id='signupScript'
+        src='//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js'
+        strategy='lazyOnload'
+      />
+      <Script id='cc-var'>
+        {" "}
+        var _ctct_m = &quot;80340fa0b2980f0bbdae8929a468d1b6&quot;;{" "}
+      </Script>
     </section>
   );
 }
