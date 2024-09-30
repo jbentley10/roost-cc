@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import Cookies from "js-cookie";
+import { renderDocument } from "@/lib/renderDocument";
 
 export interface Event {
   dateAndTime: Date;
@@ -66,7 +67,9 @@ export default function EventBanner(props: { events: Event[] }) {
       <div className='container mx-auto flex flex-col sm:flex-row items-center justify-between'>
         <div className='flex-1 text-center sm:text-left mb-4 sm:mb-0'>
           <h2 className='font-bold text-lg'>{currentEvent.name}</h2>
-          <p className='text-sm mt-1'>{currentEvent.description}</p>
+          <div className='text-sm mt-1'>
+            {renderDocument(currentEvent.description)}
+          </div>
         </div>
         <div className='flex items-center space-x-4'>
           {currentEvent.learnMoreLink && (

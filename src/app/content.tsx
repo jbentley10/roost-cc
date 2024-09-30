@@ -15,7 +15,7 @@ import { Heading } from "../components/heading";
 import { ImageTextBlock } from "../components/image-text-block";
 import { ImageCards } from "../components/image-cards";
 import LogoRow from "../components/logo-row";
-import { EventFullWidth } from "@/components/event-full-width";
+import EventsContainer from "@/components/events-container";
 import TestimonialsSlider from "@/components/testimonials-slider";
 import ImageGrid from "@/components/image-grid";
 import GalleryGrid from "@/components/gallery-grid";
