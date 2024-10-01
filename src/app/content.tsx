@@ -15,7 +15,6 @@ import { Heading } from "../components/heading";
 import { ImageTextBlock } from "../components/image-text-block";
 import { ImageCards } from "../components/image-cards";
 import LogoRow from "../components/logo-row";
-import EventsContainer from "@/components/events-container";
 import TestimonialsSlider from "@/components/testimonials-slider";
 import ImageGrid from "@/components/image-grid";
 import GalleryGrid from "@/components/gallery-grid";
@@ -72,9 +71,6 @@ const blockByType = (block: any) => {
       return (
         <LogoRow heading={block.heading} logos={block.logosCollection.items} />
       );
-
-    case "EventsContainer":
-      return <EventsContainer events={block.eventsCollection.items} />;
 
     case "TestimonialsSlider":
       return (

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,10 +22,8 @@ import { renderDocument } from "@/lib/renderDocument";
 type ViewType = "list" | "calendar";
 
 export interface EventType {
-  contentfulMetadata: {
-    tags: [{ name: string }];
-  };
-  _id: string;
+  tags: [{ name: string }];
+  id: string;
   name: string;
   description: { json: {} };
   link?: string;
@@ -33,6 +33,7 @@ export interface EventType {
     description: string;
   };
   facebookShareLink?: string;
+  learnMoreLink?: string;
 }
 
 function formatDate(dateString: string): string {
@@ -57,7 +58,10 @@ function EventCard(props: { event: EventType }) {
   const { event } = props;
 
   return (
-    <Card className='overflow-hidden py-8 px-14 mb-10 rounded bg-card text-card-foreground'>
+    <Card
+      id={event.id}
+      className='overflow-hidden py-8 px-14 mb-10 rounded bg-card text-card-foreground'
+    >
       <CardContent className='p-0'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
           <div className='h-100 w-100'>
@@ -73,7 +77,7 @@ function EventCard(props: { event: EventType }) {
           <div className='p-6 flex flex-col justify-between'>
             <div>
               <div id={"name-and-description"} className={"mb-8"}>
-                <h2 className='text-2xl font-bold mb-2 font-display'>
+                <h2 className='text-2xl font-regular mb-2 font-display'>
                   {event.name}
                 </h2>
                 <div className='text-muted-foreground mb-4'>
@@ -131,7 +135,7 @@ function EventsContainer(props: { events: EventType[] }) {
     selectedTag === "all"
       ? events
       : events.filter((event) =>
-          event.contentfulMetadata.tags[0].name.includes(selectedTag)
+          event.tags.some((tag) => tag.name.includes(selectedTag))
         );
 
   const sortedEvents = [...filteredEvents]
@@ -159,13 +163,13 @@ function EventsContainer(props: { events: EventType[] }) {
             <SelectContent>
               <SelectItem value='all'>All Events</SelectItem>
               <SelectItem value='bingo'>Bingo</SelectItem>
-              <SelectItem value='drag-show'>Drag Show</SelectItem>
+              <SelectItem value='drag show'>Drag Show</SelectItem>
               <SelectItem value='fundraiser'>Fundraiser</SelectItem>
               <SelectItem value='karaoke'>Karaoke</SelectItem>
-              <SelectItem value='live-entertainment'>
+              <SelectItem value='live entertainment'>
                 Live Entertainment
               </SelectItem>
-              <SelectItem value='special-event'>Special Event</SelectItem>
+              <SelectItem value='special event'>Special Event</SelectItem>
               <SelectItem value='videos'>Videos</SelectItem>
             </SelectContent>
           </Select>

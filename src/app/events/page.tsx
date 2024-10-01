@@ -2,8 +2,9 @@
  * @file page.tsx
  */
 // Import components and utils
-import { fetchBlocksBySlug } from "@/lib/contentfulData";
+import { fetchBlocksBySlug, fetchEvents } from "@/lib/contentfulData";
 import Content from "@/app/content";
+import EventsContainer from "@/components/events-container";
 
 // Set metadata
 export const metadata = {
@@ -13,6 +14,7 @@ export const metadata = {
 
 export default async function Events() {
   const blocksEnglish = await fetchBlocksBySlug("events");
+  const events = await fetchEvents();
 
   // Wait for the promises to resolve
   const [english] = await Promise.all([blocksEnglish]);
@@ -20,6 +22,7 @@ export default async function Events() {
   return (
     <main className='flex flex-col items-center justify-between'>
       {english && <Content key={Math.random()} englishBlocks={english} />}
+      {events && <EventsContainer events={events} />}
     </main>
   );
 }

@@ -4,6 +4,7 @@ import { Navigation } from "../components/navigation";
 import { Footer } from "../components/footer";
 import EventBanner, { Event } from "@/components/event-banner";
 import { fetchEvents } from "@/lib/contentfulData";
+import Script from "next/script";
 
 // Declare fonts
 const bevan = Bevan({
@@ -32,6 +33,10 @@ export default async function RootLayout({
     >
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
+        <Script
+          type='text/javascript'
+          src='//cdn.rlets.com/capture_configs/36a/304/d48/00a4a4486b7f71ae80fef9a.js'
+        />
       </head>
       <body>
         <EventBanner events={events} />

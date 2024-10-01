@@ -10,14 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { renderDocument } from "@/lib/renderDocument";
-
-export interface EventType {
-  _id: string;
-  name: string;
-  description: { json: {} };
-  dateAndTime: string;
-  link?: string;
-}
+import { EventType } from "./events-container";
 
 const MonthSelector: React.FC<{
   currentDate: Date;
@@ -162,7 +155,7 @@ export default function Calendar({ events = [] }: CalendarProps) {
               <div className='font-semibold mb-1'>{index + 1}</div>
               {dayEvents.map((event) => (
                 <Badge
-                  key={event._id}
+                  key={event.id}
                   variant='secondary'
                   className='mb-1 cursor-pointer'
                   onClick={() => setSelectedEvent(event)}

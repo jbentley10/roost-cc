@@ -3,7 +3,6 @@ const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 const environment = process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT;
 const graphqlUrl = `https://graphql.contentful.com/content/v1/spaces/${space}/environments/${environment}?access_token=${accessToken}`;
 import { notFound } from "next/navigation";
-import { title } from "process";
 
 async function fetchGraphQL(
   query: string,
@@ -66,6 +65,11 @@ export async function fetchEvents() {
         sys {
           id
         }
+        contentfulMetadata {
+          tags {
+            name
+          }
+        }
         name
         link
         dateAndTime
@@ -86,6 +90,8 @@ export async function fetchEvents() {
   }
 
   const events = data.eventCollection.items.map((entry: any) => ({
+    id: entry.sys.id,
+    tags: entry.contentfulMetadata.tags,
     name: entry.name,
     description: entry.description,
     link: entry.link,
@@ -93,7 +99,6 @@ export async function fetchEvents() {
     image: entry.image,
     facebookShareLink: entry.facebookShareLink,
     learnMoreLink: entry.learnMoreLink,
-    id: entry.sys.id,
   }));
 
   return events;
@@ -182,7 +187,6 @@ export async function fetchBlocksBySlug(slug: string) {
               __typename
               ...CallToActionBlockFields
               ...DividerTextBlockFields
-              ...EventsContainerFields
               ...ExampleBlockFields
               ...HeadingFields
               ...HeroBlockFields
@@ -215,32 +219,6 @@ export async function fetchBlocksBySlug(slug: string) {
     fragment ExampleBlockFields on ExampleBlock {
       _id
       example
-    }
-
-    fragment EventsContainerFields on EventsContainer {
-      _id
-      heading
-      eventsCollection (limit:30) {
-        items {
-          _id
-          contentfulMetadata {
-            tags {
-              name
-            }
-          }
-          name
-          description {
-            json
-          }
-          link
-          dateAndTime
-          image {
-            url
-            description
-          }
-          facebookShareLink
-        }
-      }
     }
 
     fragment HeadingFields on Heading {
