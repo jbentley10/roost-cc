@@ -54,7 +54,7 @@ function formatTime(dateString: string): string {
   });
 }
 
-function EventCard(props: { event: EventType }) {
+export function EventCard(props: { event: EventType }) {
   const { event } = props;
 
   return (
@@ -163,7 +163,6 @@ function EventsContainer(props: { events: EventType[] }) {
             <SelectContent>
               <SelectItem value='all'>All Events</SelectItem>
               <SelectItem value='bingo'>Bingo</SelectItem>
-              <SelectItem value='drag show'>Drag Show</SelectItem>
               <SelectItem value='fundraiser'>Fundraiser</SelectItem>
               <SelectItem value='karaoke'>Karaoke</SelectItem>
               <SelectItem value='live entertainment'>

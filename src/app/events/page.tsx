@@ -14,7 +14,7 @@ export const metadata = {
 
 export default async function Events() {
   const blocksEnglish = await fetchBlocksBySlug("events");
-  const events = await fetchEvents();
+  const events = await fetchEvents(50);
 
   // Wait for the promises to resolve
   const [english] = await Promise.all([blocksEnglish]);

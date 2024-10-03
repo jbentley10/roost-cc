@@ -57,10 +57,11 @@ export async function fetchPage(id: string, locale: string) {
   console.log(`Error getting page.`);
 }
 
+// Sort events by dateAndTime (soonest first)
 export async function fetchEvents() {
   const query = `
   query {
-    eventCollection (limit: 50) {
+    eventCollection (limit: 100) {
       items {
         sys {
           id
@@ -82,6 +83,7 @@ export async function fetchEvents() {
       }
     }
   }`;
+  
   const data = await fetchGraphQL(query);
 
   if (!data || data.eventCollection.items.length === 0) {
@@ -100,6 +102,11 @@ export async function fetchEvents() {
     facebookShareLink: entry.facebookShareLink,
     learnMoreLink: entry.learnMoreLink,
   }));
+
+  // Sort events by dateAndTime (soonest first)
+  events.sort((a: { dateAndTime: string }, b: { dateAndTime: string }) => 
+    new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
+  );
 
   return events;
 }
