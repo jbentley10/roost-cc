@@ -117,6 +117,27 @@ export async function fetchEvents() {
   return events;
 }
 
+export async function fetchPaths(tag: string[]) {
+  const query = `
+    query($tag: [String]) {
+      pageCollection (where:{ contentfulMetadata:{ tags: {id_contains_some: $tag}}}) {
+        items {
+          slug
+          _id
+          englishTitle
+        }
+      }
+    }
+  `;
+
+  const variables = { tag };
+  const data = await fetchGraphQL(query, variables);
+
+  if (data.pageCollection) return data.pageCollection;
+
+  console.log(`Error getting page with tag ${tag}.`);
+}
+
 // Sort events by dateAndTime (soonest first)
 export async function fetchImages() {
   const query = `
@@ -172,7 +193,7 @@ export async function fetchPages() {
           }
           fields {
             englishTitle
-            spanishTitle
+            description
             slug
             order
             childPages
@@ -208,17 +229,9 @@ export async function fetchMetadataBySlug(slug: string) {
     query($slug: String!) {
       pageCollection(where: { slug: $slug }, limit: 1) {
         items {
-          sys {
-            id
-          }
-          fields {
-            englishTitle
-            spanishTitle
-            slug
-            order
-            childPages
-            topLevelPage
-          }
+          _id
+          englishTitle
+          description
         }
       }
     }
