@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import Image from "next/image";
-import { Dialog, DialogContent } from "./ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
@@ -86,7 +86,7 @@ function GalleryGrid(props: { images: ImageType[] }) {
 
       <div
         id='images-container'
-        className={"component-container component-spacer"}
+        className={"component-container"}
       >
         {/* Heading */}
         <h2 className={"text-center capitalize pb-8 font-display"}>
@@ -110,6 +110,7 @@ function GalleryGrid(props: { images: ImageType[] }) {
                 width={300}
                 height={150}
                 className='object-cover w-full h-full'
+                quality={50}
               />
             </div>
           ))}
@@ -118,12 +119,17 @@ function GalleryGrid(props: { images: ImageType[] }) {
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
         <DialogContent className='max-w-3xl w-full h-[80vh] flex items-center justify-center'>
+          <DialogTitle>{filteredImages[currentImageIndex]?.title || ""}</DialogTitle>
+          <DialogDescription>{filteredImages[currentImageIndex]?.description || ""}</DialogDescription>
           <div className='relative w-full h-full'>
             <Image
               alt={filteredImages[currentImageIndex]?.description || ""}
               src={filteredImages[currentImageIndex]?.url || ""}
-              layout='fill'
-              objectFit='contain'
+              width={filteredImages[currentImageIndex].width}
+              height={filteredImages[currentImageIndex].height}
+              style={{ width: '100%', height: 'auto'}}
+              quality={100}
+              loading="eager"
             />
             <Button
               variant='default'
