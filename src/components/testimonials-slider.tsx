@@ -32,7 +32,7 @@ function TestimonialsSlider(props: { testimonials: TestimonialType[] }) {
       <div className='flex flex-row items-center justify-center w-full h-56'>
         <div className='testimonial'>
           <div className={"w-96"}>
-            <h5 className='quote font-hand'>
+            <h5 className='quote'>
               &quot;{testimonials[currentIndex].quote}&quot;
             </h5>
             <h5 className='name font-hand'>

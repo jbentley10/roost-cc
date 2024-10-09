@@ -9,7 +9,7 @@ import EventsContainer from "@/components/events-container";
 // Set metadata
 export const metadata = {
   title: "Events | The Roost - Cathedral City, CA",
-  description: "This app uses NextJS and Contentful.",
+  description: "The Roost hosts live events most days of the week, including live music and karaoke.",
 };
 
 export default async function Events() {

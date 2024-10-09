@@ -8,7 +8,7 @@ import Content from "@/app/content";
 // Set metadata
 export const metadata = {
   title: "Letter of Intent | The Roost - Cathedral City, CA",
-  description: "This app uses NextJS and Contentful.",
+  description: "The Roost Foundation Letter of Intent.",
 };
 
 export default async function LetterOfIntent() {

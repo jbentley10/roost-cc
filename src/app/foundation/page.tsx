@@ -8,7 +8,7 @@ import Content from "@/app/content";
 // Set metadata
 export const metadata = {
   title: "Foundation | The Roost - Cathedral City, CA",
-  description: "This app uses NextJS and Contentful.",
+  description: "The Roost Foundation supports local organizations in the Valley and provides help for those in need.",
 };
 
 export default async function Foundation() {

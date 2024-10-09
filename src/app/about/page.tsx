@@ -8,7 +8,7 @@ import Content from "@/app/content";
 // Set metadata
 export const metadata = {
   title: "About | The Roost - Cathedral City, CA",
-  description: "This app uses NextJS and Contentful.",
+  description: "Founded in 2019, the Roost in Cathedral City is a safe space for everyone to enjoy.",
 };
 
 export default async function About() {

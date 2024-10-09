@@ -81,9 +81,6 @@ const blockByType = (block: any) => {
     case "ImageGrid3X3":
       return <ImageGrid images={block.imagesCollection.items} />;
 
-    case "GalleryGrid":
-      return <GalleryGrid images={block.imagesCollection.items} />;
-
     case "EventsCarousel":
       return <EventCarousel />;
   }

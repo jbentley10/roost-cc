@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   Select,
@@ -11,12 +13,12 @@ import { Dialog, DialogContent } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
-type ViewType = "lgbtq" | "staff";
 type ImageType = {
-  image: {
-    url: string;
-    description: string;
-  };
+  url: string;
+  title?: string;
+  description?: string;
+  width: number;
+  height: number;
   contentfulMetadata: {
     tags: [
       {
@@ -29,28 +31,19 @@ type ImageType = {
 function GalleryGrid(props: { images: ImageType[] }) {
   const { images } = props;
   const [selectedTag, setSelectedTag] = useState<string>("all");
-  const [view, setView] = useState<ViewType>("lgbtq");
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const handleViewChange = (value: ViewType) => {
-    setView(value);
-  };
 
   const filteredImages =
     selectedTag === "all"
       ? images
       : images.filter((image) =>
-          image.contentfulMetadata.tags[0].name.includes(selectedTag)
+          image.contentfulMetadata.tags.some(tag => tag.name.includes(selectedTag))
         );
 
   const openModal = (index: number) => {
     setCurrentImageIndex(index);
     setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
   };
 
   const goToPreviousImage = () => {
@@ -82,8 +75,10 @@ function GalleryGrid(props: { images: ImageType[] }) {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value='all'>All Images</SelectItem>
-              <SelectItem value='lgbtq'>LGBTQ Nights</SelectItem>
+              <SelectItem value='fundraiser'>Fundraiser</SelectItem>
+              <SelectItem value='live entertainment'>Live Entertainment</SelectItem>
               <SelectItem value='staff'>Staff</SelectItem>
+              <SelectItem value='bingo'>Bingo</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -110,8 +105,8 @@ function GalleryGrid(props: { images: ImageType[] }) {
               onClick={() => openModal(index)}
             >
               <Image
-                alt={image.image.description}
-                src={image.image.url}
+                alt={image.description ? image.description: ""}
+                src={image.url}
                 width={300}
                 height={150}
                 className='object-cover w-full h-full'
@@ -125,8 +120,8 @@ function GalleryGrid(props: { images: ImageType[] }) {
         <DialogContent className='max-w-3xl w-full h-[80vh] flex items-center justify-center'>
           <div className='relative w-full h-full'>
             <Image
-              alt={filteredImages[currentImageIndex]?.image.description || ""}
-              src={filteredImages[currentImageIndex]?.image.url || ""}
+              alt={filteredImages[currentImageIndex]?.description || ""}
+              src={filteredImages[currentImageIndex]?.url || ""}
               layout='fill'
               objectFit='contain'
             />

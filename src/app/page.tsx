@@ -9,7 +9,7 @@ import SplitContentForm from "@/components/split-content-form";
 // Set metadata
 export const metadata = {
   title: "Home | The Roost - Cathedral City, CA",
-  description: "This app uses NextJS and Contentful.",
+  description: "The Roost is home to Cathedral City's best karaoke, live entertainment, and happy hour.",
 };
 
 export default async function Home() {

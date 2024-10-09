@@ -15,7 +15,11 @@ export const Navigation = () => {
             alt='logo'
             style={{ width: "auto", height: "auto" }}
             priority={true}
+            className={"mb-4"}
           />
+        </Link>
+        <Link href={"tel:+17605078495"}>
+          <span className={"font-bold"}>(760) 507-8495</span>
         </Link>
       </section>
       <section

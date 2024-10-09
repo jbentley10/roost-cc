@@ -67,9 +67,11 @@ export default function EventBanner(props: { events: Event[] }) {
       <div className='container mx-auto flex flex-col sm:flex-row items-center justify-between'>
         <div className='flex-1 text-center sm:text-left mb-4 sm:mb-0'>
           <h2 className='font-bold text-lg'>{currentEvent.name}</h2>
-          <div className='text-sm mt-1'>
-            {renderDocument(currentEvent.description)}
-          </div>
+          {currentEvent.description && (
+            <div className='text-sm mt-1'>
+              {renderDocument(currentEvent.description.json)}
+            </div>
+          )}
         </div>
         <div className='flex items-center space-x-4'>
           {currentEvent.learnMoreLink && (
@@ -80,12 +82,16 @@ export default function EventBanner(props: { events: Event[] }) {
               Learn More
             </Link>
           )}
-          <Link
-            href={currentEvent.link}
-            className='bg-accent text-accent-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-accent/90 transition-colors'
-          >
-            Buy Tickets
-          </Link>
+          {currentEvent.link && (
+            <div>
+              <Link
+                href={currentEvent.link}
+                className='bg-accent text-accent-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-accent/90 transition-colors'
+              >
+                Buy Tickets
+              </Link>
+            </div>
+          )}
           <button
             className='text-primary-foreground hover:text-primary-foreground/80 transition-colors'
             aria-label='Close banner'

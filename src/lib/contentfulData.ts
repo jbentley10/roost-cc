@@ -72,6 +72,10 @@ export async function fetchEvents() {
           }
         }
         name
+        description {
+          json
+        }
+        genre
         link
         dateAndTime
         image {
@@ -83,7 +87,7 @@ export async function fetchEvents() {
       }
     }
   }`;
-  
+
   const data = await fetchGraphQL(query);
 
   if (!data || data.eventCollection.items.length === 0) {
@@ -96,6 +100,7 @@ export async function fetchEvents() {
     tags: entry.contentfulMetadata.tags,
     name: entry.name,
     description: entry.description,
+    genre: entry.genre,
     link: entry.link,
     dateAndTime: entry.dateAndTime,
     image: entry.image,
@@ -104,8 +109,54 @@ export async function fetchEvents() {
   }));
 
   // Sort events by dateAndTime (soonest first)
-  events.sort((a: { dateAndTime: string }, b: { dateAndTime: string }) => 
-    new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
+  events.sort(
+    (a: { dateAndTime: string }, b: { dateAndTime: string }) =>
+      new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
+  );
+
+  return events;
+}
+
+// Sort events by dateAndTime (soonest first)
+export async function fetchImages() {
+  const query = `
+  query {
+    assetCollection (where: {contentfulMetadata: {tags: {id_contains_some: "image"}}}) {
+      items {
+        contentfulMetadata {
+          tags {
+            name
+          }
+        }
+        title 
+        description 
+        url 
+        width 
+        height
+      }
+    }
+  }`;
+
+  const data = await fetchGraphQL(query);
+
+  if (!data || data.assetCollection.items.length === 0) {
+    console.log("Error finding events");
+    return [];
+  }
+
+  const events = data.assetCollection.items.map((entry: any) => ({
+    contentfulMetadata: entry.contentfulMetadata,
+    name: entry.name,
+    description: entry.description,
+    url: entry.url,
+    width: entry.width,
+    height: entry.height
+  }));
+
+  // Sort events by dateAndTime (soonest first)
+  events.sort(
+    (a: { dateAndTime: string }, b: { dateAndTime: string }) =>
+      new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
   );
 
   return events;
