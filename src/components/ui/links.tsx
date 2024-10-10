@@ -45,7 +45,7 @@ export const Links: React.FC<LinksProps> = ({ orientation, size }) => {
             hover:opacity-50 mr-4 sm:mr-4 lg:mr-5 xl:mr-6 
             ${
               size == "small"
-                ? "font-bold text-primary text-lg lg:text-3xl pb-4 md:pb-0"
+                ? "font-bold text-primary text-sm lg:text-3xl pb-4 md:pb-0"
                 : "font-regular text-white text-sm sm:text-base md:text-xl lg:text-2xl xl:text-2xl font-display pb-2 sm:pb-8 text-nowrap"
             }
           `}

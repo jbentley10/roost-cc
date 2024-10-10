@@ -37,7 +37,7 @@ export const ImageTextBlock: React.FC<ImageTextBlockProps> = ({
       className={`
         component-container component-spacer flex ${
           imageOnLeft === true
-            ? "flex-col md:flex-row"
+            ? "flex-col-reverse md:flex-row"
             : "flex-col-reverse md:flex-row-reverse"
         } 
         items-center text-primary
