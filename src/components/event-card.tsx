@@ -1,17 +1,13 @@
 import Image from "next/image";
 import { EventType, formatDate, formatTime } from "./events-container";
 import { Card, CardContent } from "./ui/card";
-import { renderDocument, RenderShorthand } from "@/lib/renderDocument";
+import { RenderShorthand } from "@/lib/renderDocument";
 import { CalendarIcon, ClockIcon, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
 export function EventCard(props: { event: EventType }) {
   const { event } = props;
-
-  // Convert description JSON to string
-  const descriptionString = JSON.stringify(event.description.json);
-  const isLongDescription = descriptionString.length > 150;
 
   return (
     <Card
@@ -21,7 +17,7 @@ export function EventCard(props: { event: EventType }) {
     >
       <CardContent className='p-0'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
-          <div className='h-100 w-100'>
+          <div className='h-full w-100'>
             {event.image && (
               <Image
                 src={event.image?.url}

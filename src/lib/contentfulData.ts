@@ -139,10 +139,10 @@ export async function fetchPaths(tag: string[]) {
 }
 
 // Sort events by dateAndTime (soonest first)
-export async function fetchImages() {
+export async function fetchImages(limit: number) {
   const query = `
-  query {
-    assetCollection (where: {contentfulMetadata: {tags: {id_contains_some: "image"}}}) {
+  query ($limit: Int) {
+    assetCollection (limit:$limit, where: {contentfulMetadata: {tags: {id_contains_some: "image"}}}) {
       items {
         contentfulMetadata {
           tags {
@@ -158,7 +158,8 @@ export async function fetchImages() {
     }
   }`;
 
-  const data = await fetchGraphQL(query);
+  const variables = { limit };
+  const data = await fetchGraphQL(query, variables);
 
   if (!data || data.assetCollection.items.length === 0) {
     console.log("Error finding events");
@@ -275,7 +276,6 @@ export async function fetchBlocksBySlug(slug: string) {
     }
 
     fragment CallToActionBlockFields on CallToActionBlock {
-      _id
       heading
       subheading
       buttonText
@@ -283,22 +283,18 @@ export async function fetchBlocksBySlug(slug: string) {
     }
 
     fragment DividerTextBlockFields on DividerTextBlock {
-      _id
       text
     }
 
     fragment ExampleBlockFields on ExampleBlock {
-      _id
       example
     }
 
     fragment HeadingFields on Heading {
-      _id
       headingText
     }
 
     fragment HeroBlockFields on HeroBlock {
-      _id
       heading
       subHeading
       buttonText
@@ -306,7 +302,6 @@ export async function fetchBlocksBySlug(slug: string) {
     }
 
     fragment ImageAndTextBlockFields on ImageAndTextBlock {
-      _id
       heading
       imageOnLeft
       buttonText
@@ -326,7 +321,6 @@ export async function fetchBlocksBySlug(slug: string) {
     }
 
     fragment ImageCardsFields on ImageCards {
-      _id
       name
       imageCardsCollection(limit: 4) {
         items {
@@ -345,7 +339,6 @@ export async function fetchBlocksBySlug(slug: string) {
     }
 
     fragment LogoRowFields on LogoRow {
-      _id
       heading
       logosCollection (limit:8) {
         items {
@@ -358,7 +351,6 @@ export async function fetchBlocksBySlug(slug: string) {
     }
 
     fragment TestimonialsSliderFields on TestimonialsSlider {
-      _id
       testimonialsCollection (limit:10) {
         items {
           _id
@@ -369,34 +361,11 @@ export async function fetchBlocksBySlug(slug: string) {
     }
 
     fragment ImageGrid3x3Fields on ImageGrid3X3 {
-      _id
-      imagesCollection (limit:9) {
-        items {
-          _id
-          image {
-            description
-            url
-          }
-        }
-      }
+      name
     }
 
     fragment GalleryGridFields on GalleryGrid {
-      _id
-      imagesCollection (limit:9) {
-        items {
-          _id
-          contentfulMetadata {
-            tags {
-              name
-            }
-          }
-          image {
-            description
-            url
-          }
-        }
-      }
+      name
     }`;
 
   const variables = { slug };

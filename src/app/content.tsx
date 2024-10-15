@@ -1,8 +1,6 @@
 /**
  * @file content.tsx
  */
-"use client";
-
 // Component that's called from inside page.js
 // All it does is look at each content block,
 // and assign it the appropriate React component(s)
@@ -17,7 +15,6 @@ import { ImageCards } from "../components/image-cards";
 import LogoRow from "../components/logo-row";
 import TestimonialsSlider from "@/components/testimonials-slider";
 import ImageGrid from "@/components/image-grid";
-import GalleryGrid from "@/components/gallery-grid";
 import EventCarousel from "@/components/events-carousel";
 
 const blockByType = (block: any) => {
@@ -79,7 +76,7 @@ const blockByType = (block: any) => {
       );
 
     case "ImageGrid3X3":
-      return <ImageGrid images={block.imagesCollection.items} />;
+      return <ImageGrid />;
 
     case "EventsCarousel":
       return <EventCarousel />;

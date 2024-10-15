@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 
@@ -29,7 +31,7 @@ function TestimonialsSlider(props: { testimonials: TestimonialType[] }) {
       }
     >
       <h2 className={"pb-8 font-display"}>Testimonials</h2>
-      <div className='flex flex-row items-center justify-center w-full h-56'>
+      <div className='flex flex-row items-center justify-center w-full h-56 mb-8'>
         <div className='testimonial'>
           <div className={"w-96"}>
             <h5 className='quote'>

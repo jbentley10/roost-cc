@@ -2,27 +2,27 @@ import React from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { fetchImages } from "@/lib/contentfulData";
 
-function ImageGrid(props: {
-  images: { image: { description: string; url: string } }[];
-}) {
-  const { images } = props;
+async function ImageGrid() {
+  const images = await fetchImages(9);
+
   return (
     <div className={"component-container component-spacer"}>
       <h2 className={"font-display"}>Gallery</h2>
-      <div className={"grid grid-cols-1 md:grid-cols-3 md:grid-rows-3"}>
+      <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4"}>
         {images.map(
           (
-            image: { image: { description: string; url: string } },
+            image: { description: string; url: string },
             index: number
           ) => (
             <Image
-              src={image.image.url}
-              alt={image.image.description}
+              src={image.url}
+              alt={image.description}
               width={300}
-              height={300}
+              height={150}
               key={index}
-              className={"mr-4 mb-4"}
+              className='object-cover w-full h-full'
             />
           )
         )}
