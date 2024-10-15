@@ -38,9 +38,11 @@ export function EventCard(props: { event: EventType }) {
                     {RenderShorthand(event.description.json)}
                   </div>
                 )}
-                <div className='text-muted-foreground mb-4'>
-                  {`Genre: ${event.genre}`}
-                </div>
+                {event.genre !== null &&
+                  <div className='text-muted-foreground mb-4'>
+                    {`Genre: ${event.genre}`}
+                  </div>
+                }
               </div>
               <div className='flex items-center mb-2'>
                 <CalendarIcon className='mr-2 h-4 w-4' />

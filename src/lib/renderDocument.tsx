@@ -53,11 +53,20 @@ export const RenderShorthand = (document: any) => {
   const options = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
-        const blockText = children?.toString() || "";
+        let blockText = children?.toString() || "";
         accumulatedText += blockText; // Accumulate text from all blocks
-        return <p>{children}</p>;
+        return (<><p>{children}</p><br /></>);
       },
-      // Handle other block types as needed
+      [BLOCKS.UL_LIST]: (node: any, children: React.ReactNode) => {
+        let blockText = children?.toString() || "";
+        accumulatedText += blockText; // Accumulate text from all blocks
+        return <ul className={"pl-8"}>{children}</ul>;
+      },
+      [BLOCKS.LIST_ITEM]: (node: any, children: React.ReactNode) => {
+        let blockText = children?.toString() || "";
+        accumulatedText += blockText; // Accumulate text from all blocks
+        return <li>{children}</li>
+      },
     },
   };
 
@@ -71,7 +80,7 @@ export const RenderShorthand = (document: any) => {
   // Function to truncate text if it's not expanded
   const truncateText = (text: string) => {
     if (isExpanded || totalCharacterCount <= characterLimit) {
-      return text; // Show full text if expanded or within limit
+      return renderedDocument; // Show full text if expanded or within limit
     }
     return text.slice(0, characterLimit) + "..."; // Truncate and add ellipsis
   };

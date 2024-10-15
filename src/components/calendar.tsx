@@ -74,14 +74,18 @@ const EventModal: React.FC<{
                 minute: "2-digit",
               })}
             </p>
-            <a
-              href={event.link}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-blue-500 hover:underline mt-2 inline-block'
-            >
-              Buy Tickets
-            </a>
+            {event.link ?
+              <a
+                href={event.link}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-blue-500 hover:underline mt-2 inline-block'
+              >
+                Buy Tickets
+              </a>
+              :
+              <span>Free Event</span>
+            }
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
