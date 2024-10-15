@@ -14,7 +14,7 @@ export const metadata = {
 
 export default async function Gallery() {
   const blocksEnglish = await fetchBlocksBySlug("gallery");
-  const images = await fetchImages();
+  const images = await fetchImages(100);
 
   // Wait for the promises to resolve
   const [english] = await Promise.all([blocksEnglish]);

@@ -1,8 +1,10 @@
-import { renderDocument } from "../lib/renderDocument";
-import Image from "next/image";
+"use client";
+
 import React from "react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { renderDocument } from "@/lib/renderDocument";
 
 export interface ImageTextBlockProps {
   image: {

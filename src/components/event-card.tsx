@@ -1,10 +1,12 @@
+"use client";
+
 import Image from "next/image";
-import { EventType, formatDate, formatTime } from "./events-container";
-import { Card, CardContent } from "./ui/card";
+import { EventType, formatDate, formatTime } from "@/components/events-container";
+import { Card, CardContent } from "@/components/ui/card";
 import { RenderShorthand } from "@/lib/renderDocument";
 import { CalendarIcon, ClockIcon, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 export function EventCard(props: { event: EventType }) {
   const { event } = props;
