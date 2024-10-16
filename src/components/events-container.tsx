@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import moment from 'moment';
 import {
   Select,
   SelectContent,
@@ -44,13 +45,14 @@ export function formatDate(dateString: string): string {
 }
 
 export function formatTime(dateString: string): string {
+  // Create a date object from the UTC date string
   const date = new Date(dateString);
-  date.setHours(date.getHours() - 1); // Subtract one hour from the time
-  const formattedDate = date.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-  });
-  return formattedDate;
+  const formattedTime = moment(date).format('LT');
+  
+  // Log the formatted date for debugging
+  console.log("Formatted Time:", formattedTime);
+  
+  return formattedTime;
 }
 
 function EventsContainer(props: { events: EventType[] }) {
