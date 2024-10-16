@@ -115,9 +115,12 @@ h4 {
   font-weight: 300;
 }
 
-h5,
-label {
+h5 {
   font-size: 24px;
+}
+
+label {
+  font-size: 36px;
 }
 
 ul {

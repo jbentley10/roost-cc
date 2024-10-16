@@ -14,7 +14,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import Calendar from "./calendar";
 import { EventCard } from "./event-card";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "./ui/pagination";
 
 type ViewType = "list" | "calendar";
 
@@ -49,9 +48,6 @@ export function formatTime(dateString: string): string {
   const date = new Date(dateString);
   const formattedTime = moment(date).format('LT');
   
-  // Log the formatted date for debugging
-  console.log("Formatted Time:", formattedTime);
-  
   return formattedTime;
 }
 
@@ -59,8 +55,6 @@ function EventsContainer(props: { events: EventType[] }) {
   const { events } = props;
   const [selectedTag, setSelectedTag] = useState<string>("all");
   const [view, setView] = useState<ViewType>("list");
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const eventsPerPage = 15;
 
   const handleViewChange = (value: ViewType) => {
     setView(value);
@@ -83,15 +77,6 @@ function EventsContainer(props: { events: EventType[] }) {
         new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
     );
 
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
-
-  const paginatedEvents = sortedEvents.slice(
-    (currentPage - 1) * eventsPerPage,
-    currentPage * eventsPerPage
-  );
-
   return (
     <>
       <div
@@ -102,7 +87,7 @@ function EventsContainer(props: { events: EventType[] }) {
       >
         {/* Event Select */}
         <div className='mb-6 flex flex-row justify-start md:justify-end'>
-          <h5 className={"font-hand"}>Show</h5>
+          <label className={"font-hand"}>Show</label>
           <Select onValueChange={setSelectedTag} defaultValue='all'>
             <SelectTrigger className='w-[180px]'>
               <SelectValue placeholder='Select event type' />
@@ -115,8 +100,6 @@ function EventsContainer(props: { events: EventType[] }) {
               <SelectItem value='live entertainment'>
                 Live Entertainment
               </SelectItem>
-              <SelectItem value='special event'>Special Event</SelectItem>
-              <SelectItem value='videos'>Videos</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -156,43 +139,6 @@ function EventsContainer(props: { events: EventType[] }) {
                   <EventCard key={index} event={event} />
                 ))}
               </div>
-              {/* Pagination Controls */}
-              {/* <Pagination className={'mb-16'}>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious href="#event-list" onClick={() => handlePageChange(currentPage - 1)} />
-                  </PaginationItem> */}
-                  {/* Show current page - 1 if it exists and is not the first page */}
-                  {/* {currentPage > 2 && (
-                    <PaginationItem>
-                      <PaginationLink href="#event-list" onClick={() => handlePageChange(currentPage - 1)}>{currentPage - 1}</PaginationLink>
-                    </PaginationItem>
-                  )} */}
-                  {/* Show ellipsis if there are skipped pages */}
-                  {/* {currentPage > 3 && <PaginationEllipsis />} */}
-                  {/* Show current page */}
-                  {/* <PaginationItem>
-                    <PaginationLink href="#event-list">{currentPage}</PaginationLink>
-                  </PaginationItem> */}
-                  {/* Show ellipsis if there are skipped pages */}
-                  {/* {currentPage < Math.ceil(sortedEvents.length / eventsPerPage) - 2 && currentPage < Math.ceil(sortedEvents.length / eventsPerPage) - 1 && <PaginationEllipsis />} */}
-                  {/* Show current page + 1 if it exists and is not the last page */}
-                  {/* {currentPage < Math.ceil(sortedEvents.length / eventsPerPage) - 1 && (
-                    <PaginationItem>
-                      <PaginationLink href="#event-list" onClick={() => handlePageChange(currentPage + 1)}>{currentPage + 1}</PaginationLink>
-                    </PaginationItem>
-                  )} */}
-                  {/* Always show the last page */}
-                  {/* {currentPage < Math.ceil(sortedEvents.length / eventsPerPage) && (
-                    <PaginationItem>
-                      <PaginationLink href="#event-list" onClick={() => handlePageChange(Math.ceil(sortedEvents.length / eventsPerPage))}>
-                        {Math.ceil(sortedEvents.length / eventsPerPage)}
-                      </PaginationLink>
-                    </PaginationItem>
-                  )}
-                  <PaginationNext href="#event-list" onClick={() => handlePageChange(currentPage + 1)} />
-                </PaginationContent>
-              </Pagination> */}
             </>
           ) : (
             <div className={"w-full"}>
