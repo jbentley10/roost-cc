@@ -45,10 +45,12 @@ export function formatDate(dateString: string): string {
 
 export function formatTime(dateString: string): string {
   const date = new Date(dateString);
-  return date.toLocaleTimeString("en-US", {
+  date.setHours(date.getHours() - 1); // Subtract one hour from the time
+  const formattedDate = date.toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
   });
+  return formattedDate;
 }
 
 function EventsContainer(props: { events: EventType[] }) {
