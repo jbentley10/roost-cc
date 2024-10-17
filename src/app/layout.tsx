@@ -1,8 +1,9 @@
 import { Bevan, Grand_Hotel, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Navigation } from "../components/navigation";
 import { Footer } from "../components/footer";
-import EventBanner, { Event } from "@/components/event-banner";
+import EventBanner from "@/components/event-banner";
 import { fetchEvents } from "@/lib/contentfulData";
 import Script from "next/script";
 
@@ -43,6 +44,7 @@ export default async function RootLayout({
         <Navigation />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
