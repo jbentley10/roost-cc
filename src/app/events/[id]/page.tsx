@@ -2,36 +2,40 @@
  * @file page.tsx
  */
 // Import components and utils
-import { fetchBlocksBySlug, fetchMetadataBySlug, fetchPaths } from "@/lib/contentfulData";
+import {
+  fetchBlocksBySlug,
+  fetchMetadataBySlug,
+  fetchPaths,
+} from "@/lib/contentfulData";
 import Content from "@/app/content";
-import type { Metadata, ResolvingMetadata } from 'next'
- 
+import type { Metadata, ResolvingMetadata } from "next";
+
 type Props = {
-  params: { id: string }
-}
+  params: Promise<{ id: string; searchParams: Record<string, any> }>; // Change to Promise type
+};
 
 // Set metadata
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // read route params
-  const id = params.id
- 
+  const resolvedParams = await params; // Await the promise to get the actual params
+  const id = resolvedParams.id;
+
   // fetch data
   const blocksEnglish = await fetchMetadataBySlug(`events/${id}`);
- 
+
   return {
     title: blocksEnglish.englishTitle,
-    description: blocksEnglish.description
-  }
+    description: blocksEnglish.description,
+  };
 }
 
 type pathItem = {
   slug: string;
   _id: string;
   englishTitle: string;
-}
+};
 
 export async function generateStaticParams() {
   const response = await fetchPaths(["eventListing"]);
@@ -43,8 +47,9 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export default async function EventListing(params: { params: { id: string, searchParams: object }}) {
-  const blocksEnglish = await fetchBlocksBySlug(`events/${params.params.id}`);
+export default async function EventListing(params: Props) {
+  const resolvedParams = await params.params; // Await the promise to get the actual params
+  const blocksEnglish = await fetchBlocksBySlug(`events/${resolvedParams.id}`);
 
   // Wait for the promises to resolve
   const [english] = await Promise.all([blocksEnglish]);
