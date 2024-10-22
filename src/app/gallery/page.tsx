@@ -9,7 +9,8 @@ import GalleryGrid from "@/components/gallery-grid";
 // Set metadata
 export const metadata = {
   title: "Gallery | The Roost - Cathedral City, CA",
-  description: "Check out the latest photos from events and happenings at The Roost.",
+  description:
+    "Check out the latest photos from events and happenings at The Roost.",
 };
 
 export default async function Gallery() {
@@ -22,7 +23,7 @@ export default async function Gallery() {
   return (
     <main className='flex flex-col items-center justify-between'>
       {english && <Content key={Math.random()} englishBlocks={english} />}
-      <GalleryGrid images={images} />;
+      <GalleryGrid images={images} />
     </main>
   );
 }
