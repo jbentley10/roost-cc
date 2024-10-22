@@ -1,5 +1,4 @@
 import { Bevan, Grand_Hotel, Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Navigation } from "../components/navigation";
 import { Footer } from "../components/footer";
@@ -44,7 +43,6 @@ export default async function RootLayout({
         <Navigation />
         {children}
         <Footer />
-        <Analytics />
       </body>
     </html>
   );
