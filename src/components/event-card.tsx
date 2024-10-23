@@ -8,7 +8,7 @@ import { CalendarIcon, ClockIcon, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function EventCard(props: { event: EventType, showDescriptionAndGenre: boolean }) {
+export function EventCard(props: { event: EventType, showDescriptionAndGenre?: boolean }) {
   const { event, showDescriptionAndGenre = true } = props;
 
   return (
