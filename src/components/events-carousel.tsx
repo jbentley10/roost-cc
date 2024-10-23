@@ -27,7 +27,7 @@ export default async function EventCarousel() {
         <CarouselContent>
           {slicedEvents.map((event) => (
             <CarouselItem key={event.id}>
-              <EventCard event={event} />
+              <EventCard event={event} showDescriptionAndGenre={false} />
             </CarouselItem>
           ))}
         </CarouselContent>

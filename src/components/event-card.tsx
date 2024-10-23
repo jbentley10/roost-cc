@@ -8,8 +8,8 @@ import { CalendarIcon, ClockIcon, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function EventCard(props: { event: EventType }) {
-  const { event } = props;
+export function EventCard(props: { event: EventType, showDescriptionAndGenre: boolean }) {
+  const { event, showDescriptionAndGenre = true } = props;
 
   return (
     <Card
@@ -35,12 +35,12 @@ export function EventCard(props: { event: EventType }) {
                 <h2 className='text-2xl font-regular mb-2 font-display'>
                   {event.name}
                 </h2>
-                {event.description && event.description.json && (
+                {event.description && showDescriptionAndGenre==true && event.description.json && (
                   <div className='text-muted-foreground mb-4'>
                     {RenderShorthand(event.description.json)}
                   </div>
                 )}
-                {event.genre !== null &&
+                {event.genre !== null && showDescriptionAndGenre==true &&
                   <div className='text-muted-foreground mb-4'>
                     {`Genre: ${event.genre}`}
                   </div>

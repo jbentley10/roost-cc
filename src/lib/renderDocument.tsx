@@ -46,7 +46,7 @@ export const renderDocument = (document: any) => {
 export const RenderShorthand = (document: any) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const [totalCharacterCount, setTotalCharacterCount] = React.useState(0);
-  const characterLimit = 300; // Limit before showing "Read More"
+  const characterLimit = 100; // Limit before showing "Read More"
 
   let accumulatedText = ""; // Holds the full text content for truncation
 
