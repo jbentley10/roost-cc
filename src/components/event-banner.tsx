@@ -69,7 +69,7 @@ export default function EventBanner(props: { events: Event[] }) {
           <h2 className='font-bold text-lg'>{currentEvent.name}</h2>
           {currentEvent.description && (
             <div className='text-sm mt-1'>
-              {RenderShorthand(currentEvent.description.json)}
+              {renderDocument(currentEvent.description.json)}
             </div>
           )}
         </div>
