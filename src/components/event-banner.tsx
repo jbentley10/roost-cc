@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import Cookies from "js-cookie";
-import { renderDocument } from "@/lib/renderDocument";
+import { renderDocument, RenderShorthand } from "@/lib/renderDocument";
 
 export interface Event {
   dateAndTime: Date;
@@ -69,7 +69,7 @@ export default function EventBanner(props: { events: Event[] }) {
           <h2 className='font-bold text-lg'>{currentEvent.name}</h2>
           {currentEvent.description && (
             <div className='text-sm mt-1'>
-              {renderDocument(currentEvent.description.json)}
+              {RenderShorthand(currentEvent.description.json)}
             </div>
           )}
         </div>
