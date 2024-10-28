@@ -9,7 +9,12 @@ import {
   SelectValue,
 } from "./ui/select";
 import Image from "next/image";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "./ui/dialog";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
@@ -38,7 +43,9 @@ function GalleryGrid(props: { images: ImageType[] }) {
     selectedTag === "all"
       ? images
       : images.filter((image) =>
-          image.contentfulMetadata.tags.some(tag => tag.name.includes(selectedTag))
+          image.contentfulMetadata.tags.some((tag) =>
+            tag.name.includes(selectedTag)
+          )
         );
 
   const openModal = (index: number) => {
@@ -76,7 +83,9 @@ function GalleryGrid(props: { images: ImageType[] }) {
             <SelectContent>
               <SelectItem value='all'>All Images</SelectItem>
               <SelectItem value='fundraiser'>Fundraiser</SelectItem>
-              <SelectItem value='live entertainment'>Live Entertainment</SelectItem>
+              <SelectItem value='live entertainment'>
+                Live Entertainment
+              </SelectItem>
               <SelectItem value='staff'>Staff</SelectItem>
               <SelectItem value='bingo'>Bingo</SelectItem>
             </SelectContent>
@@ -84,10 +93,7 @@ function GalleryGrid(props: { images: ImageType[] }) {
         </div>
       </div>
 
-      <div
-        id='images-container'
-        className={"component-container"}
-      >
+      <div id='images-container' className={"component-container"}>
         {/* Heading */}
         <h2 className={"text-center capitalize pb-8 font-display"}>
           {selectedTag}
@@ -105,7 +111,7 @@ function GalleryGrid(props: { images: ImageType[] }) {
               onClick={() => openModal(index)}
             >
               <Image
-                alt={image.description ? image.description: ""}
+                alt={image.description ? image.description : ""}
                 src={image.url}
                 width={300}
                 height={150}
@@ -119,17 +125,15 @@ function GalleryGrid(props: { images: ImageType[] }) {
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
         <DialogContent className='max-w-3xl w-full h-[80vh] flex items-center justify-center'>
-          <DialogTitle>{filteredImages[currentImageIndex]?.title || ""}</DialogTitle>
-          <DialogDescription>{filteredImages[currentImageIndex]?.description || ""}</DialogDescription>
           <div className='relative w-full h-full'>
             <Image
               alt={filteredImages[currentImageIndex]?.description || ""}
               src={filteredImages[currentImageIndex]?.url || ""}
               width={filteredImages[currentImageIndex].width}
               height={filteredImages[currentImageIndex].height}
-              style={{ width: '100%', height: 'auto'}}
+              style={{ width: "100%", height: "auto" }}
               quality={100}
-              loading="eager"
+              loading='eager'
             />
             <Button
               variant='default'

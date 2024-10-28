@@ -1,14 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { EventType, formatDate, formatTime } from "@/components/events-container";
+import {
+  EventType,
+  formatDate,
+  formatTime,
+} from "@/components/events-container";
 import { Card, CardContent } from "@/components/ui/card";
 import { RenderShorthand } from "@/lib/renderDocument";
 import { CalendarIcon, ClockIcon, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function EventCard(props: { event: EventType, showDescriptionAndGenre?: boolean }) {
+export function EventCard(props: {
+  event: EventType;
+  showDescriptionAndGenre?: boolean;
+}) {
   const { event, showDescriptionAndGenre = true } = props;
 
   return (
@@ -35,16 +42,18 @@ export function EventCard(props: { event: EventType, showDescriptionAndGenre?: b
                 <h2 className='text-2xl font-regular mb-2 font-display'>
                   {event.name}
                 </h2>
-                {event.description && showDescriptionAndGenre==true && event.description.json && (
-                  <div className='text-muted-foreground mb-4'>
-                    {RenderShorthand(event.description.json)}
-                  </div>
-                )}
-                {event.genre !== null && showDescriptionAndGenre==true &&
+                {event.description &&
+                  showDescriptionAndGenre == true &&
+                  event.description.json && (
+                    <div className='text-muted-foreground mb-4'>
+                      <RenderShorthand document={event.description.json} />
+                    </div>
+                  )}
+                {event.genre !== null && showDescriptionAndGenre == true && (
                   <div className='text-muted-foreground mb-4'>
                     {`Genre: ${event.genre}`}
                   </div>
-                }
+                )}
               </div>
               <div className='flex items-center mb-2'>
                 <CalendarIcon className='mr-2 h-4 w-4' />
