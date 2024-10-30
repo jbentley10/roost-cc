@@ -11,7 +11,8 @@ import Content from "@/app/content";
 import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
-  params: Promise<{ id: string; searchParams: Record<string, any> }>; // Change to Promise type
+  params: { id: string };
+  searchParams?: Record<string, string>;
 };
 
 // Set metadata
@@ -19,11 +20,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const resolvedParams = await params; // Await the promise to get the actual params
-  const id = resolvedParams.id;
-
-  // fetch data
-  const blocksEnglish = await fetchMetadataBySlug(`events/${id}`);
+  // No need to await params
+  const blocksEnglish = await fetchMetadataBySlug(`events/${params.id}`);
 
   return {
     title: blocksEnglish.englishTitle,
@@ -40,23 +38,23 @@ type pathItem = {
 export async function generateStaticParams() {
   const response = await fetchPaths(["eventListing"]);
 
-  const paths = response.items.map((item: pathItem) => {
-    return item.slug;
-  });
-
-  return paths;
+  return response.items.map((item: pathItem) => ({
+    id: item.slug.replace("events/", ""), // Remove the 'events/' prefix if it's in the slug
+  }));
 }
 
 export default async function EventListing(params: Props) {
-  const resolvedParams = await params.params; // Await the promise to get the actual params
-  const blocksEnglish = await fetchBlocksBySlug(`events/${resolvedParams.id}`);
+  // No need to await params since it's not a Promise
+  const blocksEnglish = await fetchBlocksBySlug(`events/${params.params.id}`);
 
   // Wait for the promises to resolve
   const [english] = await Promise.all([blocksEnglish]);
 
   return (
     <main className='flex flex-col items-center justify-between'>
-      {english && <Content key={Math.random()} englishBlocks={english} />}
+      {blocksEnglish && (
+        <Content key={params.params.id} englishBlocks={blocksEnglish} />
+      )}
     </main>
   );
 }
