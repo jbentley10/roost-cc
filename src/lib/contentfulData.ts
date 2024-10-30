@@ -132,7 +132,6 @@ export async function fetchPaths(tag: string[]) {
 
   const variables = { tag };
   const data = await fetchGraphQL(query, variables);
-  console.log("PATHS", data);
 
   if (data.pageCollection) return data.pageCollection;
 
