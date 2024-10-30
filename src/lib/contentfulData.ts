@@ -132,6 +132,7 @@ export async function fetchPaths(tag: string[]) {
 
   const variables = { tag };
   const data = await fetchGraphQL(query, variables);
+  console.log("PATHS", data);
 
   if (data.pageCollection) return data.pageCollection;
 
@@ -172,7 +173,7 @@ export async function fetchImages(limit: number) {
     description: entry.description,
     url: entry.url,
     width: entry.width,
-    height: entry.height
+    height: entry.height,
   }));
 
   // Sort events by dateAndTime (soonest first)

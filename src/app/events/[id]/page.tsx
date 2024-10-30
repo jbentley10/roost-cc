@@ -8,20 +8,19 @@ import {
   fetchPaths,
 } from "@/lib/contentfulData";
 import Content from "@/app/content";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type Props = {
-  params: { id: string };
-  searchParams?: Record<string, string>;
+  params: Promise<{ id: string }>;
+  searchParams: Promise<Record<string, string>>;
 };
 
-// Set metadata
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // No need to await params
-  const blocksEnglish = await fetchMetadataBySlug(`events/${params.id}`);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const resolvedParams = await params;
+  const blocksEnglish = await fetchMetadataBySlug(
+    `events/${resolvedParams.id}`
+  );
 
   return {
     title: blocksEnglish.englishTitle,
@@ -29,32 +28,44 @@ export async function generateMetadata(
   };
 }
 
-type pathItem = {
+type ContentfulPageItem = {
   slug: string;
   _id: string;
   englishTitle: string;
 };
 
-export async function generateStaticParams() {
-  const response = await fetchPaths(["eventListing"]);
+type ContentfulResponse = {
+  items: ContentfulPageItem[];
+};
 
-  return response.items.map((item: pathItem) => ({
-    id: item.slug.replace("events/", ""), // Remove the 'events/' prefix if it's in the slug
+export async function generateStaticParams() {
+  const response = (await fetchPaths(["eventListing"])) as ContentfulResponse;
+
+  return response.items.map((item: ContentfulPageItem) => ({
+    id: item.slug.replace("events/", ""),
   }));
 }
 
-export default async function EventListing(params: Props) {
-  // No need to await params since it's not a Promise
-  const blocksEnglish = await fetchBlocksBySlug(`events/${params.params.id}`);
+export default async function EventListing({ params }: Props) {
+  try {
+    const resolvedParams = await params;
+    const blocksEnglish = await fetchBlocksBySlug(
+      `events/${resolvedParams.id}`
+    );
 
-  // Wait for the promises to resolve
-  const [english] = await Promise.all([blocksEnglish]);
+    if (!blocksEnglish) {
+      notFound();
+    }
 
-  return (
-    <main className='flex flex-col items-center justify-between'>
-      {blocksEnglish && (
-        <Content key={params.params.id} englishBlocks={blocksEnglish} />
-      )}
-    </main>
-  );
+    return (
+      <main className='flex flex-col items-center justify-between'>
+        {blocksEnglish && (
+          <Content key={resolvedParams.id} englishBlocks={blocksEnglish} />
+        )}
+      </main>
+    );
+  } catch (error) {
+    console.error("Error in EventListing:", error);
+    notFound();
+  }
 }
