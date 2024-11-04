@@ -12,10 +12,12 @@ import {
 import { fetchEvents } from "@/lib/contentfulData";
 import { EventType } from "./events-container";
 import { EventCard } from "./event-card";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default async function EventCarousel() {
   const events: EventType[] = await fetchEvents();
-  const slicedEvents = events.slice(0, 5);
+  const slicedEvents = events.slice(3, 8);
 
   return (
     <section
@@ -34,6 +36,11 @@ export default async function EventCarousel() {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+      <Link href={"/events"}>
+        <Button size={"lg"} className='text-center m-auto flex'>
+          View All Events
+        </Button>
+      </Link>
     </section>
   );
 }

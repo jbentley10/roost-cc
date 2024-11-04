@@ -6,6 +6,7 @@ import { Footer } from "../components/footer";
 import EventBanner from "@/components/event-banner";
 import { fetchEvents } from "@/lib/contentfulData";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Declare fonts
 const bevan = Bevan({
@@ -45,6 +46,7 @@ export default async function RootLayout({
         {children}
         <Footer />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
