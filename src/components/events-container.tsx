@@ -51,6 +51,19 @@ export function formatTime(dateString: string): string {
   return formattedTime;
 }
 
+/* Format for PST
+export function formatTime(dateString: string): string {
+  const date = new Date(dateString);
+  
+  return new Intl.DateTimeFormat('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone: 'America/Los_Angeles',
+    hour12: true
+  }).format(date);
+}
+*/ 
+
 function EventsContainer(props: { events: EventType[] }) {
   const { events } = props;
   const [selectedTag, setSelectedTag] = useState<string>("all");
