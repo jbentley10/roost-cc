@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import moment from 'moment';
 import {
   Select,
   SelectContent,
@@ -32,37 +31,6 @@ export interface EventType {
   facebookShareLink?: string;
   learnMoreLink?: string;
 }
-
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-
-export function formatTime(dateString: string): string {
-  // Create a date object from the UTC date string
-  const date = new Date(dateString);
-  const formattedTime = moment(date).format('LT');
-  
-  return formattedTime;
-}
-
-/* Format for PST
-export function formatTime(dateString: string): string {
-  const date = new Date(dateString);
-  
-  return new Intl.DateTimeFormat('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZone: 'America/Los_Angeles',
-    hour12: true
-  }).format(date);
-}
-*/ 
 
 function EventsContainer(props: { events: EventType[] }) {
   const { events } = props;
@@ -147,7 +115,7 @@ function EventsContainer(props: { events: EventType[] }) {
         <div className={""}>
           {view === "list" ? (
             <>
-              <div id="event-list" className={"w-full"}>
+              <div id='event-list' className={"w-full"}>
                 {sortedEvents.map((event: EventType, index: number) => (
                   <EventCard key={index} event={event} />
                 ))}

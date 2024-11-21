@@ -1,11 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import {
-  EventType,
-  formatDate,
-  formatTime,
-} from "@/components/events-container";
+import { EventType } from "@/components/events-container";
+import { formatDate, formatTime } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { RenderShorthand } from "@/lib/renderDocument";
 import { CalendarIcon, ClockIcon, ExternalLink } from "lucide-react";
