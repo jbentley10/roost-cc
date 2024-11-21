@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-accent text-primary font-hand hover:bg-accent/90 border-2 border-accent-stroke",
+          "bg-accent text-primary font-sans hover:bg-accent/90 border-2 border-accent-stroke",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -23,7 +23,7 @@ const buttonVariants = cva(
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8 text-xl w-full md:w-1/2",
+        lg: "h-11 rounded-md px-8 text-xl w-full",
         icon: "h-10 w-10",
       },
     },
