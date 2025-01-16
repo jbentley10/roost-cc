@@ -66,7 +66,7 @@ export const Footer = () => {
           "font-hand text-xl bg-primary text-white text-center pt-12 pb-10"
         }
       >
-        &copy;{`${new Date().getFullYear()}`}
+        &copy;{`${new Date().getFullYear()}`}{" "}
         <Link
           className={"font-bold font-hand"}
           href='https://palmspringswebdesign.net'
