@@ -47,6 +47,16 @@ export default async function RootLayout({
         <Footer />
         <Analytics />
         <SpeedInsights />
+        <Script
+          src='https://www.googletagmanager.com/gtag/js?id=G-J8C3629HVQ'
+          strategy='beforeInteractive'
+        />
+        <Script id='gtag-script'>
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-J8C3629HVQ');`}
+        </Script>
       </body>
     </html>
   );
