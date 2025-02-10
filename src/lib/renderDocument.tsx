@@ -68,7 +68,7 @@ export const RenderShorthand: React.FC<RenderShorthandProps> = ({ document, show
 
   // Render the content based on expanded state
   const content =
-    isExpanded || totalCharacterCount <= characterLimit
+    isExpanded || !showReadMore
       ? documentToReactComponents(document, displayOptions)
       : documentToReactComponents(
           {
@@ -93,8 +93,8 @@ export const RenderShorthand: React.FC<RenderShorthandProps> = ({ document, show
   return (
     <div>
       <div>{content}</div>
-      {totalCharacterCount > characterLimit && showReadMore && !isExpanded && (
-        <Button variant="secondary" onClick={handleReadMore}>
+      {!isExpanded && showReadMore && totalCharacterCount > characterLimit && (
+        <Button variant="secondary" onClick={handleReadMore} className="mt-2">
           Read More
         </Button>
       )}

@@ -6,9 +6,8 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
-import { renderDocument, RenderShorthand } from "@/lib/renderDocument"
+import { RenderShorthand } from "@/lib/renderDocument"
 import type { EventType } from "./events-container"
-import { useMediaQuery } from "@/lib/use-media-query"
 
 const MonthSelector: React.FC<{
   currentDate: Date
@@ -47,7 +46,6 @@ const EventModal: React.FC<{
   onClose: () => void
 }> = ({ event, onClose }) => {
   const [showFullDescription, setShowFullDescription] = useState(false)
-  const isMobile = useMediaQuery("(max-width: 640px)")
 
   if (!event) return null
 
@@ -62,16 +60,12 @@ const EventModal: React.FC<{
         <DialogHeader>
           <DialogTitle>{event.name}</DialogTitle>
           <DialogDescription>
-            <div className={`${isMobile ? "max-h-[200px] overflow-y-auto" : ""}`}>
-              {isMobile ? (
-                <RenderShorthand
-                  document={event.description.json}
-                  showReadMore={!showFullDescription}
-                  onReadMore={() => setShowFullDescription(true)}
-                />
-              ) : (
-                renderDocument(event.description.json)
-              )}
+            <div className="max-h-[200px] overflow-y-auto pr-4">
+              <RenderShorthand
+                document={event.description.json}
+                showReadMore={!showFullDescription}
+                onReadMore={() => setShowFullDescription(true)}
+              />
             </div>
             <p className="mt-2">
               Time:{" "}
