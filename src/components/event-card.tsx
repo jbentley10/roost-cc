@@ -10,7 +10,20 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function EventCard(props: {
-  event: EventType;
+  event: {
+    id: string;
+    name: string;
+    description: { json: {} };
+    genre: string;
+    link?: string;
+    dateAndTime: string;
+    image?: {
+      url: string;
+      description: string;
+    };
+    facebookShareLink?: string;
+    learnMoreLink?: string;
+  };
   showDescriptionAndGenre?: boolean;
 }) {
   const { event, showDescriptionAndGenre = true } = props;

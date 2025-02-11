@@ -86,6 +86,7 @@ const blockByType = (block: any) => {
       return (
         <EventCard 
           event={{
+            id: block.id,
             name: block.name,
             description: block.description,
             genre: block.genre,

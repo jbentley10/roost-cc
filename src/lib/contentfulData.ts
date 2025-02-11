@@ -370,6 +370,7 @@ export async function fetchBlocksBySlug(slug: string) {
     }
 
     fragment EventCardFields on EventCard {
+      _id
       name
       description {
         json
