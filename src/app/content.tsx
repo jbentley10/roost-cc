@@ -16,6 +16,7 @@ import LogoRow from "../components/logo-row";
 import TestimonialsSlider from "@/components/testimonials-slider";
 import ImageGrid from "@/components/image-grid";
 import EventCarousel from "@/components/events-carousel";
+import { EventCard } from "@/components/event-card";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
@@ -80,6 +81,23 @@ const blockByType = (block: any) => {
 
     case "EventsCarousel":
       return <EventCarousel />;
+
+    case "EventCard":
+      return (
+        <EventCard 
+          event={{
+            name: block.name,
+            description: block.description,
+            genre: block.genre,
+            link: block.link,
+            dateAndTime: block.dateAndTime,
+            image: block.image,
+            facebookShareLink: block.facebookShareLink,
+            learnMoreLink: block.learnMoreLink
+          }}
+          showDescriptionAndGenre={true}
+        />
+      );
   }
 };
 

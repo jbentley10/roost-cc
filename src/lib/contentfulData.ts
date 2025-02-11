@@ -269,6 +269,7 @@ export async function fetchBlocksBySlug(slug: string) {
               ...TestimonialsSliderFields
               ...ImageGrid3x3Fields
               ...GalleryGridFields
+              ...EventCardFields
             }
           }
         }
@@ -366,7 +367,27 @@ export async function fetchBlocksBySlug(slug: string) {
 
     fragment GalleryGridFields on GalleryGrid {
       name
-    }`;
+    }
+
+    fragment EventCardFields on EventCard {
+      name
+      description {
+        json
+      }
+      genre
+      link
+      dateAndTime
+      image {
+        title
+        description
+        url
+        width
+        height
+      }
+      facebookShareLink
+      learnMoreLink
+    }
+    `;
 
   const variables = { slug };
   const data = await fetchGraphQL(query, variables);
