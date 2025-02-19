@@ -47,7 +47,12 @@ const blockByType = (block: any) => {
       );
 
     case "Heading":
-      return <Heading heading={block.headingText} />;
+      return (
+        <Heading 
+          heading={block.headingText} 
+          subheading={block.subheading} 
+        />
+      );
 
     case "ImageAndTextBlock":
       return (

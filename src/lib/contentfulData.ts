@@ -293,6 +293,7 @@ export async function fetchBlocksBySlug(slug: string) {
 
     fragment HeadingFields on Heading {
       headingText
+      subheading
     }
 
     fragment HeroBlockFields on HeroBlock {
