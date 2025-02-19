@@ -13,9 +13,9 @@ export const Heading: React.FC<HeadingProps> = ({ heading, subheading }) => {
           <h1 className='pb-7 text-white tracking-tight font-display'>
             {heading}
           </h1>
-          <h2 className='pb-7 text-white tracking-tight font-sans'>
+          <h3 className='pb-7 text-white tracking-tight font-sans text-xl sm:text-2xl'>
             {subheading}
-          </h2>
+          </h3>
         </div>
       </div>
     </section>
