@@ -21,7 +21,7 @@ export function formatTime(dateString: string): string {
   return new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
     minute: "2-digit",
-    timeZone: "America/Los_Angeles",
+    timeZone: "UTC",
     hour12: true,
   }).format(date);
 }
