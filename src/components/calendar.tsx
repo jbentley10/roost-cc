@@ -47,9 +47,7 @@ const EventModal: React.FC<{
 }> = ({ event, onClose }) => {
   const [showFullDescription, setShowFullDescription] = useState(false)
 
-  if (!event) return null
-
-  const eventDate: Date = new Date(event.dateAndTime)
+  if (!event) return null;
 
   return (
     <Dialog open={!!event} onOpenChange={onClose}>
@@ -69,10 +67,12 @@ const EventModal: React.FC<{
             </div>
             <p className="mt-2">
               Time:{" "}
-              {eventDate.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+              {new Date(event.dateAndTime).toLocaleString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true,
+                    timeZone: 'UTC'
+                  })}
             </p>
             {event.link ? (
               <a
@@ -154,9 +154,11 @@ export default function Calendar({ events = [] }: CalendarProps) {
                   className="mb-1 cursor-pointer"
                   onClick={() => setSelectedEvent(event)}
                 >
-                  {new Date(event.dateAndTime).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
+                  {new Date(event.dateAndTime).toLocaleString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true,
+                    timeZone: 'UTC'
                   })}{" "}
                   - {event.name}
                 </Badge>
