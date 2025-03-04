@@ -64,7 +64,7 @@ export default function EventBanner(props: { events: Event[] }) {
 
   return (
     <div className="sticky top-0 left-0 right-0 bg-primary text-primary-foreground p-4 z-50 shadow-md overflow-y-auto max-h-[25vh] sm:max-h-none">
-      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between min-h-[25vh] sm:min-h-0">
+      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between min-h-[12vh] sm:min-h-0">
         <div className="flex-1 text-center sm:text-left mb-4 sm:mb-0 overflow-y-auto max-h-[15vh] sm:max-h-none">
           <h2 className="font-bold text-lg">{currentEvent.name}</h2>
           {currentEvent.description && (
