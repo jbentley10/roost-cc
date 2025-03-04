@@ -46,7 +46,7 @@ export const Footer = () => {
               <ul className={"list-none"}>
                 <li>
                   <Link target="blank" href="https://maps.app.goo.gl/DFyGi7aZn4hwRpxz7">
-                    <address className={"not-italic font-hand text-sm md:text-2xl xl:text-3xl"}>
+                    <address className={"not-italic font-hand text-2xl xl:text-3xl"}>
                       The Roost Lounge <br />
                       68718 E Palm Canyon Drive #203 <br />
                       Cathedral City, CA 92234
@@ -54,7 +54,7 @@ export const Footer = () => {
                   </Link>
                 </li>
                 <li className={"pt-4"}>
-                  <a className={"font-hand text-sm md:text-2xl xl:text-3xl"} href={"tel:+17605078495"}>
+                  <a className={"font-hand text-2xl xl:text-3xl"} href={"tel:+17605078495"}>
                     760-507-8495
                   </a>
                 </li>

@@ -14,6 +14,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
+  DialogFooter,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -124,7 +125,7 @@ function GalleryGrid(props: { images: ImageType[] }) {
       </div>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className='max-w-3xl w-full h-[80vh] flex items-center justify-center'>
+        <DialogContent className='max-w-3xl w-full h-auto flex items-center justify-center'>
           <div className='relative w-full h-full'>
             <Image
               alt={filteredImages[currentImageIndex]?.description || ""}
@@ -151,6 +152,9 @@ function GalleryGrid(props: { images: ImageType[] }) {
             >
               <ChevronRight className='h-6 w-6' />
             </Button>
+            <DialogFooter className="mt-8">
+              <DialogDescription className="text-left">{filteredImages[currentImageIndex]?.description || ""}</DialogDescription>
+            </DialogFooter>
           </div>
         </DialogContent>
       </Dialog>
