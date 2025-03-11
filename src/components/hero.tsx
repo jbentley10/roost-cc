@@ -29,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
           {buttonText && buttonLink && (
             <Link href={buttonLink} prefetch={false}>
-              <Button className={"mb-8 md:mb-24"} size={"lg"}>
+              <Button className={"mb-8 md:mb-24 w-3/4 xl:w-1/2"} size={"lg"}>
                 {buttonText}
               </Button>
             </Link>

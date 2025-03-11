@@ -37,7 +37,7 @@ export default async function EventCarousel() {
         <CarouselNext />
       </Carousel>
       <Link href={"/events"}>
-        <Button size={"lg"} className='text-center m-auto flex'>
+        <Button size={"lg"} className='text-center m-auto flex w-1/2 md:w-1/4'>
           View All Events
         </Button>
       </Link>
