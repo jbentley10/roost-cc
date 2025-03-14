@@ -83,10 +83,13 @@ function GalleryGrid(props: { images: ImageType[] }) {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value='all'>All Images</SelectItem>
-              <SelectItem value='fundraiser'>Fundraiser</SelectItem>
+              <SelectItem value='nest fest 2025'>
+                Nest Fest 2025
+              </SelectItem>
               <SelectItem value='live entertainment'>
                 Live Entertainment
               </SelectItem>
+              <SelectItem value='fundraiser'>Fundraiser</SelectItem>              
               <SelectItem value='staff'>Staff</SelectItem>
               <SelectItem value='bingo'>Bingo</SelectItem>
             </SelectContent>
