@@ -84,6 +84,7 @@ export async function fetchEvents() {
         }
         facebookShareLink
         learnMoreLink
+        priceText
       }
     }
   }`;
@@ -106,6 +107,7 @@ export async function fetchEvents() {
     image: entry.image,
     facebookShareLink: entry.facebookShareLink,
     learnMoreLink: entry.learnMoreLink,
+    priceText: entry.priceText
   }));
 
   // Sort events by dateAndTime (soonest first)
@@ -388,6 +390,7 @@ export async function fetchBlocksBySlug(slug: string) {
       }
       facebookShareLink
       learnMoreLink
+      priceText
     }
     `;
 

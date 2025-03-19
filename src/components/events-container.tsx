@@ -17,7 +17,7 @@ import { EventCard } from "./event-card";
 type ViewType = "list" | "calendar";
 
 export interface EventType {
-  tags: [{ name: string }];
+  tags?: [{ name: string }];
   id: string;
   name: string;
   description: { json: {} };
@@ -30,6 +30,7 @@ export interface EventType {
   };
   facebookShareLink?: string;
   learnMoreLink?: string;
+  priceText?: string;
 }
 
 function EventsContainer(props: { events: EventType[] }) {

@@ -10,20 +10,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function EventCard(props: {
-  event: {
-    id: string;
-    name: string;
-    description: { json: {} };
-    genre: string;
-    link?: string;
-    dateAndTime: string;
-    image?: {
-      url: string;
-      description: string;
-    };
-    facebookShareLink?: string;
-    learnMoreLink?: string;
-  };
+  event: EventType
   showDescriptionAndGenre?: boolean;
 }) {
   const { event, showDescriptionAndGenre = true } = props;
@@ -101,7 +88,7 @@ export function EventCard(props: {
                 </Link>
               </Button>
             ) : (
-              <h4>Free Event</h4>
+              <h4>{event.priceText ? event.priceText : "Free Event"}</h4>
             )}
           </div>
         </div>

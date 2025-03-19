@@ -99,7 +99,8 @@ const blockByType = (block: any) => {
             dateAndTime: block.dateAndTime,
             image: block.image,
             facebookShareLink: block.facebookShareLink,
-            learnMoreLink: block.learnMoreLink
+            learnMoreLink: block.learnMoreLink,
+            priceText: block.priceText
           }}
           showDescriptionAndGenre={true}
         />
