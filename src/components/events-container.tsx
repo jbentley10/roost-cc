@@ -49,7 +49,7 @@ function EventsContainer(props: { events: EventType[] }) {
     selectedTag === "all"
       ? events
       : events.filter((event) =>
-          event.tags.some((tag) => tag.name.includes(selectedTag))
+          event.tags?.some((tag) => tag.name.includes(selectedTag))
         );
 
   const sortedEvents = [...filteredEvents]
