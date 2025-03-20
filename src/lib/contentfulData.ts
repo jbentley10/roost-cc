@@ -141,10 +141,10 @@ export async function fetchPaths(tag: string[]) {
 }
 
 // Sort events by dateAndTime (soonest first)
-export async function fetchImages(limit: number) {
+export async function fetchImages(limit: number, skip = 0) {
   const query = `
-  query ($limit: Int) {
-    assetCollection (limit:$limit, where: {contentfulMetadata: {tags: {id_contains_some: "image"}}}) {
+  query ($limit: Int, $skip: Int) {
+    assetCollection (limit: $limit, skip: $skip, where: {contentfulMetadata: {tags: {id_contains_some: "image"}}}) {
       items {
         contentfulMetadata {
           tags {
@@ -157,33 +157,28 @@ export async function fetchImages(limit: number) {
         width 
         height
       }
+      total
     }
-  }`;
+  }`
 
-  const variables = { limit };
-  const data = await fetchGraphQL(query, variables);
+  const variables = { limit, skip }
+  const data = await fetchGraphQL(query, variables)
 
   if (!data || data.assetCollection.items.length === 0) {
-    console.log("Error finding events");
-    return [];
+    console.log("Error finding images")
+    return []
   }
 
-  const events = data.assetCollection.items.map((entry: any) => ({
+  const images = data.assetCollection.items.map((entry: any) => ({
     contentfulMetadata: entry.contentfulMetadata,
     name: entry.name,
     description: entry.description,
     url: entry.url,
     width: entry.width,
     height: entry.height,
-  }));
+  }))
 
-  // Sort events by dateAndTime (soonest first)
-  events.sort(
-    (a: { dateAndTime: string }, b: { dateAndTime: string }) =>
-      new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
-  );
-
-  return events;
+  return images
 }
 
 export async function fetchPages() {
