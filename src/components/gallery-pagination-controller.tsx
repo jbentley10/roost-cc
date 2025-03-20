@@ -3,7 +3,6 @@
 import { useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useState, useEffect } from "react"
 import Image from "next/image"
-import type { ImageType } from "./gallery-grid"
 import {
   Pagination,
   PaginationContent,
