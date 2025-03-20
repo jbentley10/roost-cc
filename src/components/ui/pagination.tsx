@@ -52,7 +52,8 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
-      className
+      className,
+      'hover:pointer'
     )}
     {...props}
   />

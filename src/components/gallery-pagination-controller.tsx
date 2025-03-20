@@ -1,7 +1,7 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation"
-import { useCallback, useState, useEffect } from "react"
+import { useRouter, useSearchParams, usePathname } from "next/navigation"
+import { useCallback, useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import {
   Pagination,
@@ -37,17 +37,35 @@ interface GalleryPaginationControllerProps {
 
 export default function GalleryPaginationController({ images }: GalleryPaginationControllerProps) {
   const router = useRouter()
+  const pathname = usePathname()
   const searchParams = useSearchParams()
+
+  // Use local state for pagination instead of relying solely on URL
+  const [currentPage, setCurrentPage] = useState(1)
+  const [imagesPerPage, setImagesPerPage] = useState(50)
   const [selectedTag, setSelectedTag] = useState<string>("all")
   const [modalOpen, setModalOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  // Get current values from URL or use defaults - all handled client-side
-  const pageParam = searchParams.get("page")
-  const perPageParam = searchParams.get("perPage")
+  // Use a ref to track if this is the initial render
+  const isInitialRender = useRef(true)
 
-  const currentPage = pageParam ? Number.parseInt(pageParam) : 1
-  const imagesPerPage = perPageParam ? Number.parseInt(perPageParam) : 50
+  // Initialize state from URL on component mount
+  useEffect(() => {
+    const pageParam = searchParams.get("page")
+    const perPageParam = searchParams.get("perPage")
+
+    if (pageParam) {
+      setCurrentPage(Number.parseInt(pageParam))
+    }
+
+    if (perPageParam) {
+      setImagesPerPage(Number.parseInt(perPageParam))
+    }
+
+    // No longer initial render after first effect
+    isInitialRender.current = false
+  }, [searchParams])
 
   // Filter images based on selected tag
   const filteredImages =
@@ -66,36 +84,63 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
 
   // Create a function to update URL with new parameters
   const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-      return params.toString()
+    (params: Record<string, string>) => {
+      const urlSearchParams = new URLSearchParams(searchParams.toString())
+
+      // Update or add each parameter
+      Object.entries(params).forEach(([name, value]) => {
+        urlSearchParams.set(name, value)
+      })
+
+      return urlSearchParams.toString()
     },
     [searchParams],
   )
 
-  // Handle page change
+  // Handle page change - update state first, then URL
   const handlePageChange = useCallback(
     (page: number) => {
-      router.push(`?${createQueryString("page", page.toString())}`)
+      // Update local state immediately
+      setCurrentPage(page)
+
+      // Update URL without causing a navigation/reload
+      if (!isInitialRender.current) {
+        const newParams = createQueryString({ page: page.toString() })
+        // Use replace instead of push to avoid adding to history stack
+        router.replace(`${pathname}?${newParams}`, { scroll: false })
+      }
     },
-    [router, createQueryString],
+    [router, pathname, createQueryString, isInitialRender],
   )
 
-  // Handle images per page change
+  // Handle images per page change - update state first, then URL
   const handleImagesPerPageChange = useCallback(
     (count: string) => {
-      router.push(`?${createQueryString("perPage", count)}&page=1`)
+      const newCount = Number.parseInt(count)
+
+      // Update local state immediately
+      setImagesPerPage(newCount)
+      setCurrentPage(1) // Reset to page 1
+
+      // Update URL without causing a navigation/reload
+      if (!isInitialRender.current) {
+        const newParams = createQueryString({
+          perPage: count,
+          page: "1", // Reset to page 1 when changing items per page
+        })
+        // Use replace instead of push to avoid adding to history stack
+        router.replace(`${pathname}?${newParams}`, { scroll: false })
+      }
     },
-    [router, createQueryString],
+    [router, pathname, createQueryString, isInitialRender],
   )
 
   // Reset to page 1 when tag changes
   useEffect(() => {
-    if (selectedTag !== "all") {
-      handlePageChange(1)
+    if (!isInitialRender.current && selectedTag !== "all") {
+      setCurrentPage(1)
     }
-  }, [selectedTag, handlePageChange])
+  }, [selectedTag])
 
   // Modal functions
   const openModal = (index: number) => {
@@ -174,18 +219,24 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
 
         {/* Image Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {currentImages.map((image, index) => (
-            <div key={index} className="cursor-pointer" onClick={() => openModal(index)}>
-              <Image
-                alt={image.description || ""}
-                src={image.url || "/placeholder.svg"}
-                width={300}
-                height={150}
-                className="object-cover w-full h-full"
-                quality={50}
-              />
+          {currentImages.length > 0 ? (
+            currentImages.map((image, index) => (
+              <div key={index} className="cursor-pointer" onClick={() => openModal(index)}>
+                <Image
+                  alt={image.description || ""}
+                  src={image.url || "/placeholder.svg"}
+                  width={300}
+                  height={150}
+                  className="object-cover w-full h-full"
+                  quality={50}
+                />
+              </div>
+            ))
+          ) : (
+            <div className="col-span-4 text-center py-12">
+              <p>No images found for the selected filter.</p>
             </div>
-          ))}
+          )}
         </div>
 
         {/* Pagination Controls with Images Per Page Selector - Added bottom padding */}
@@ -283,3 +334,4 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
     </div>
   )
 }
+
