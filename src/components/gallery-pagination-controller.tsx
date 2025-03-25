@@ -228,7 +228,7 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
                   width={300}
                   height={150}
                   className="object-cover w-full h-full"
-                  quality={50}
+                  // quality={50}
                 />
               </div>
             ))
