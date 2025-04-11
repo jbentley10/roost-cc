@@ -202,6 +202,7 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
                 <SelectItem value="nest fest 2025">Nest Fest 2025</SelectItem>
                 <SelectItem value="live entertainment">Live Entertainment</SelectItem>
                 <SelectItem value="fundraiser">Fundraiser</SelectItem>
+                <SelectItem value="customers">Customers</SelectItem>
                 <SelectItem value="staff">Staff</SelectItem>
                 <SelectItem value="bingo">Bingo</SelectItem>
               </SelectContent>
