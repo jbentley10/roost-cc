@@ -17,7 +17,14 @@ import Link from "next/link";
 
 export default async function EventCarousel() {
   const events: EventType[] = await fetchEvents();
-  const slicedEvents = events.slice(3, 8);
+  
+  // Filter only upcoming events
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0); // Set to the start of the current day
+  
+  const upcomingEvents = events.filter(
+    (event) => new Date(event.dateAndTime) >= currentDate
+  ).slice(0, 5);
 
   return (
     <section
@@ -27,7 +34,7 @@ export default async function EventCarousel() {
       <h2 className={"pb-4 font-display"}>Upcoming Events</h2>
       <Carousel className='w-full max-w-5xl mx-auto'>
         <CarouselContent>
-          {slicedEvents.map((event) => (
+          {upcomingEvents.map((event) => (
             <CarouselItem key={event.id}>
               <EventCard event={event} showDescriptionAndGenre={false} />
             </CarouselItem>
