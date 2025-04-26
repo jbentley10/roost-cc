@@ -205,6 +205,7 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
                 <SelectItem value="customers">Customers</SelectItem>
                 <SelectItem value="staff">Staff</SelectItem>
                 <SelectItem value="bingo">Bingo</SelectItem>
+                <SelectItem value="easter-bonnet-brunch">Easter Bonnet Brunch</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -215,7 +216,11 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
       <div className="component-container">
         {/* Heading */}
         <h2 className="text-center capitalize pb-8 font-display">
-          {selectedTag === "all" ? "All Images" : selectedTag}
+          {selectedTag === "all" 
+            ? "All Images" 
+            : selectedTag === "easter-bonnet-brunch" 
+              ? "Easter Bonnet Brunch" 
+              : selectedTag}
         </h2>
 
         {/* Image Grid */}
