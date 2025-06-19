@@ -34,12 +34,12 @@ export default async function RootLayout({
       className={`${grandHotel.variable} ${bevan.variable} ${inter.variable}`}
     >
       <head>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-J8C3629HVQ"></Script>
-        <Script id='gtag-script'>
-          {`window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-J8C3629HVQ');`}
+        <Script id="google-analytics">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-582SP45F');`}
         </Script>
         <link rel='icon' href='/favicon.ico' sizes='any' />
         <Script
@@ -48,6 +48,8 @@ export default async function RootLayout({
         />
       </head>
       <body>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-582SP45F"
+        height="0" width="0" style={{display:"none",visibility:"hidden"}}></iframe></noscript>
         <EventBanner events={events} />
         <Navigation />
         {children}
