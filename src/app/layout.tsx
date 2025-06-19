@@ -34,6 +34,13 @@ export default async function RootLayout({
       className={`${grandHotel.variable} ${bevan.variable} ${inter.variable}`}
     >
       <head>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-J8C3629HVQ"></Script>
+        <Script id='gtag-script'>
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-J8C3629HVQ');`}
+        </Script>
         <link rel='icon' href='/favicon.ico' sizes='any' />
         <Script
           type='text/javascript'
@@ -47,16 +54,6 @@ export default async function RootLayout({
         <Footer />
         <Analytics />
         <SpeedInsights />
-        <Script
-          src='https://www.googletagmanager.com/gtag/js?id=G-J8C3629HVQ'
-          strategy='beforeInteractive'
-        />
-        <Script id='gtag-script'>
-          {`window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-J8C3629HVQ');`}
-        </Script>
       </body>
     </html>
   );
