@@ -54,6 +54,7 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
   useEffect(() => {
     const pageParam = searchParams.get("page")
     const perPageParam = searchParams.get("perPage")
+    const tagParam = searchParams.get("tag")
 
     if (pageParam) {
       setCurrentPage(Number.parseInt(pageParam))
@@ -61,6 +62,10 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
 
     if (perPageParam) {
       setImagesPerPage(Number.parseInt(perPageParam))
+    }
+
+    if (tagParam) {
+      setSelectedTag(tagParam)
     }
 
     // No longer initial render after first effect
@@ -135,12 +140,6 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
     [router, pathname, createQueryString, isInitialRender],
   )
 
-  // Reset to page 1 when tag changes
-  useEffect(() => {
-    if (!isInitialRender.current && selectedTag !== "all") {
-      setCurrentPage(1)
-    }
-  }, [selectedTag])
 
   // Modal functions
   const openModal = (index: number) => {
@@ -190,9 +189,18 @@ export default function GalleryPaginationController({ images }: GalleryPaginatio
             <Select
               onValueChange={(value) => {
                 setSelectedTag(value)
-                // Reset to page 1 when filter changes - handled by useEffect
+                setCurrentPage(1) // Reset to page 1 when filter changes
+                
+                // Update URL with new tag parameter
+                if (!isInitialRender.current) {
+                  const newParams = createQueryString({
+                    tag: value,
+                    page: "1" // Reset to page 1 when changing tag
+                  })
+                  router.replace(`${pathname}?${newParams}`, { scroll: false })
+                }
               }}
-              defaultValue="all"
+              value={selectedTag}
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select event type" />
