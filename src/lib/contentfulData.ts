@@ -267,6 +267,7 @@ export async function fetchBlocksBySlug(slug: string) {
               ...ImageGrid3x3Fields
               ...GalleryGridFields
               ...EventCardFields
+              ...VideoPlayerFields
             }
           }
         }
@@ -386,6 +387,14 @@ export async function fetchBlocksBySlug(slug: string) {
       facebookShareLink
       learnMoreLink
       priceText
+    }
+
+    fragment VideoPlayerFields on VideoPlayer {
+      video {
+        title
+        description
+        url
+      }
     }
     `;
 
