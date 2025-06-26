@@ -17,6 +17,7 @@ import TestimonialsSlider from "@/components/testimonials-slider";
 import ImageGrid from "@/components/image-grid";
 import EventCarousel from "@/components/events-carousel";
 import { EventCard } from "@/components/event-card";
+import { VideoPlayer } from "@/components/video-player";
 
 const blockByType = (block: any) => {
   // Get the content type from the block content properties
@@ -105,6 +106,14 @@ const blockByType = (block: any) => {
           showDescriptionAndGenre={true}
         />
       );
+
+    case "VideoPlayer":
+      console.log(block);
+      return (
+        <VideoPlayer
+          video={block.video}
+        />
+      )
   }
 };
 
