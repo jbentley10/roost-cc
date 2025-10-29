@@ -101,7 +101,8 @@ const blockByType = (block: any) => {
             image: block.image,
             facebookShareLink: block.facebookShareLink,
             learnMoreLink: block.learnMoreLink,
-            priceText: block.priceText
+            priceText: block.priceText,
+            isPinned: block.isPinned
           }}
           showDescriptionAndGenre={true}
         />

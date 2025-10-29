@@ -31,6 +31,7 @@ export interface EventType {
   facebookShareLink?: string;
   learnMoreLink?: string;
   priceText?: string;
+  isPinned?: boolean;
 }
 
 function EventsContainer(props: { events: EventType[] }) {
@@ -54,10 +55,14 @@ function EventsContainer(props: { events: EventType[] }) {
 
   const sortedEvents = [...filteredEvents]
     .filter((event) => new Date(event.dateAndTime) >= currentDate)
-    .sort(
-      (a, b) =>
-        new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
-    );
+    .sort((a, b) => {
+      // First, sort by pinned status (pinned events come first)
+      if (a.isPinned && !b.isPinned) return -1;
+      if (!a.isPinned && b.isPinned) return 1;
+      
+      // If both have same pinned status, sort by date
+      return new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime();
+    });
 
   return (
     <>
