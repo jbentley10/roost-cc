@@ -77,16 +77,22 @@ async function duplicateEntry(client, spaceId, environmentId, templateEntry, new
     fields[TITLE_FIELD] = { [LOCALE]: newTitle };
   }
 
-  // Set the new date (ISO string for Contentful Date fields)
-  const isoDate = newDate.toISOString().split("T")[0]; // "2026-04-15"
+  // Build new datetime: use local date parts (avoids UTC timezone shift) + time from template
+  const templateDateTime = fields[DATE_FIELD]?.[LOCALE] ?? "";
+  const timePart = templateDateTime.includes("T") ? templateDateTime.split("T")[1] : "00:00:00";
+  const year = newDate.getFullYear();
+  const month = String(newDate.getMonth() + 1).padStart(2, "0");
+  const day = String(newDate.getDate()).padStart(2, "0");
+  const newDateTime = `${year}-${month}-${day}T${timePart}`;
+
   if (fields[DATE_FIELD]) {
-    fields[DATE_FIELD][LOCALE] = isoDate;
+    fields[DATE_FIELD][LOCALE] = newDateTime;
   } else {
-    fields[DATE_FIELD] = { [LOCALE]: isoDate };
+    fields[DATE_FIELD] = { [LOCALE]: newDateTime };
   }
 
   if (DRY_RUN) {
-    console.log(`  [DRY RUN] Would create: "${newTitle}" on ${isoDate}`);
+    console.log(`  [DRY RUN] Would create: "${newTitle}" on ${newDateTime}`);
     return null;
   }
 
@@ -108,9 +114,9 @@ async function duplicateEntry(client, spaceId, environmentId, templateEntry, new
       },
       newEntry
     );
-    console.log(`  ✅ Created & published: "${newTitle}" on ${isoDate}`);
+    console.log(`  ✅ Created & published: "${newTitle}" on ${newDateTime}`);
   } else {
-    console.log(`  ✅ Created (draft): "${newTitle}" on ${isoDate}`);
+    console.log(`  ✅ Created (draft): "${newTitle}" on ${newDateTime}`);
   }
 
   return newEntry;
