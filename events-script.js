@@ -3,18 +3,15 @@
 // Duplicates Karaoke (Tuesdays) and Open Mic (Mondays) for the rest of 2026
 // =============================================================================
 // Usage:
-//   1. npm install contentful-management
-//   2. Fill in your credentials below
-//   3. node duplicate-events.js --dry-run   (preview without creating)
-//   4. node duplicate-events.js             (create all events)
+//   1. Add CONTENTFUL_MANAGEMENT_TOKEN to .env.local
+//   2. node events-script.js --dry-run   (preview without creating)
+//   3. node events-script.js             (create all events)
 // =============================================================================
 
-const contentful = require("contentful-management");
+const { client: contentfulClient, SPACE_ID, ENV_ID: ENVIRONMENT_ID } = require("./scripts/lib/client");
 
-// ─── CONFIGURE THESE ─────────────────────────────────────────────────────────
-const SPACE_ID = "tby4d3bo5j9e";
-const MANAGEMENT_TOKEN = "CFPAT-P-ohFYkFvRvCKe3NehkoBlLoBwStlmz3IA4OSREM750";
-const ENVIRONMENT_ID = "master"; // Change if using a different environment
+// Use the shared client rather than creating a new one
+const contentful = { createClient: () => contentfulClient };
 
 // The entry IDs of your existing Karaoke and Open Mic events to use as templates
 const KARAOKE_TEMPLATE_ENTRY_ID = "u8Cc1CG9qyhXlbP9bdOAS";
@@ -124,7 +121,7 @@ async function main() {
     console.log("🔍 DRY RUN MODE — no entries will be created\n");
   }
 
-  const client = contentful.createClient({ accessToken: MANAGEMENT_TOKEN });
+  const client = contentfulClient;
 
   console.log("📡 Connecting to Contentful...");
 
