@@ -26,7 +26,13 @@ const NO_PUBLISH = args.includes("--no-publish");
 
 function flag(name) {
   const i = args.indexOf(name);
-  return i !== -1 ? args[i + 1] : null;
+  if (i === -1) return null;
+  const value = args[i + 1];
+  if (!value || value.startsWith("--")) {
+    console.error(`❌ Missing value for ${name}`);
+    process.exit(1);
+  }
+  return value;
 }
 
 const filePath = flag("--file");
@@ -73,7 +79,7 @@ async function main() {
   if (DRY_RUN) console.log("DRY RUN MODE — nothing will be uploaded\n");
 
   const absPath = path.resolve(filePath);
-  if (!fs.existsSync(absPath)) {
+  if (!fs.existsSync(absPath) || !fs.statSync(absPath).isFile()) {
     console.error(`❌ File not found: ${absPath}`);
     process.exit(1);
   }
