@@ -36,6 +36,85 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
+## Event Scripts
+
+All scripts live in `scripts/` and share the Contentful client configured via `.env.local`. Run any script with `--dry-run` to preview without making changes.
+
+### Prerequisites
+
+Add these to your `.env.local`:
+
+```
+CONTENTFUL_MANAGEMENT_TOKEN=CFPAT-...
+GBD_EMAIL=your@email.com
+GBD_PASSWORD=yourpassword
+```
+
+For the GBD scripts, Playwright must be installed:
+
+```bash
+npm install playwright
+npx playwright install chromium
+```
+
+---
+
+### Contentful scripts
+
+#### Create a single event
+```bash
+node scripts/create-event.js \
+  --name "Event Name" \
+  --date "2026-07-04T18:00:00" \
+  --link "https://ticketbud.com/..." \
+  --publish
+```
+
+#### Upload an image and link it to an event
+```bash
+node scripts/upload-asset.js \
+  --file "public/events/photo.webp" \
+  --title "Asset Title" \
+  --event-id <contentfulEntryId>
+```
+
+#### Update an existing event
+```bash
+# First find the entry ID:
+node scripts/find-entries.js --type event --search "Event Name"
+
+# Then update any fields:
+node scripts/update-event.js --id <entryId> --date "2026-09-19T18:00:00" --name "New Name"
+```
+
+#### Create recurring Open Mic / Karaoke events for the rest of the year
+```bash
+node events-script.js --dry-run   # preview
+node events-script.js             # create all
+```
+
+---
+
+### Gay Business Directory (GBD) scripts
+
+#### Sync all Contentful events to GBD
+Fetches future events from Contentful, scrapes what's already on GBD, and submits anything missing — including images. Open Mic and Karaoke are skipped since those are managed separately on GBD.
+
+```bash
+node gbd-sync.js --dry-run   # preview what would be submitted
+node gbd-sync.js             # run the full sync
+```
+
+#### Submit a specific batch of events to GBD
+Edit the `EVENTS` array in `gbd-events-script.js`, then:
+
+```bash
+node gbd-events-script.js --dry-run   # preview
+node gbd-events-script.js             # submit
+```
+
+---
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
