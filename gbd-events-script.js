@@ -13,6 +13,7 @@
 const { chromium } = require("playwright");
 const fs = require("fs");
 const path = require("path");
+const { setDatepickerDate } = require("./scripts/lib/gbd-datepicker");
 
 try {
   process.loadEnvFile(path.resolve(__dirname, ".env.local"));
@@ -50,84 +51,76 @@ function getEndOfYear() {
   return `12/31/${yyyy}`;
 }
 
-const GENNINE_DESCRIPTION = `Gennine Francis Jackson joins us for an evening showcasing her vocal talents. Relax, listen, sing along if you like.\n\nSeating begins at 5:30PM. Show begins at 6PM.\n\nOnline reservations close at 2:00PM the day of the show. After this time, please call The Roost Lounge at 760-507-8495 to inquire about seating availability. Thank you.`;
+const HOOTENANNY_DESCRIPTION = `Join Desert Hot Things the Roost Lounge's live house band for a "Hootenanny!" event that takes place at The Roost Lounge in Cathedral City. The event is an "old-fashioned sing-a-long party" where the band plays and sings hit songs from the 80s. The audience can pick songs from a list, and everyone can sing a long.\n\nSeating begins at 6:30PM and the show starts at 7PM.\n\nOnline reservations close at 2:00PM the day of the show.`;
 
 const EVENTS = [
   {
-    label: "Gennine Francis Jackson - 8/8",
-    post_title: "Gennine Francis Jackson - 8/8",
-    post_category: "Nighttime",
-    recurring_type: "0",
-    start_time: "6:00 PM",
-    end_time: "N/A",
-    post_start_date: "08/08/2026",
-    post_expire_date: "08/08/2026",
-    post_promo: "",
-    post_url:
-      "https://ticketbud.com/events/d3e7f1c6-710e-11f1-89c3-42010a71701a",
-    post_venue: "The Roost Lounge",
-    post_location: "67619 E Palm Canyon Dr #202, Cathedral City, CA 92234",
-    post_tags:
-      "live music, singer, lgbtq, palm springs, gennine francis jackson",
-    post_content: GENNINE_DESCRIPTION,
-    post_status: "1",
+    label:            "Hootenanny! with Desert Hot Things - 8/23",
+    post_title:       "Hootenanny! with Desert Hot Things - 8/23",
+    post_category:    "Nighttime",
+    recurring_type:   "0",
+    start_time:       "6:30 PM",
+    end_time:         "N/A",
+    post_start_date:  "08/23/2026",
+    post_expire_date: "08/23/2026",
+    post_promo:       "",
+    post_url:         "https://ticketbud.com/events/ffac75a6-710f-11f1-928d-42010a71701a",
+    post_venue:       "The Roost Lounge",
+    post_location:    "67619 E Palm Canyon Dr #202, Cathedral City, CA 92234",
+    post_tags:        "live music, lgbtq, palm springs, desert hot things, hootenanny, sing-a-long",
+    post_content:     HOOTENANNY_DESCRIPTION,
+    post_status:      "1",
   },
   {
-    label: "Gennine Francis Jackson - 8/22",
-    post_title: "Gennine Francis Jackson - 8/22",
-    post_category: "Nighttime",
-    recurring_type: "0",
-    start_time: "6:00 PM",
-    end_time: "N/A",
-    post_start_date: "08/22/2026",
-    post_expire_date: "08/22/2026",
-    post_promo: "",
-    post_url:
-      "https://ticketbud.com/events/090ee58a-710f-11f1-9b04-42010a71701a",
-    post_venue: "The Roost Lounge",
-    post_location: "67619 E Palm Canyon Dr #202, Cathedral City, CA 92234",
-    post_tags:
-      "live music, singer, lgbtq, palm springs, gennine francis jackson",
-    post_content: GENNINE_DESCRIPTION,
-    post_status: "1",
+    label:            "Hootenanny! with Desert Hot Things - 9/27",
+    post_title:       "Hootenanny! with Desert Hot Things - 9/27",
+    post_category:    "Nighttime",
+    recurring_type:   "0",
+    start_time:       "6:30 PM",
+    end_time:         "N/A",
+    post_start_date:  "09/27/2026",
+    post_expire_date: "09/27/2026",
+    post_promo:       "",
+    post_url:         "https://ticketbud.com/events/486c34b6-7110-11f1-97bb-42010a71701a",
+    post_venue:       "The Roost Lounge",
+    post_location:    "67619 E Palm Canyon Dr #202, Cathedral City, CA 92234",
+    post_tags:        "live music, lgbtq, palm springs, desert hot things, hootenanny, sing-a-long",
+    post_content:     HOOTENANNY_DESCRIPTION,
+    post_status:      "1",
   },
   {
-    label: "Gennine Francis Jackson - 9/12",
-    post_title: "Gennine Francis Jackson - 9/12",
-    post_category: "Nighttime",
-    recurring_type: "0",
-    start_time: "6:00 PM",
-    end_time: "N/A",
-    post_start_date: "09/12/2026",
-    post_expire_date: "09/12/2026",
-    post_promo: "",
-    post_url:
-      "https://ticketbud.com/events/4b7a0b7a-710f-11f1-a338-42010a71701a",
-    post_venue: "The Roost Lounge",
-    post_location: "67619 E Palm Canyon Dr #202, Cathedral City, CA 92234",
-    post_tags:
-      "live music, singer, lgbtq, palm springs, gennine francis jackson",
-    post_content: GENNINE_DESCRIPTION,
-    post_status: "1",
+    label:            "Hootenanny! with Desert Hot Things - 10/25",
+    post_title:       "Hootenanny! with Desert Hot Things - 10/25",
+    post_category:    "Nighttime",
+    recurring_type:   "0",
+    start_time:       "6:30 PM",
+    end_time:         "N/A",
+    post_start_date:  "10/25/2026",
+    post_expire_date: "10/25/2026",
+    post_promo:       "",
+    post_url:         "https://ticketbud.com/events/81ba98f2-7110-11f1-bef6-42010a71701a",
+    post_venue:       "The Roost Lounge",
+    post_location:    "67619 E Palm Canyon Dr #202, Cathedral City, CA 92234",
+    post_tags:        "live music, lgbtq, palm springs, desert hot things, hootenanny, sing-a-long",
+    post_content:     HOOTENANNY_DESCRIPTION,
+    post_status:      "1",
   },
   {
-    label: "Gennine Francis Jackson - 9/19",
-    post_title: "Gennine Francis Jackson - 9/19",
-    post_category: "Nighttime",
-    recurring_type: "0",
-    start_time: "6:00 PM",
-    end_time: "N/A",
-    post_start_date: "09/19/2026",
-    post_expire_date: "09/19/2026",
-    post_promo: "",
-    post_url:
-      "https://ticketbud.com/events/82d189f4-710f-11f1-b270-42010a71701a",
-    post_venue: "The Roost Lounge",
-    post_location: "67619 E Palm Canyon Dr #202, Cathedral City, CA 92234",
-    post_tags:
-      "live music, singer, lgbtq, palm springs, gennine francis jackson",
-    post_content: GENNINE_DESCRIPTION,
-    post_status: "1",
+    label:            "Hootenanny! with Desert Hot Things - 12/12",
+    post_title:       "Hootenanny! with Desert Hot Things - 12/12",
+    post_category:    "Nighttime",
+    recurring_type:   "0",
+    start_time:       "6:30 PM",
+    end_time:         "N/A",
+    post_start_date:  "12/12/2026",
+    post_expire_date: "12/12/2026",
+    post_promo:       "",
+    post_url:         "https://ticketbud.com/events/c658094a-7110-11f1-9093-42010a71701a",
+    post_venue:       "The Roost Lounge",
+    post_location:    "67619 E Palm Canyon Dr #202, Cathedral City, CA 92234",
+    post_tags:        "live music, lgbtq, palm springs, desert hot things, hootenanny, sing-a-long",
+    post_content:     HOOTENANNY_DESCRIPTION,
+    post_status:      "1",
   },
 ];
 // ─────────────────────────────────────────────────────────────────────────────
@@ -226,8 +219,8 @@ async function submitEvent(page, event) {
   await page.selectOption('select[name="end_time"]', { label: event.end_time });
 
   // Dates
-  await page.fill('input[name="post_start_date"]', event.post_start_date);
-  await page.fill('input[name="post_expire_date"]', event.post_expire_date);
+  await setDatepickerDate(page, 'input[name="post_start_date"]', event.post_start_date);
+  await setDatepickerDate(page, 'input[name="post_expire_date"]', event.post_expire_date);
 
   // Cost / promo
   await page.fill('input[name="post_promo"]', event.post_promo);

@@ -78,6 +78,17 @@ node scripts/upload-asset.js \
   --event-id <contentfulEntryId>
 ```
 
+#### Bulk-upload a folder of photos
+Drop photos into `public/events/inbox/`, then run:
+```bash
+node scripts/upload-folder.js \
+  --folder "public/events/inbox" \
+  --name "80s-dance" \
+  --date "7-4-2026" \
+  --tag "image"
+```
+Each file is renamed to `<date>-<name>-<index>` (e.g. `7-4-2026-80s-dance-1`), uploaded, tagged, and published. The `--tag` value is created automatically if it doesn't already exist. Use `--dry-run` to preview.
+
 #### Update an existing event
 ```bash
 # First find the entry ID:

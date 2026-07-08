@@ -20,6 +20,7 @@ try {
 } catch {}
 
 const { client, SPACE_ID, ENV_ID, LOCALE } = require("./scripts/lib/client");
+const { setDatepickerDate } = require("./scripts/lib/gbd-datepicker");
 
 const SESSION_FILE = path.join(__dirname, "gbd-session.json");
 const BASE_URL     = "https://www.gaybusinessdirectory.com";
@@ -106,7 +107,7 @@ async function fetchContentfulEvents() {
     const mmddyyyy = `${month}/${day}/${year}`;
 
     // Format title to match GBD naming convention: "Name - M/D"
-    const name = f.name?.[LOCALE] ?? "";
+    const name = (f.name?.[LOCALE] ?? "").trim();
 
     const descriptionDoc = f.description?.[LOCALE];
     const descriptionHtml = descriptionDoc ? richTextToHtml(descriptionDoc) : "";
@@ -233,6 +234,9 @@ async function submitEvent(page, event) {
     }
   }
 
+  // Wait for the form to be fully ready before filling
+  await page.waitForSelector('input[name="post_title"]', { timeout: 10000 });
+
   const publishRadio = event.post_status === "1"
     ? 'input[name="post_status"][value="1"]'
     : 'input[name="post_status"][value="0"]';
@@ -242,8 +246,8 @@ async function submitEvent(page, event) {
   await page.selectOption('select[name="recurring_type"]', { value: event.recurring_type });
   await page.selectOption('select[name="start_time"]', { label: event.start_time });
   await page.selectOption('select[name="end_time"]',   { label: event.end_time });
-  await page.fill('input[name="post_start_date"]',  event.post_start_date);
-  await page.fill('input[name="post_expire_date"]', event.post_expire_date);
+  await setDatepickerDate(page, 'input[name="post_start_date"]',  event.post_start_date);
+  await setDatepickerDate(page, 'input[name="post_expire_date"]', event.post_expire_date);
   await page.fill('input[name="post_promo"]', event.post_promo);
   await page.fill('input[name="post_url"]', event.post_url);
   await page.fill('input[name="post_venue"]',       event.post_venue);
@@ -275,6 +279,16 @@ async function submitEvent(page, event) {
   await page.waitForLoadState("networkidle", { timeout: 20000 });
 
   if (tmpImagePath) fs.unlink(tmpImagePath, () => {});
+
+  // Detect silent rejection — GBD sometimes stays on the add page with an error
+  const stillOnAddPage = page.url().includes("/events/add");
+  if (stillOnAddPage) {
+    const errorText = await page.evaluate(() => {
+      const el = document.querySelector(".alert-danger, .alert-error, [class*='error-message']");
+      return el ? el.innerText.trim() : null;
+    });
+    throw new Error(`GBD rejected submission${errorText ? `: ${errorText}` : " (no error message shown)"}`);
+  }
 
   console.log(`  ✅ Submitted: "${event.post_title}" on ${event.post_start_date}`);
 }
@@ -363,7 +377,7 @@ async function main() {
       for (let i = 0; i < toSubmit.length; i++) {
         console.log(`📅 Submitting: ${toSubmit[i].post_title}`);
         await submitEvent(page, toSubmit[i]);
-        if (i < toSubmit.length - 1) await new Promise(r => setTimeout(r, 2000));
+        if (i < toSubmit.length - 1) await new Promise(r => setTimeout(r, 5000));
       }
       console.log(`\n🎉 Done! Submitted ${toSubmit.length} event(s).`);
     }
