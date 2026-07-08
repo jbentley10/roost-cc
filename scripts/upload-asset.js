@@ -134,9 +134,9 @@ async function main() {
   // Step 3: Trigger Contentful's image processing (resizing, CDN delivery)
   console.log("Processing asset...");
   await client.asset.processForLocale(
-    { spaceId: SPACE_ID, environmentId: ENV_ID, assetId: asset.sys.id, locale: LOCALE },
+    { spaceId: SPACE_ID, environmentId: ENV_ID, assetId: asset.sys.id },
     asset,
-    {}
+    LOCALE
   );
 
   // Step 4: Poll until the CDN URL is available
