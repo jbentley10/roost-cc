@@ -87,7 +87,7 @@ node scripts/upload-folder.js \
   --date "7-4-2026" \
   --tag "image"
 ```
-Each file is renamed to `<date>-<name>-<index>` (e.g. `7-4-2026-80s-dance-1`), uploaded, tagged, and published. The `--tag` value is created automatically if it doesn't already exist. Use `--dry-run` to preview.
+Each file is renamed to `<date>-<name>-<index>` (e.g. `7-4-2026-80s-dance-1`), uploaded, tagged, and published, then removed from the inbox folder. The `--tag` value is created automatically if it doesn't already exist. Use `--dry-run` to preview (nothing is uploaded or deleted).
 
 #### Update an existing event
 ```bash

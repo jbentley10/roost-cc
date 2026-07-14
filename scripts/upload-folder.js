@@ -156,6 +156,7 @@ async function main() {
     console.log(`Uploading ${files[i]} as "${title}"...`);
     const published = await uploadOne(path.join(absFolder, files[i]), title, tag);
     console.log(`  ✅ Published (${published.sys.id})`);
+    fs.unlinkSync(path.join(absFolder, files[i]));
   }
 
   console.log("\nDone!");
