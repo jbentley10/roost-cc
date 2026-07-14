@@ -181,21 +181,32 @@ async function resolveImageUrl(assetId) {
 // ─── GBD Scraper ─────────────────────────────────────────────────────────────
 
 async function scrapeGbdEventTitles(page) {
-  // GBD uses client-side DataTables — all rows are in the DOM already.
-  // Show 50 entries so everything is visible, then scrape in one pass.
+  // GBD paginates the events table with DataTables numbered pages
+  // (e.g. "page 1 of 4") rather than a "show N entries" length control,
+  // so we have to click through every page to see all existing events.
+  // The "Next" button's click handler doesn't reliably re-render in time
+  // for a networkidle wait, so we click each numbered page link directly.
   await page.goto(EVENTS_URL, { waitUntil: "networkidle" });
 
-  const fifty = page.locator('a:has-text("50 entries"), button:has-text("50 entries")');
-  if (await fifty.count() > 0) {
-    await fifty.first().click();
-    await page.waitForLoadState("networkidle");
+  const titles = new Set();
+
+  const pageNumbers = await page.$$eval(
+    "#feature-body-datatable_paginate .paginate_button:not(.previous):not(.next) a",
+    els => els.map(el => el.textContent.trim()).filter(t => /^\d+$/.test(t))
+  );
+  const totalPages = pageNumbers.length > 0 ? Math.max(...pageNumbers.map(Number)) : 1;
+
+  for (let p = 1; p <= totalPages; p++) {
+    if (p > 1) {
+      await page.locator(`#feature-body-datatable_paginate a[data-dt-idx="${p}"]`).click();
+      await page.waitForTimeout(800);
+    }
+    for (const t of await page.$$eval("h4.post-title a", els => els.map(el => el.textContent.trim()))) {
+      titles.add(t);
+    }
   }
 
-  const titles = await page.$$eval("h4.post-title a", els =>
-    els.map(el => el.textContent.trim())
-  );
-
-  return new Set(titles);
+  return titles;
 }
 
 // ─── GBD Login ───────────────────────────────────────────────────────────────
@@ -276,13 +287,19 @@ async function submitEvent(page, event) {
   }
 
   await page.click('input[type="submit"][value="Save Changes"]');
-  await page.waitForLoadState("networkidle", { timeout: 20000 });
+
+  // GBD's confirmation redirect briefly bounces back through /events/add
+  // before landing on /events/edit/<id>/save a couple seconds later, so
+  // checking the URL right after networkidle can catch that transient
+  // state and misreport a successful save as a rejection.
+  const confirmed = await page
+    .waitForURL(/\/events\/edit\/.+\/save/, { timeout: 15000 })
+    .then(() => true)
+    .catch(() => false);
 
   if (tmpImagePath) fs.unlink(tmpImagePath, () => {});
 
-  // Detect silent rejection — GBD sometimes stays on the add page with an error
-  const stillOnAddPage = page.url().includes("/events/add");
-  if (stillOnAddPage) {
+  if (!confirmed) {
     const errorText = await page.evaluate(() => {
       const el = document.querySelector(".alert-danger, .alert-error, [class*='error-message']");
       return el ? el.innerText.trim() : null;
