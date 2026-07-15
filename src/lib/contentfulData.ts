@@ -60,8 +60,14 @@ export async function fetchPage(id: string, locale: string) {
 // Sort events by dateAndTime (soonest first)
 export async function fetchEvents() {
   const query = `
-  query {
-    eventCollection (limit: 100) {
+  query ($skip: Int!, $since: DateTime!) {
+    eventCollection (
+      limit: 100
+      skip: $skip
+      order: dateAndTime_ASC
+      where: { dateAndTime_gte: $since }
+    ) {
+      total
       items {
         sys {
           id
@@ -90,14 +96,30 @@ export async function fetchEvents() {
     }
   }`;
 
-  const data = await fetchGraphQL(query);
+  // Include events from the start of today so nothing happening later today is excluded
+  const since = new Date();
+  since.setHours(0, 0, 0, 0);
 
-  if (!data || data.eventCollection.items.length === 0) {
-    console.log("Error finding events");
-    return [];
+  const items: any[] = [];
+  let skip = 0;
+  let total = Infinity;
+
+  while (skip < total) {
+    const data = await fetchGraphQL(query, { skip, since: since.toISOString() });
+
+    if (!data || !data.eventCollection) {
+      console.log("Error finding events");
+      return [];
+    }
+
+    total = data.eventCollection.total;
+    items.push(...data.eventCollection.items);
+    skip += data.eventCollection.items.length;
+
+    if (data.eventCollection.items.length === 0) break;
   }
 
-  const events = data.eventCollection.items.map((entry: any) => ({
+  const events = items.map((entry: any) => ({
     id: entry.sys.id,
     tags: entry.contentfulMetadata.tags,
     name: entry.name,
@@ -112,7 +134,7 @@ export async function fetchEvents() {
     isPinned: entry.isPinned
   }));
 
-  // Sort events by dateAndTime (soonest first)
+  // Already sorted by dateAndTime via the query, but keep this in case pinned/past ordering matters downstream
   events.sort(
     (a: { dateAndTime: string }, b: { dateAndTime: string }) =>
       new Date(a.dateAndTime).getTime() - new Date(b.dateAndTime).getTime()
