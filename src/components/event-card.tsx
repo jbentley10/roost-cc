@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function EventCard(props: {
-  event: EventType
+  event: EventType;
   showDescriptionAndGenre?: boolean;
 }) {
   const { event, showDescriptionAndGenre = true } = props;
@@ -19,7 +19,7 @@ export function EventCard(props: {
     <Card
       key={event.id}
       id={event.name}
-      className='overflow-hidden py-8 px-14 mb-10 rounded bg-card text-card-foreground'
+      className='overflow-hidden py-8 px-4 mb-10 rounded bg-card text-card-foreground'
     >
       <CardContent className='p-0'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
