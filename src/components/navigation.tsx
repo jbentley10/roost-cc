@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Links } from "@/components/ui/links";
 import Link from "next/link";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export const Navigation = () => {
   return (
@@ -10,8 +11,8 @@ export const Navigation = () => {
         <Link href={"/"}>
           <Image
             src='/logo.webp'
-            width='158'
-            height='91'
+            width='120'
+            height='69'
             alt='logo'
             style={{ width: "auto", height: "auto" }}
             priority={true}
@@ -23,11 +24,14 @@ export const Navigation = () => {
         </Link>
       </section>
       <section
-        className='w-full pt-8 pb-8 md:py-0 md:w-3/4 flex flex-row justify-start md:justify-end'
+        className='w-full pt-8 pb-8 md:py-0 md:w-3/4 flex flex-row items-center justify-start md:justify-end'
         id='links-and-phone'
       >
-        <div id='links'>
+        <div id='links' className='flex flex-wrap items-center'>
           <Links orientation='horizontal' size='small' />
+        </div>
+        <div className='flex items-center pl-4 ml-4 border-l border-border'>
+          <ThemeSwitcher />
         </div>
       </section>
     </nav>

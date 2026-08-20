@@ -34,7 +34,7 @@ export const Links: React.FC<LinksProps> = ({ orientation, size }) => {
     <div
       className={
         orientation == "horizontal"
-          ? "flex flex-row"
+          ? "flex flex-row flex-wrap gap-y-2"
           : "flex flex-row flex-wrap md:flex-nowrap sm:flex-col"
       }
     >

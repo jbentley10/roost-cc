@@ -1,4 +1,4 @@
-import { Bevan, Grand_Hotel, Inter } from "next/font/google";
+import { Grand_Hotel, Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Navigation } from "../components/navigation";
@@ -7,12 +7,13 @@ import EventBanner from "@/components/event-banner";
 import { fetchEvents } from "@/lib/contentfulData";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Declare fonts
-const bevan = Bevan({
+const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-bevan",
+  weight: ["700"],
+  variable: "--font-playfair",
 });
 const grandHotel = Grand_Hotel({
   subsets: ["latin"],
@@ -31,7 +32,8 @@ export default async function RootLayout({
   return (
     <html
       lang='en'
-      className={`${grandHotel.variable} ${bevan.variable} ${inter.variable}`}
+      className={`${grandHotel.variable} ${playfairDisplay.variable} ${inter.variable}`}
+      suppressHydrationWarning
     >
       <head>
         <Script id="google-analytics">
@@ -50,10 +52,18 @@ export default async function RootLayout({
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-582SP45F"
         height="0" width="0" style={{display:"none",visibility:"hidden"}}></iframe></noscript>
-        <EventBanner events={events} />
-        <Navigation />
-        {children}
-        <Footer />
+        <ThemeProvider
+          attribute='data-theme'
+          defaultTheme='1a'
+          themes={["1a", "1b", "2a"]}
+          storageKey='roost-theme'
+          enableSystem={false}
+        >
+          <EventBanner events={events} />
+          <Navigation />
+          {children}
+          <Footer />
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>

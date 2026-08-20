@@ -38,6 +38,108 @@
     --radius: 0.5rem;
   }
 
+  /* 1a - Bold Teal + Gold */
+  :root[data-theme="1a"] {
+    --background: 40 43% 96%;
+    --foreground: 0 0% 10%;
+
+    --card: 40 43% 96%;
+    --card-foreground: 0 0% 10%;
+
+    --nav: 40 43% 96%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 190 100% 18%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 34 29% 83%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 34 29% 83%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 31 53% 64%;
+    --accent-stroke: 31 53% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 34 29% 83%;
+    --input: 34 29% 83%;
+    --ring: 190 100% 18%;
+  }
+
+  /* 1b - Rainbow Gradients + Teal */
+  :root[data-theme="1b"] {
+    --background: 0 0% 100%;
+    --foreground: 190 100% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 190 100% 18%;
+
+    --nav: 0 0% 100%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 190 100% 18%;
+
+    --primary: 190 100% 18%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 31 53% 64%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 31 53% 64%;
+    --accent-stroke: 31 53% 54%;
+    --accent-foreground: 0 0% 10%;
+
+    --border: 31 53% 64%;
+    --input: 0 0% 85%;
+    --ring: 190 100% 18%;
+
+    --gradient-cta: linear-gradient(
+      135deg,
+      #ff1493 0%,
+      #ffd700 50%,
+      #1e90ff 100%
+    );
+  }
+
+  /* 2a - Jewel Tones + Warmth */
+  :root[data-theme="2a"] {
+    --background: 40 43% 96%;
+    --foreground: 221 36% 27%;
+
+    --card: 40 43% 96%;
+    --card-foreground: 221 36% 27%;
+
+    --nav: 40 43% 96%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 221 36% 27%;
+
+    --primary: 264 34% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 190 100% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 34 29% 83%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 31 53% 64%;
+    --accent-stroke: 333 41% 64%;
+    --accent-foreground: 0 0% 10%;
+
+    --border: 221 36% 27%;
+    --input: 34 29% 83%;
+    --ring: 264 34% 45%;
+
+    --color-rose: 333 41% 64%;
+  }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -78,12 +180,43 @@
   }
 }
 
+/* Primary CTA button: gold (1a) / gradient (1b) / purple (2a) */
+.cta-primary {
+  background: hsl(var(--accent));
+  box-shadow: none;
+}
+
+[data-theme="1b"] .cta-primary {
+  background: var(--gradient-cta);
+  box-shadow: 0 2px 8px rgba(255, 20, 147, 0.2);
+}
+
+[data-theme="2a"] .cta-primary {
+  background: hsl(var(--primary));
+}
+
+/* Featured card: subtle border (1a) / gold border (1b) / rose left border (2a) */
+.card-featured {
+  border: 1px solid hsl(var(--border));
+}
+
+[data-theme="1b"] .card-featured {
+  border: 2px solid hsl(var(--accent));
+}
+
+[data-theme="2a"] .card-featured {
+  border-top: 1px solid hsl(var(--border));
+  border-right: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+  border-left: 4px solid hsl(var(--color-rose));
+}
+
 .component-container {
   padding: 0 88px;
 }
 
 .component-spacer {
-  margin: 62px 0;
+  margin: 96px 0;
 }
 
 h1,
@@ -161,7 +294,7 @@ ul {
   }
 
   .component-spacer {
-    margin: 40px 0;
+    margin: 56px 0;
   }
 
   .atf-container {

@@ -80,7 +80,7 @@ const config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", ...fontFamily.sans],
-        display: ["var(--font-bevan)"],
+        display: ["var(--font-playfair)", ...fontFamily.serif],
         hand: ["var(--font-grand-hotel)"],
       },
     },

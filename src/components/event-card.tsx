@@ -19,7 +19,8 @@ export function EventCard(props: {
     <Card
       key={event.id}
       id={event.name}
-      className='overflow-hidden py-8 px-4 mb-10 rounded bg-card text-card-foreground'
+      variant='featured'
+      className='overflow-hidden mb-10 rounded bg-card text-card-foreground'
     >
       <CardContent className='p-0'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
