@@ -6,14 +6,14 @@ import { Links } from "@/components/ui/links";
 export const Footer = () => {
   return (
     <footer className={"footer text-primary-foreground"}>
-      <div className={"flex flex-col sm:flex-row bg-white"}>
-        <div className={"bg-white sm:pl-0 w-full sm:w-1/2 pt-14 pb-10"}>
+      <div className={"flex flex-col sm:flex-row bg-[#f7efea]"}>
+        <div className={"bg-[#f7efea] sm:pl-0 w-full sm:w-1/2 pt-14 pb-10"}>
           <Link href="/">
             <Image
               className={"pl-8 md:pl-16 sm:pr-16 md:pr-0"}
-              src='/logo.webp'
+              src='/new-logo.webp'
               width='350'
-              height='295'
+              height='358'
               alt='The logo for The Roost of Cathedral City'
             />
           </Link>

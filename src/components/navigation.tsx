@@ -10,9 +10,9 @@ export const Navigation = () => {
       <section className='w-full md:w-1/4' id='logo'>
         <Link href={"/"}>
           <Image
-            src='/logo.webp'
+            src='/new-logo.webp'
             width='120'
-            height='69'
+            height='123'
             alt='logo'
             style={{ width: "auto", height: "auto" }}
             priority={true}
