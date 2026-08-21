@@ -2,6 +2,9 @@
   "name": "@palm-springs-web-design/static-site-template",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=24.19.0"
+  },
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
